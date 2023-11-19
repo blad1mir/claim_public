@@ -1,29 +1,42 @@
+<aside id="sidebar-multi-level-sidebar" class="h-full" aria-label="Sidebar">
+  <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50" style="background-color: #1c2434;">
+      <!-- Logo ClaimSoft -->
+      <div class="text-white text-lg font-bold mb-4" style="padding-left: 35px;">ClaimSoft</div>
 
- 
- <aside id="sidebar-multi-level-sidebar" class="h-full" aria-label="Sidebar">
-    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 ">
-       <ul class="space-y-2 font-medium">
-          <li>
-             <a href="#" class="flex items-center p-2 text-[#01539B] rounded-lg  hover:bg-[#01539B] hover:text-white group">
+      <div style=" padding-left: 70px;">
+        <ul class="space-y-2 font-medium">
+            <li>
+              <a (click)="onUserClick()" class="flex items-center p-2 text-[#01539B] rounded-lg hover:bg-[#01539B] hover:text-white group">
                 <img src="assets/folder_open.svg" class="w-6 h-6 hover:text-white " alt="">
-                <span class="ml-3">Expedientes</span>
-             </a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center p-2 text-[#01539B] rounded-lg  hover:bg-[#01539B]  hover:text-white group">
-               <img src="assets/checklist.svg" class="w-6 h-6" alt="">
-               <span class="ml-3">Tareas</span>
-            </a>
-         </li>
+                <span class="ml-3">Usuarios</span>
+              </a>
+            </li>
 
-         <li>
-            <a href="#" class="flex items-center p-2 text-[#01539B] rounded-lg  hover:bg-[#01539B] hover:text-white group">
-               <img src="assets/contacts.svg" class="w-6 h-6" alt="">
-               <span class="ml-3">Contactos</span>
-            </a>
-         </li>
-       </ul>
-    </div>
- </aside>
- 
- 
+            <li>
+              <a (click)="onCompanyClick()" class="flex items-center p-2 text-[#01539B] rounded-lg hover:bg-[#01539B] hover:text-white group">
+                <img src="assets/folder_open.svg" class="w-6 h-6 hover:text-white " alt="">
+                <span class="ml-3">Empresas</span>
+              </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center p-2 text-[#01539B] rounded-lg hover:bg-[#01539B] hover:text-white group">
+                    <img src="assets/folder_open.svg" class="w-6 h-6 hover:text-white " alt="">
+                    <span class="ml-3">Expedientes</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center p-2 text-[#01539B] rounded-lg hover:bg-[#01539B] hover:text-white group">
+                    <img src="assets/checklist.svg" class="w-6 h-6" alt="">
+                    <span class="ml-3">Tareas</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center p-2 text-[#01539B] rounded-lg hover:bg-[#01539B] hover:text-white group">
+                    <img src="assets/contacts.svg" class="w-6 h-6" alt="">
+                    <span class="ml-3">Contactos</span>
+                </a>
+            </li>
+        </ul>
+      </div>
+  </div>
+</aside>

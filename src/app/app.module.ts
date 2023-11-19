@@ -7,6 +7,9 @@ import { RecordsComponent } from './records/records.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarMenuComponent } from './navbar-menu/navbar-menu.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
+import { UsersComponent } from './users/users.component';
+import { CompaniesComponent } from './companies/companies.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,11 +17,14 @@ import { TopMenuComponent } from './top-menu/top-menu.component';
     RecordsComponent,
     LoginComponent,
     NavbarMenuComponent,
-    TopMenuComponent
+    TopMenuComponent,
+    UsersComponent,
+    CompaniesComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
