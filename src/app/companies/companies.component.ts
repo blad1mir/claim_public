@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommunicationService } from '../communication.service';
 
 @Component({
   selector: 'app-companies',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompaniesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private communicationService: CommunicationService) { }
 
   ngOnInit(): void {
+  }
+
+  onCompanyProfileClick() {
+    this.communicationService.emitCompanyProfileClicked();
   }
 
 }

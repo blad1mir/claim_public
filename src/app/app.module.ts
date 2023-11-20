@@ -10,6 +10,8 @@ import { TopMenuComponent } from './top-menu/top-menu.component';
 import { UsersComponent } from './users/users.component';
 import { CompaniesComponent } from './companies/companies.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { CompanyProfileComponent } from './company-profile/company-profile.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarMenuComponent,
     TopMenuComponent,
     UsersComponent,
-    CompaniesComponent
+    CompaniesComponent,
+    UserProfileComponent,
+    CompanyProfileComponent
   ],
   imports: [
     BrowserModule,
