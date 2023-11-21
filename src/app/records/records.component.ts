@@ -11,6 +11,7 @@ export class RecordsComponent implements OnInit {
   showCompanies: boolean = false;
   showUserProfile: boolean = false;
   showCompaniesProfile: boolean = false;
+  showUserEdit: boolean = false;
 
   constructor(private communicationService: CommunicationService) { }
 
@@ -19,6 +20,7 @@ export class RecordsComponent implements OnInit {
       this.showCompanies = false;
       this.showUserProfile = false;
       this.showCompaniesProfile = false;
+      this.showUserEdit = false;
       this.showUsers = true;
     });
 
@@ -26,6 +28,7 @@ export class RecordsComponent implements OnInit {
       this.showUsers = false;
       this.showUserProfile = false;
       this.showCompaniesProfile = false;
+      this.showUserEdit = false;
       this.showCompanies = true;
     });
 
@@ -33,13 +36,23 @@ export class RecordsComponent implements OnInit {
       this.showCompanies = false;
       this.showUsers = false;
       this.showCompaniesProfile = false;
+      this.showUserEdit = false;
       this.showUserProfile = true;
+    });
+
+    this.communicationService.userEditClicked$.subscribe(() => {
+      this.showCompanies = false;
+      this.showUsers = false;
+      this.showCompaniesProfile = false;
+      this.showUserProfile = false;
+      this.showUserEdit = true;
     });
 
     this.communicationService.companyProfileClicked$.subscribe(() => {
       this.showUsers = false;
       this.showUserProfile = false;
       this.showCompanies = false;
+      this.showUserEdit = false;
       this.showCompaniesProfile = true;
     });
   }

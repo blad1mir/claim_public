@@ -12,6 +12,7 @@ import { CompaniesComponent } from './companies/companies.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CompanyProfileComponent } from './company-profile/company-profile.compo
     UsersComponent,
     CompaniesComponent,
     UserProfileComponent,
-    CompanyProfileComponent
+    CompanyProfileComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
