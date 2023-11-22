@@ -13,19 +13,11 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.login();
-  }
-
-  async login() {
     const username = 'root';
     const password = '28A3_0005';
 
-    try {
-      const response = await this.service.post('user_profiles/login/', { username, password });
-      console.log(response);
-    } catch (error) {
-      console.error('Error en la solicitud de inicio de sesión', error);
-    }
+    let serviceTest = this.service.post('user_profiles/login/', { username, password });
+    console.log(serviceTest);
   }
 
 }
