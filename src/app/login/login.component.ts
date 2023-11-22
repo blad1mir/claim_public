@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
   constructor(
     public service: HttpClientService,public http: HttpClient
   ) { 
-    let res1 = this.http.post(this.apiUrl1 + 'user_profiles/login/', JSON.stringify(this.user));
+    let res1 = this.http.post(this.apiUrl1 + 'user_profiles/roles/',{});
     console.log(res1)
 
-    let res2 = this.http.post(this.apiUrl2 + 'user_profiles/login/', JSON.stringify(this.user));
+    let res2 = this.http.post(this.apiUrl2 + 'user_profiles/roles/',{});
     console.log(res2)
   }
 
