@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  apiUrl1= 'http://v.claimcenter.com:8000/api/';
+  apiUrl1= 'https://v.claimcenter.com:8000/api/';
   apiUrl2= '91.107.215.150:8000/api/';
 
   user = {
