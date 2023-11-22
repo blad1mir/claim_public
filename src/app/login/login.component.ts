@@ -13,11 +13,26 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.login();
+  }
+
+  async login() {
     const username = 'root';
     const password = '28A3_0005';
 
-    let serviceTest = this.service.post('user_profiles/login/', { username, password });
-    console.log(serviceTest);
+    try {
+      const response = await this.service.post('user_profiles/login/', { username, password });
+
+      if (response !== undefined) {
+        console.log(response);
+        // Aquí puedes manejar la respuesta como sea necesario
+      } else {
+        console.error('Respuesta indefinida. Manejar este caso.');
+      }
+    } catch (error) {
+      console.error('Error en la solicitud de inicio de sesión', error);
+      // Manejar errores aquí
+    }
   }
 
 }

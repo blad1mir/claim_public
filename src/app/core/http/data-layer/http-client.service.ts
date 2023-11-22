@@ -31,9 +31,9 @@ export class HttpClientService {
   }
 
   // Función para realizar una solicitud POST
-  public async post<T>(endpoint: string, data: any): Promise<T> {
+  public async post<T>(endpoint: string, data: any): Promise<T | undefined> {
     const url = `${this.baseUrl}/${endpoint}`;
-    const response = this.http.post<T>(url, data);
-    return firstValueFrom(response);
+    const response = await this.http.post<T>(url, data).toPromise(); // Agrega el await aquí
+    return response;
   }
 }
