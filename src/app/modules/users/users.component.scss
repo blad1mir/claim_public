@@ -5,8 +5,9 @@
   transition: background-color 0.5s, border 0.5s, box-shadow 0.5s; /* Transición predeterminada */
   margin-top: 100px;
   margin-bottom: 100px;
+  margin-left: 40px;
+  margin-right: 40px;
   padding: 50px;
-
 }
 
 .reputation-container .reputation-box {
@@ -23,4 +24,20 @@
   background-color: #fbfcff; /* Color de fondo al pasar el ratón */
   border: 1px solid #d1d8ec; /* Color del borde al pasar el ratón */
   box-shadow: 0 4px 8px rgba(193, 206, 246, 0.3); /* Sombra hacia abajo del mismo color que el borde al pasar el ratón */
+}
+
+
+
+
+
+// Cambios para pantallas pequeñas (por ejemplo, dispositivos móviles)
+@media only screen and (max-width: 768px) {
+  .reputation-container-total .reputation-box-total {
+    padding: 20px;
+  }
+
+  .reputation-container .reputation-box {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
