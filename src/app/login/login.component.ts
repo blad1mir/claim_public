@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   apiUrl2= '91.107.215.150/api';
 
   user = {
-    username : 'root',
+    username : 'blad',
     password : '28A3_0005'
   }
   constructor(
