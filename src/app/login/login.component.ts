@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
   apiUrl1= 'http://v.claimcenter.com:8000/api/';
-  apiUrl2= '91.107.215.150:8000/api/';
+ // apiUrl2= '91.107.215.150:8000/api/';
 
   user = {
     username : 'blad',
@@ -18,17 +18,17 @@ export class LoginComponent implements OnInit {
   constructor(
     public service: HttpClientService,public http: HttpClient
   ) { 
-    let res1 = this.http.get(this.apiUrl1 + 'user_profiles/roles/').subscribe(data => {
+   this.http.get(this.apiUrl1 + 'user_profiles/roles/').subscribe(data => {
       console.log(data);
      
     });
-    console.log(res1)
+   
 
-    let res2 = this.http.get(this.apiUrl2 + 'user_profiles/roles/').subscribe(data => {
-      console.log(data);
+  //  this.http.get(this.apiUrl2 + 'user_profiles/roles/').subscribe(data => {
+  //     console.log(data);
      
-    });
-    console.log(res2)
+  //   });
+    
   }
 
   ngOnInit(): void {
