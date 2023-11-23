@@ -5,7 +5,7 @@
   transition: background-color 0.5s, border 0.5s, box-shadow 0.5s; /* Transición predeterminada */
   margin-top: 100px;
   margin-bottom: 100px;
-  margin-left: 40px;
+  margin-left: 300px;
   margin-right: 40px;
   padding: 50px;
 }
@@ -16,6 +16,7 @@
   box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* Sin sombra predeterminada */
   transition: background-color 0.5s, border 0.5s, box-shadow 0.5s; /* Transición predeterminada */
   padding-bottom: 20px;
+  width: 350px;
   padding-left: 20px;
   padding-right: 30px;
 }
@@ -26,18 +27,70 @@
   box-shadow: 0 4px 8px rgba(193, 206, 246, 0.3); /* Sombra hacia abajo del mismo color que el borde al pasar el ratón */
 }
 
+.search-input{
+  width: 600px;
+}
 
 
 
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Puedes ajustar esto según tus necesidades */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 
-// Cambios para pantallas pequeñas (por ejemplo, dispositivos móviles)
-@media only screen and (max-width: 768px) {
+.user-list li {
+  flex: 0 0 calc(33.333% - 20px); /* Ajusta el porcentaje según el número de elementos que deseas mostrar por fila */
+  margin: 10px;
+}
+
+@media only screen and (max-width: 1100px) {
   .reputation-container-total .reputation-box-total {
     padding: 20px;
+    margin-left: 100px;
   }
 
   .reputation-container .reputation-box {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  .search-input{
+    width: 550px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .reputation-container-total .reputation-box-total {
+    padding: 20px;
+    margin-left: 100px;
+  }
+
+  .reputation-container .reputation-box {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .search-input{
+    width: 300px;
+  }
+}
+
+// Cambios para pantallas pequeñas (por ejemplo, dispositivos móviles)
+@media only screen and (max-width: 700px) {
+  .reputation-container-total .reputation-box-total {
+    padding: 20px;
+    margin-left: 100px;
+  }
+
+  .reputation-container .reputation-box {
+    width: 200;
+  }
+
+  .search-input{
+    width: 100%;
   }
 }

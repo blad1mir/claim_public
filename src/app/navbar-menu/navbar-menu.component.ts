@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommunicationService } from '../communication.service';
-import { navbarData } from './navbar-data';
+
 
 interface SideNavToggle {
   screenWidth: number;
@@ -16,9 +16,8 @@ interface SideNavToggle {
 export class NavbarMenuComponent implements OnInit {
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
 
-  collapsed = false;
+  collapsed = true;
   screenWidth = 0;
-  navData = navbarData;
 
   constructor(private communicationService: CommunicationService) { }
 

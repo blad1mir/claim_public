@@ -17,18 +17,18 @@ export class LoginComponent implements OnInit {
   }
   constructor(
     public service: HttpClientService,public http: HttpClient
-  ) { 
-   this.http.get(this.apiUrl1 + 'user_profiles/roles/').subscribe(data => {
+  ) {
+   this.http.get(this.apiUrl1 + 'user_profiles/dropdown/').subscribe(data => {
       console.log(data);
-     
+
     });
-   
+
 
   //  this.http.get(this.apiUrl2 + 'user_profiles/roles/').subscribe(data => {
   //     console.log(data);
-     
+
   //   });
-    
+
   }
 
   ngOnInit(): void {
