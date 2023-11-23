@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommunicationService } from '../communication.service';
+import { navbarData } from './navbar-data';
+
+interface SideNavToggle {
+  screenWidth: number;
+  collapsed: boolean;
+}
+
 
 @Component({
   selector: 'app-navbar-menu',
@@ -7,10 +14,27 @@ import { CommunicationService } from '../communication.service';
   styleUrls: ['./navbar-menu.component.scss']
 })
 export class NavbarMenuComponent implements OnInit {
+  @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
+
+  collapsed = false;
+  screenWidth = 0;
+  navData = navbarData;
 
   constructor(private communicationService: CommunicationService) { }
 
+
   ngOnInit(): void {
+  }
+
+
+  toggleCollapse(): void {
+    this.collapsed = !this.collapsed;
+    this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
+  }
+
+  closeSidenav(): void {
+    this.collapsed = false;
+    this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
   }
 
   onUserClick() {
