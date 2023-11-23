@@ -1,9 +1,27 @@
-<aside id="sidebar-multi-level-sidebar" class="h-full" aria-label="Sidebar">
-  <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50" style="background-color: #1c2434; height: 717px;">
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">A</button>
+    <div class="logo-text" *ngIf="collapsed">Angular</div>
+    <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
+      <i class="fal fa-times close-icon"></i>
+    </button>
+  </div>
+  <ul class="sidenav-nav">
+    <li class="sidenav-nav-item" *ngFor="let data of navData">
+      <a class="sidenav-nav-link" [routerLink]="[data.routelink]">
+        <i class="sidenav-link-icon" [class]="data.icon"></i>
+        <span class="sidenav-link-text" *ngIf="collapsed">{{data.label}}</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!--aside id="sidebar-multi-level-sidebar" class="h-full" aria-label="Sidebar">
+  <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50" style="background-color: #1c2434; height: 717px;"-->
       <!-- Logo ClaimSoft -->
       <!--div class="text-white text-lg font-bold mb-4" style="padding-left: 35px;">ClaimSoft</div-->
 
-      <div style=" padding-left: 10px;">
+      <!--div style=" padding-left: 10px;">
         <ul class="space-y-2 font-medium">
             <li>
               <a (click)="onUserClick()" class="flex items-center p-2 text-[#01539B] rounded-lg hover:bg-[#01539B] hover:text-white group">
@@ -39,4 +57,4 @@
         </ul>
       </div>
   </div>
-</aside>
+</aside-->
