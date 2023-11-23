@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //apiUrl: 'http://v.claimcenter.com:8000/api',
-  apiUrl: '91.107.215.150'
+  apiUrl: 'http://v.claimcenter.com:8000/api/',
+  //apiUrl: '91.107.215.150'
 };
 
 /*

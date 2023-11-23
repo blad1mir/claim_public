@@ -4,6 +4,7 @@
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   transition: background-color 0.5s, border 0.5s, box-shadow 0.5s;
   margin-top: 20px;
+
   margin-bottom: 100px;
   padding: 50px;
 }
@@ -26,4 +27,21 @@
   background-color: #fbfcff;
   border: 1px solid #6b8ce7;
   box-shadow: 0 4px 8px rgba(193, 206, 246, 0.3);
+}
+
+
+@media only screen and (max-width: 768px) {
+  .reputation-container-total .reputation-box-total {
+    padding: 20px;
+    margin-left: 100px;
+  }
+
+  .reputation-container .reputation-box {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .title-text {
+    margin-left: 100px;
+  }
 }

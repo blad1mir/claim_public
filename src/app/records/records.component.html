@@ -3,8 +3,8 @@
 
   <div class="flex">
     <!-- Contenido izquierdo -->
-    <div style="width: 300px;">
-      <app-navbar-menu class="h-full"></app-navbar-menu>
+    <div>
+      <app-navbar-menu (onToggleSideNav)="onToggleSideNav($event)"></app-navbar-menu>
     </div>
 
     <!-- Contenido central (ocupando dos tercios) -->

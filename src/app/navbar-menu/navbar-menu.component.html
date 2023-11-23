@@ -1,16 +1,45 @@
 <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
   <div class="logo-container">
-    <button class="logo" (click)="toggleCollapse()">A</button>
-    <div class="logo-text" *ngIf="collapsed">Angular</div>
+    <button class="logo" (click)="toggleCollapse()">C</button>
+    <div class="logo-text" *ngIf="collapsed">Claim Center</div>
+
     <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
       <i class="fal fa-times close-icon"></i>
     </button>
   </div>
   <ul class="sidenav-nav">
-    <li class="sidenav-nav-item" *ngFor="let data of navData">
-      <a class="sidenav-nav-link" [routerLink]="[data.routelink]">
-        <i class="sidenav-link-icon" [class]="data.icon"></i>
-        <span class="sidenav-link-text" *ngIf="collapsed">{{data.label}}</span>
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" (click)="onUserClick()">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">person</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Usuarios</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" (click)="onCompanyClick()">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">apartment</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Empresas</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" href="">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">description</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Expedientes</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" href="">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">playlist_add_check</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Tareas</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" href="">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">badge</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Contactos</span>
       </a>
     </li>
   </ul>
