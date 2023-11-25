@@ -1,27 +1,41 @@
 <div class="reputation-container-total">
   <div class="reputation-box-total flex items-center rounded-md">
-    <ul class="user-list">
-      <li>
-        <section class="mb-5">
-          <h1 class="text-2xl font-bold mb-2">Empresas</h1>
-          <input type="text" placeholder="Search users" class="search-input border p-2">
-        </section>
-      </li>
+    <div class="users-container">
 
-      <li *ngFor="let companyData of companyProfiles.results">
-        <div class="container mt-5">
-          <a (click)="onCompanyProfileClick()">
-            <div class="reputation-container flex justify-center">
-              <div class="reputation-box flex items-center space-x-2 p-2 rounded-md">
-                <div class="flex flex-col">
-                  <div class="text-xl font-bold mb-1">{{ companyData.name}}</div>
-                  <div class="text-sm text-gray-500 mt-1">{{ companyData.emails.email }}</div>
-                </div>
-              </div>
-            </div>
-          </a>
+      <section class="container search" style="padding-bottom: 30px;">
+        <h1 class="text-2xl font-bold mb-2">Empresas</h1>
+        <input [(ngModel)]="searchInput" type="text" placeholder="Search company" class="search-input border p-2">
+        <button class="button-38" role="button" (click)="onSearchClick()">Buscar</button>
+      </section>
+
+      <div class="container">
+        <ul class="responsive-table">
+          <li class="table-header">
+            <div class="col col-1" style="padding-right: 20px;">Email</div>
+            <div class="col col-2">Nombre</div>
+            <div class="col col-3">Document Legal</div>
+          </li>
+          <li class="table-row" *ngFor="let companyData of companyProfiles.results" (click)="onUserProfileClick">
+              <div class="col col-1" data-label="Email" style="padding-right: 20px;">{{ companyData.emails.email }}</div>
+              <div class="col col-2" data-label="First Name">{{ companyData.name }}</div>
+              <div class="col col-3" data-label="Last Name">{{ companyData.legal_document }}</div>
+          </li>
+        </ul>
+      </div>
+
+
+
+
+      <div class="center">
+        <div class="pagination">
+          <a class="button-38" (click)="onPreviousClick()">&laquo;</a>
+          <a class="button-38" >{{paginationNumber()}}</a>
+          <a class="button-38" (click)="onNextClick()">&raquo;</a>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
+
   </div>
 </div>
+
+

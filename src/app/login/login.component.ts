@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClientService } from '../core/http/data-layer/http-client.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,50 +9,29 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  apiUrl1= 'http://v.claimcenter.com:8000/api/';
- // apiUrl2= '91.107.215.150:8000/api/';
+  private readonly baseUrl: string = environment.apiUrl;
+  public username: string = '';
+  public password: string = '';
 
-  user = {
-    username : 'blad',
-    password : '28A3_0005'
+  constructor(public http: HttpClient, private router: Router) {}
+
+  ngOnInit(): void {}
+
+  submitLoginForm() {
+    this.http.post<any>(this.baseUrl + 'user_profiles/login/', { username: this.username, password: this.password })
+      .subscribe(
+        (response) => {
+          console.log(response);
+          if (response && (response.message == "Inicio de Sesion Existoso")) {
+            this.router.navigate(['/records']);
+          } else {
+            console.error('Credenciales incorrectas. Manejar este caso.');
+          }
+        },
+        (error) => {
+          console.error('Error en la solicitud de inicio de sesión', error);
+          // Manejar errores aquí
+        }
+      );
   }
-  constructor(
-    public service: HttpClientService,public http: HttpClient
-  ) {
-   this.http.get(this.apiUrl1 + 'user_profiles/dropdown/').subscribe(data => {
-      console.log(data);
-
-    });
-
-
-  //  this.http.get(this.apiUrl2 + 'user_profiles/roles/').subscribe(data => {
-  //     console.log(data);
-
-  //   });
-
-  }
-
-  ngOnInit(): void {
-    this.login();
-  }
-
-  async login() {
-    const username = 'root';
-    const password = '28A3_0005';
-
-    try {
-      const response = await this.service.post('user_profiles/login/', { username, password });
-
-      if (response !== undefined) {
-        console.log(response);
-        // Aquí puedes manejar la respuesta como sea necesario
-      } else {
-        console.error('Respuesta indefinida. Manejar este caso.');
-      }
-    } catch (error) {
-      console.error('Error en la solicitud de inicio de sesión', error);
-      // Manejar errores aquí
-    }
-  }
-
 }

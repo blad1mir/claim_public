@@ -11,7 +11,7 @@ export class CommunicationService {
   private companyClickedSource = new Subject<boolean>();
   companyClicked$ = this.companyClickedSource.asObservable();
 
-  private userProfileClickedSource = new Subject<boolean>();
+  private userProfileClickedSource = new Subject<boolean | string>(); // Puede ser booleano o string
   userProfileClicked$ = this.userProfileClickedSource.asObservable();
 
   private userEditClickedSource = new Subject<boolean>();
@@ -36,12 +36,16 @@ export class CommunicationService {
     this.companyClickedSource.next(true);
   }
 
-  emitUserProfileClicked() {
+  emitUserProfileClicked(usernameOrBoolean?: boolean | string) {
     this.userClickedSource.next(false);
     this.companyClickedSource.next(false);
     this.companyProfileClickedSource.next(false);
     this.userEditClickedSource.next(false);
-    this.userProfileClickedSource.next(true);
+    if (typeof usernameOrBoolean === 'string') {
+      this.userProfileClickedSource.next(usernameOrBoolean);
+    } else {
+      this.userProfileClickedSource.next(true);
+    }
   }
 
   emitUserEditClicked() {
