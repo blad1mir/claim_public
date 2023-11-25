@@ -1,28 +1,43 @@
 <div class="reputation-container-total">
   <div class="reputation-box-total flex items-center rounded-md">
-    <ul class="user-list">
-      <li>
-        <section class="mb-5">
-          <h1 class="text-2xl font-bold mb-2">Users</h1>
-          <input type="text" placeholder="Search users" class="search-input border p-2">
-        </section>
-      </li>
+    <div class="users-container">
 
-      <li *ngFor="let userData of userProfiles.results">
-        <div class="container mt-5">
-          <a (click)="onUserProfileClick()">
-            <div class="reputation-container flex justify-center">
-              <div class="reputation-box flex items-center space-x-2 p-2 rounded-md">
-                <div class="bg-blue-500 text-white rounded-full w-12 h-12 mt-3 mb-3 flex items-center justify-center">1</div>
-                <div class="flex flex-col">
-                  <div class="text-xl font-bold mb-1">{{ userData.user.first_name + ' ' + userData.user.last_name }}</div>
-                  <div class="text-sm text-gray-500 mt-1">{{ userData.user.email }}</div>
-                </div>
-              </div>
-            </div>
-          </a>
+      <section class="container search" style="padding-bottom: 30px;">
+        <h1 class="text-2xl font-bold mb-2">Users</h1>
+        <input [(ngModel)]="searchInput" type="text" placeholder="Search users" class="search-input border p-2">
+        <button class="button-38" role="button" (click)="onSearchClick()">Buscar</button>
+      </section>
+
+      <div class="container">
+        <ul class="responsive-table">
+          <li class="table-header">
+            <div class="col col-1" style="padding-right: 20px;">Email</div>
+            <div class="col col-2">First Name</div>
+            <div class="col col-3">Last Name</div>
+            <div class="col col-4">Username</div>
+          </li>
+          <li class="table-row" *ngFor="let userData of userProfiles.results" (click)="onSelectUserProfile(userData.user.username)">
+              <div class="col col-1" data-label="Email" style="padding-right: 20px;">{{ userData.user.email }}</div>
+              <div class="col col-2" data-label="First Name">{{ userData.user.first_name }}</div>
+              <div class="col col-3" data-label="Last Name">{{ userData.user.last_name }}</div>
+              <div class="col col-4" data-label="Username">{{ userData.user.username }}</div>
+          </li>
+        </ul>
+      </div>
+
+
+
+
+      <div class="center">
+        <div class="pagination">
+          <a class="button-38" (click)="onPreviousClick()">&laquo;</a>
+          <a class="button-38" >{{paginationNumber()}}</a>
+          <a class="button-38" (click)="onNextClick()">&raquo;</a>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
+
   </div>
 </div>
+
+
