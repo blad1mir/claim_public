@@ -1,12 +1,34 @@
 <div class="reputation-container-total">
-  <div class="reputation-box-total flex items-center rounded-md">
+  <div class="reputation-box-total  items-center rounded-md">
     <div class="users-container">
 
-      <section class="container search" style="padding-bottom: 30px;">
+      <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
         <h1 class="text-2xl font-bold mb-2">Users</h1>
+      </div>
+
+      <div  class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
+
         <input [(ngModel)]="searchInput" type="text" placeholder="Search users" class="search-input border p-2">
+
+        <div style="position: relative;">
+          <div class="relative inline-block text-left" [ngClass]="{ 'open': open }">
+            <button (click)="toggleDropdown()" class="button-38">
+              Filtros
+            </button>
+
+            <div *ngIf="open" (click)="stopPropagation($event)" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+              <div class="py-1">
+                <label *ngFor="let option of ['username', 'nombre', 'segundo nombre', 'apellido', 'segundo apellido', 'email', 'telefono', 'documento legal' ]" class="flex items-center space-x-2 px-4 py-2 cursor-pointer">
+                  <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" [checked]="checkboxSelections[option]" (change)="onCheckboxChange(option); toggleCheckbox(option)" />
+                  <span>{{ option }}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <button class="button-38" role="button" (click)="onSearchClick()">Buscar</button>
-      </section>
+      </div>
 
       <div class="container">
         <ul class="responsive-table">
@@ -16,17 +38,15 @@
             <div class="col col-3">Last Name</div>
             <div class="col col-4">Username</div>
           </li>
+
           <li class="table-row" *ngFor="let userData of userProfiles.results" (click)="onSelectUserProfile(userData.user.username)">
-              <div class="col col-1" data-label="Email" style="padding-right: 20px;">{{ userData.user.email }}</div>
-              <div class="col col-2" data-label="First Name">{{ userData.user.first_name }}</div>
-              <div class="col col-3" data-label="Last Name">{{ userData.user.last_name }}</div>
-              <div class="col col-4" data-label="Username">{{ userData.user.username }}</div>
+            <div class="col col-1" data-label="Email" style="padding-right: 20px;">{{ userData.user.email }}</div>
+            <div class="col col-2" data-label="First Name">{{ userData.user.first_name }}</div>
+            <div class="col col-3" data-label="Last Name">{{ userData.user.last_name }}</div>
+            <div class="col col-4" data-label="Username">{{ userData.user.username }}</div>
           </li>
         </ul>
       </div>
-
-
-
 
       <div class="center">
         <div class="pagination">
@@ -39,5 +59,3 @@
 
   </div>
 </div>
-
-
