@@ -13,7 +13,29 @@
         <span class="material-icons sidenav-link-icon" style="font-size: 30px;">person</span>
         <span class="sidenav-link-text" *ngIf="collapsed">Usuarios</span>
       </a>
+
     </li>
+
+    <ul class="sidenav-nav" *ngIf="isUserMenuOpen">
+      <li class="sidenav-nav-item">
+        <a class="sidenav-nav-link" (click)="onPeopleClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">group</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Personas</span>
+        </a>
+      </li>
+      <li  class="sidenav-nav-item">
+        <a class="sidenav-nav-link"(click)="onClientsClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">group_add</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Clientes</span>
+        </a>
+      </li>
+      <li  class="sidenav-nav-item">
+        <a class="sidenav-nav-link" (click)="onProfessionalsClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">engineering</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Profesionales</span>
+        </a>
+      </li>
+    </ul>
 
     <li class="sidenav-nav-item">
       <a class="sidenav-nav-link" (click)="onCompanyClick()">

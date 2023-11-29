@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class CommunicationService {
-  private userClickedSource = new Subject<boolean>();
+  private userClickedSource = new Subject<boolean | string>();
   userClicked$ = this.userClickedSource.asObservable();
 
   private companyClickedSource = new Subject<boolean>();
@@ -47,6 +47,21 @@ export class CommunicationService {
       this.userProfileClickedSource.next(true);
     }
   }
+
+  emitPeopleClicked(PeopleOrBoolean?: boolean | string) {
+    this.companyClickedSource.next(false);
+    this.userProfileClickedSource.next(false);
+    this.companyProfileClickedSource.next(false);
+    this.userEditClickedSource.next(false);
+    if (typeof PeopleOrBoolean === 'string') {
+      this.userClickedSource.next(PeopleOrBoolean);
+    } else {
+      this.userClickedSource.next(true);
+    }
+  }
+
+
+
 
   emitUserEditClicked() {
     this.userClickedSource.next(false);

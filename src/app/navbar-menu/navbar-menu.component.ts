@@ -18,6 +18,7 @@ export class NavbarMenuComponent implements OnInit {
 
   collapsed = true;
   screenWidth = 0;
+  isUserMenuOpen = false;
 
   constructor(private communicationService: CommunicationService) { }
 
@@ -37,10 +38,23 @@ export class NavbarMenuComponent implements OnInit {
   }
 
   onUserClick() {
-    this.communicationService.emitUserClicked();
+    this.isUserMenuOpen = !this.isUserMenuOpen;
+    //this.communicationService.emitUserClicked();
   }
 
   onCompanyClick() {
     this.communicationService.emitCompanyClicked();
+  }
+
+  onPeopleClick() {
+    this.communicationService.emitPeopleClicked('persona');
+  }
+
+  onClientsClick() {
+    this.communicationService.emitPeopleClicked('cliente');
+  }
+
+  onProfessionalsClick() {
+    this.communicationService.emitPeopleClicked('profesional');
   }
 }
