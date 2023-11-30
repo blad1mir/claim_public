@@ -37,13 +37,25 @@
             <div class="col col-2">First Name</div>
             <div class="col col-3">Last Name</div>
             <div class="col col-4">Username</div>
+            <div class="col col-5">Acciones</div>
           </li>
 
-          <li class="table-row" *ngFor="let userData of userProfiles.results" (click)="onSelectUserProfile(userData.user.username)">
+          <li class="table-row" *ngFor="let userData of userProfiles.results">
             <div class="col col-1" data-label="Email" style="padding-right: 20px;">{{ userData.user.email }}</div>
             <div class="col col-2" data-label="First Name">{{ userData.user.first_name }}</div>
             <div class="col col-3" data-label="Last Name">{{ userData.user.last_name }}</div>
             <div class="col col-4" data-label="Username">{{ userData.user.username }}</div>
+            <div class="col col-5" data-label="Acciones">
+              <button class="button-38" role="button" (click)="onSelectUserProfile(userData.user.username)">
+                <span class="material-icons sidenav-link-icon">person</span>
+              </button>
+              <button class="button-38" role="button">
+                <span class="material-icons sidenav-link-icon">edit</span>
+              </button>
+              <button class="button-38" role="button">
+                <span class="material-icons sidenav-link-icon">delete</span>
+              </button>
+            </div>
           </li>
         </ul>
       </div>
