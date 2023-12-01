@@ -40,7 +40,7 @@ export class UsersComponent implements OnInit {
     public service: HttpClientService,
     public http: HttpClient
   ) {
-    this.userProfilesUrl = this.baseUrl + 'user_profiles/';  // Inicializa la variable aquí
+    this.userProfilesUrl = this.baseUrl + 'user_profiles/';
 
     this.communicationService.userClicked$.subscribe((category: string | boolean) => {
       this.lastClickedCategory = category;

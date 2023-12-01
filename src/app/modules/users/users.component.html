@@ -30,35 +30,58 @@
         <button class="button-38" role="button" (click)="onSearchClick()">Buscar</button>
       </div>
 
-      <div class="container">
-        <ul class="responsive-table">
-          <li class="table-header">
-            <div class="col col-1" style="padding-right: 20px;">Email</div>
-            <div class="col col-2">First Name</div>
-            <div class="col col-3">Last Name</div>
-            <div class="col col-4">Username</div>
-            <div class="col col-5">Acciones</div>
-          </li>
-
-          <li class="table-row" *ngFor="let userData of userProfiles.results">
-            <div class="col col-1" data-label="Email" style="padding-right: 20px;">{{ userData.user.email }}</div>
-            <div class="col col-2" data-label="First Name">{{ userData.user.first_name }}</div>
-            <div class="col col-3" data-label="Last Name">{{ userData.user.last_name }}</div>
-            <div class="col col-4" data-label="Username">{{ userData.user.username }}</div>
-            <div class="col col-5" data-label="Acciones">
-              <button class="button-38" role="button" (click)="onSelectUserProfile(userData.user.username)">
-                <span class="material-icons sidenav-link-icon">person</span>
-              </button>
-              <button class="button-38" role="button">
-                <span class="material-icons sidenav-link-icon">edit</span>
-              </button>
-              <button class="button-38" role="button">
-                <span class="material-icons sidenav-link-icon">delete</span>
-              </button>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <div class="table-container">
+      <main >
+        <table>
+          <thead style="background-color: #01539B;">
+            <tr style="background-color: #01539B;">
+              <th style="background-color: #01539B;">
+                Email
+              </th>
+              <th style="background-color: #01539B;">
+                First Name
+              </th>
+              <th style="background-color: #01539B;">
+                Last Name
+              </th>
+              <th style="background-color: #01539B;">
+                Username
+              </th>
+              <th style="background-color: #01539B;">
+                Acciones
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-row" *ngFor="let userData of userProfiles.results">
+              <td data-title="Email">
+                {{ userData.user.email }}
+              </td>
+              <td data-title="First Name">
+                {{ userData.user.first_name }}
+              </td>
+              <td data-title="Last Name">
+                {{ userData.user.last_name }}
+              </td>
+              <td data-title="Username">
+                {{ userData.user.username }}
+              </td>
+              <td data-title="Acciones">
+                <button role="button" (click)="onSelectUserProfile(userData.user.username)">
+                  <span class="material-icons sidenav-link-icon">person</span>
+                </button>
+                <button role="button">
+                  <span class="material-icons sidenav-link-icon">edit</span>
+                </button>
+                <button role="button">
+                  <span class="material-icons sidenav-link-icon">delete</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+    </div>
 
       <div class="center">
         <div class="pagination">

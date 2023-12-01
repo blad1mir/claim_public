@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   public username: string = '';
   public password: string = '';
 
-  constructor(public http: HttpClient, private router: Router) {}
+  constructor(public http: HttpClient, private router: Router, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {}
 
@@ -24,14 +25,19 @@ export class LoginComponent implements OnInit {
           console.log(response);
           if (response && (response.message == "Inicio de Sesion Existoso")) {
             this.router.navigate(['/records']);
-          } else {
-            console.error('Credenciales incorrectas. Manejar este caso.');
           }
         },
         (error) => {
           console.error('Error en la solicitud de inicio de sesión', error);
-          // Manejar errores aquí
+          this.showErrorMessage('Credenciales incorrectas.');
         }
       );
+  }
+
+  private showErrorMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,  // Duración en milisegundos
+      panelClass: ['error-snackbar'],  // Clase CSS personalizada para el estilo del mensaje de error
+    });
   }
 }
