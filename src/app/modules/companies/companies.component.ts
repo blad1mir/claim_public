@@ -11,26 +11,78 @@ import { environment } from 'src/environments/environment';
 })
 export class CompaniesComponent implements OnInit {
   private readonly baseUrl: string = environment.apiUrl;
+  private readonly companyProfilesUrl: string;
   companyProfiles: any;
   searchInput: string = '';
+  lastClickedCategory: string | boolean = false;
+  open: boolean = false;
+  checkboxSelections: { [key: string]: boolean } = {};
 
-  constructor(
+  toggleDropdown() {
+    this.open = !this.open;
+  }
+
+  stopPropagation(event: Event) {
+    event.stopPropagation();
+  }
+
+  toggleCheckbox(option: string) {
+    this.checkboxSelections[option] = !this.checkboxSelections[option];
+  }
+
+  closeDropdown() {
+    this.open = false;
+  }
+
+constructor(
     private communicationService: CommunicationService,
     public service: HttpClientService,
     public http: HttpClient) {
-      this.http.get(this.baseUrl + 'enterprises/').subscribe((data) => {
-        this.companyProfiles = data;
-        console.log(data);
+      this.companyProfilesUrl = this.baseUrl + 'enterprises/';
+
+      this.communicationService.userClicked$.subscribe((category: string | boolean) => {
+        this.lastClickedCategory = category;
+        this.handleUserClicked(category);
       });
     }
+
+    private handleUserClicked(category: string | boolean): void {
+      if (typeof category === 'boolean') {
+        const url = `${this.companyProfilesUrl}`;
+        console.log(url);
+        this.http.get(url).subscribe((data) => {
+          this.companyProfiles = data;
+          console.log(data);
+        });
+      }
+    }
+
 
     ngOnInit(): void {}
 
     onSearchClick(): void {
-      const searchUrl = this.baseUrl + 'enterprises/' + '?search=' + this.searchInput;
-      this.http.get(searchUrl).subscribe((data) => {
-        this.companyProfiles = data;
-        console.log(data);
+
+        let searchUrl = `${this.companyProfilesUrl}`;
+
+        if (this.checkboxSelections['nombre']) searchUrl += `&name=${this.searchInput}`;
+        if (this.checkboxSelections['email']) searchUrl += `&emails_associated__email=${this.searchInput}`;
+        if (this.checkboxSelections['documento legal']) searchUrl += `&legal_document==${this.searchInput}`;
+
+
+        console.log(this.companyProfilesUrl);
+
+        this.http.get(searchUrl).subscribe((data) => {
+          this.companyProfiles = data;
+          console.log(data);
+        });
+
+    }
+
+    onCheckboxChange(selectedCategory: string): void {
+      Object.keys(this.checkboxSelections).forEach((category) => {
+        if (category !== selectedCategory) {
+          this.checkboxSelections[category] = false;
+        }
       });
     }
 
@@ -52,7 +104,7 @@ export class CompaniesComponent implements OnInit {
         actualNumber = Math.floor(offset / 10);
       } else if (this.companyProfiles.previous) {
         const offset = this.extractOffset(this.companyProfiles.previous);
-        actualNumber = Math.floor(offset / 10);
+        actualNumber = Math.floor((offset / 10)+2);
       } else {
         return 1;
       }

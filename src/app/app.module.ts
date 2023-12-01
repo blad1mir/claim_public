@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserProfileComponent } from './modules/users/user-profile/user-profile.component';
 import { CompanyProfileComponent } from './modules/companies/company-profile/company-profile.component';
 import { UserEditComponent } from './modules/users/user-edit/user-edit.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { UserEditComponent } from './modules/users/user-edit/user-edit.component
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
