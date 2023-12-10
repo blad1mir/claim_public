@@ -3,6 +3,7 @@ import { CommunicationService } from '../../communication.service';
 import { HttpClientService } from 'src/app/core/http/data-layer/http-client.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { SelectedCompanyService } from './selected-company.service';
 
 @Component({
   selector: 'app-companies',
@@ -14,9 +15,15 @@ export class CompaniesComponent implements OnInit {
   private readonly companyProfilesUrl: string;
   companyProfiles: any;
   searchInput: string = '';
+
+  nombreInput: string = "";
+  emailInput: string = "";
+  documentoLegalInput: string = "";
+
   lastClickedCategory: string | boolean = false;
   open: boolean = false;
   checkboxSelections: { [key: string]: boolean } = {};
+  isBuscarButtonActive: boolean = true;
 
   toggleDropdown() {
     this.open = !this.open;
@@ -37,23 +44,53 @@ export class CompaniesComponent implements OnInit {
 constructor(
     private communicationService: CommunicationService,
     public service: HttpClientService,
+    private selectedCompanyService: SelectedCompanyService,
     public http: HttpClient) {
       this.companyProfilesUrl = this.baseUrl + 'enterprises/';
 
-      this.communicationService.userClicked$.subscribe((category: string | boolean) => {
+      this.communicationService.companyClicked$.subscribe((category: string | boolean) => {
         this.lastClickedCategory = category;
-        this.handleUserClicked(category);
+        this.handleCompanyClicked(category);
+        console.log(this.handleCompanyClicked(category));
       });
     }
 
-    private handleUserClicked(category: string | boolean): void {
-      if (typeof category === 'boolean') {
-        const url = `${this.companyProfilesUrl}`;
-        console.log(url);
-        this.http.get(url).subscribe((data) => {
-          this.companyProfiles = data;
-          console.log(data);
-        });
+    private handleCompanyClicked(category: string | boolean): void {
+      let url: string = '';
+
+      if (typeof category === 'string') {
+        const categoryQuery = this.getCategoryQuery(category);
+        if (categoryQuery !== '') {
+          url = `${this.companyProfilesUrl}?categories__category=${categoryQuery}`;
+        }
+      }
+      console.log(url);
+
+      this.http.get(url).subscribe((data) => {
+        this.companyProfiles = data;
+        console.log(data);
+      });
+
+    }
+
+    private getCategoryQuery(category: string): string {
+      switch (category) {
+        case 'cliente':
+          return 'Cliente';
+        case 'proveedor':
+          return 'Proveedor';
+        case 'profesional':
+          return 'Profesional';
+        case 'asistencia':
+          return 'Asistencia';
+        case 'reparador':
+          return 'Reparador';
+        case 'colaborador':
+          return 'Colaborador';
+        case 'AIDE':
+          return 'AIDE';
+        default:
+          return 'persona';
       }
     }
 
@@ -61,21 +98,57 @@ constructor(
     ngOnInit(): void {}
 
     onSearchClick(): void {
+      this.toggleBuscarButton(true);
 
-        let searchUrl = `${this.companyProfilesUrl}`;
+      if (typeof this.lastClickedCategory === 'string') {
+        const categoryQuery = this.getCategoryQuery(this.lastClickedCategory);
 
-        if (this.checkboxSelections['nombre']) searchUrl += `&name=${this.searchInput}`;
-        if (this.checkboxSelections['email']) searchUrl += `&emails_associated__email=${this.searchInput}`;
-        if (this.checkboxSelections['documento legal']) searchUrl += `&legal_document==${this.searchInput}`;
+        let searchUrl = `${this.companyProfilesUrl}?categories__category=${categoryQuery}`;
+        searchUrl += `&search=${this.searchInput}`;
 
-
-        console.log(this.companyProfilesUrl);
+        console.log(searchUrl);
 
         this.http.get(searchUrl).subscribe((data) => {
           this.companyProfiles = data;
           console.log(data);
         });
+      } else {
+        console.error('No se pudo obtener la categoría para la búsqueda.');
+      }
+    }
 
+    getDocumentoLegalInput(): string {
+      return this.documentoLegalInput || "";
+    }
+
+    getEmailInput(): string {
+      return this.emailInput || "";
+    }
+
+    getNombreInput(): string {
+      return this.nombreInput || "";
+    }
+
+    onSearchAvzClick(): void {
+      this.toggleBuscarButton(true);
+
+      if (typeof this.lastClickedCategory === 'string') {
+        const categoryQuery = this.getCategoryQuery(this.lastClickedCategory);
+
+        let searchUrl = `${this.companyProfilesUrl}?categories__category=${categoryQuery}`;
+
+        searchUrl += `&name=${this.getNombreInput()}&emails_associated__email=${this.getEmailInput()}&legal_document=${this.getDocumentoLegalInput()}`;
+
+        console.log(searchUrl);
+
+        this.http.get(searchUrl).subscribe((data) => {
+          this.companyProfiles = data;
+          console.log(data);
+        });
+        console.log(searchUrl);
+      } else {
+        console.error('No se pudo obtener la categoría para la búsqueda.');
+      }
     }
 
     onCheckboxChange(selectedCategory: string): void {
@@ -84,15 +157,6 @@ constructor(
           this.checkboxSelections[category] = false;
         }
       });
-    }
-
-    onSelectUserProfile(username: string): void {
-      //this.selectedUserService.setSelectedUsername(username); // Establece el usuario seleccionado
-      this.onUserProfileClick();
-    }
-
-    onUserProfileClick() {
-      this.communicationService.emitUserProfileClicked();
     }
 
 
@@ -136,6 +200,19 @@ constructor(
       // Extrae el valor de 'offset' de la URL
       const match = /offset=(\d+)/.exec(url);
       return match ? +match[1] : 0;
+    }
+
+    toggleBuscarButton(activate: boolean): void {
+      this.isBuscarButtonActive = activate;
+    }
+
+    onSelectCompanyProfile(id: string): void {
+      this.selectedCompanyService.setSelectedCompanyid(id);
+      this.onCompanyProfileClick();
+    }
+
+    onCompanyProfileClick() {
+      this.communicationService.emitCompanyProfileClicked();
     }
   }
 

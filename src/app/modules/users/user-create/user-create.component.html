@@ -1,1 +1,298 @@
-<p>user-create works!</p>
+<div class="reputation-container-total">
+  <div class="reputation-box-total items-center rounded-md">
+
+
+    <div class="flex justify-center items-center">
+      <ul>
+
+        <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+          <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px;">Crear empresa</h1>
+        </div>
+
+        <li>
+          <div class="p-6.5">
+
+            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Nombre de usuario
+                </label>
+                <input type="text" [(ngModel)]="username"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Nombre
+                </label>
+                <input type="text" [(ngModel)]="first_name"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+            </div>
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Apellido
+              </label>
+              <input type="text" [(ngModel)]="last_name"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Correo
+                </label>
+                <input type="email" [(ngModel)]="email"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Contraseña
+                </label>
+                <input type="text" [(ngModel)]="password"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Confirmar contraseña
+              </label>
+              <input type="text" [(ngModel)]="password_confirmation"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Segundo Apellido
+              </label>
+              <input type="text" [(ngModel)]="second_last_name"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Segundo Nombre
+              </label>
+              <input type="text" [(ngModel)]="middle_name"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Información de perfil
+                </label>
+                <input type="text" [(ngModel)]="profile_info"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Empresa
+                </label>
+                <input type="text" [(ngModel)]="enterprise"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Documento legal
+              </label>
+              <input type="text" [(ngModel)]="legal_document"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Privacidad
+              </label>
+              <input type="email" [(ngModel)]="is_private"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Banco
+                </label>
+                <input type="text" [(ngModel)]="bank_name"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  abreviatura de banco
+                </label>
+                <input type="text" [(ngModel)]="bank_abbr"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Numero de cuenta
+              </label>
+              <input type="text" [(ngModel)]="account_number"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Codigo de contabilidad
+              </label>
+              <input type="text" [(ngModel)]="accounting_code"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Primera Categoría
+              </label>
+              <input type="text" [(ngModel)]="first_category"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Segunda Categoría
+              </label>
+              <input type="text" [(ngModel)]="second_category"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Tercera Categoría
+              </label>
+              <input type="text" [(ngModel)]="third_category"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Numero de celular
+              </label>
+              <input type="text" [(ngModel)]="phone_number"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Descripción de celular
+                </label>
+                <input type="text" [(ngModel)]="phone_description"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Tipo de celular
+                </label>
+                <input type="text" [(ngModel)]="phone_type"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+            </div>
+
+            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Correo asociado
+                </label>
+                <input type="text" [(ngModel)]="email_associated"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Descripción de correo
+                </label>
+                <input type="text" [(ngModel)]="email_description"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+            </div>
+
+            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  País
+                </label>
+                <input type="text" [(ngModel)]="country"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Estado
+                </label>
+                <input type="text" [(ngModel)]="state"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+            </div>
+
+            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Ciudad
+                </label>
+                <input type="text" [(ngModel)]="city"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Dirección
+                </label>
+                <input type="text" [(ngModel)]="street"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Codigo Postal
+              </label>
+              <input type="text" [(ngModel)]="zip_code"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                manejo de reclamos
+              </label>
+              <input type="text" [(ngModel)]="claims_handler"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Primer Rol
+                </label>
+                <input type="text" [(ngModel)]="first_role"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Segundo Rol
+                </label>
+                <input type="text" [(ngModel)]="second_role"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+            </div>
+
+            <button (click)="createUser()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px;">
+              Guardar
+            </button>
+          </div>
+        </li>
+      </ul>
+
+
+    </div>
+  </div>
+</div>

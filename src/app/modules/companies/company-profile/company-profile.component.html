@@ -1,37 +1,147 @@
-<div class="reputation-container-total flex justify-center">
-  <div class="reputation-box-total flex items-center space-x-2 p-2 rounded-md">
+<div class="reputation-container-total">
+  <div class="reputation-box-total items-center rounded-md">
 
-    <div class="flex justify-center items-center">
+    <ul class="hidden text-sm font-medium text-center text-gray-700 rounded-lg shadow sm:flex divide-gray-200">
+      <li class="w-full">
+          <button (click)="toggleEmployeeButton(true)" class="inline-block w-full p-4 border-gray-300 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none" [ngClass]="{'bg-white border-r  rounded-e-lg': !isEmployeeButtonActive, 'active text-gray-900 bg-gray-100 border-r': isEmployeeButtonActive }">Empresa</button>
+      </li>
+      <li class="w-full">
+          <button (click)="toggleEmployeeButton(false)" class="  inline-block w-full p-4 border-gray-300 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none" [ngClass]="{'bg-white border-0  rounded-e-lg': isEmployeeButtonActive, 'active text-gray-900 bg-gray-100 border-0': !isEmployeeButtonActive}">Empleados</button>
+      </li>
+    </ul>
+
+
+    <div class="flex justify-center items-center" *ngIf="isEmployeeButtonActive">
       <ul>
+
+        <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+          <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px;">Perfil de empresa</h1>
+        </div>
+
         <li>
-          <section class="mb-5">
-            <h1 class="text-2xl font-bold mb-2">Profile</h1>
-          </section>
-        </li>
+          <div class="p-6.5">
 
-        <li class="flex justify-center items-center" style="margin-left: 300px; margin-right: 300px;">
-          <div class="flex flex-col items-center">
-            <div class="text-xl font-bold mb-1">BL Tecnologhy CA</div>
-            <div class="text-sm text-gray-500 mt-1">cliam@gmail.com</div>
-          </div>
-        </li>
+            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Categoría
+                </label>
+                <input type="text" [value]="companyProfiles?.categories[0]?.category " [disabled]="isInputDisabled"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
 
-        <li class="flex justify-center items-center" style="margin-left: 300px; margin-right: 300px;">
-          <a href="">
-          <div class="flex flex-col items-center" style="margin: 10px;">
-            <div class="bg-blue-500 text-white rounded-full w-6 h-6 mt-5 mb-5 flex items-center justify-center text-xl font-bold">
-              <i class="material-icons" style="font-size: 16px;">edit</i>
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Banco
+                </label>
+                <input type="text" [value]="companyProfiles?.bank_details[0]?.bank_name " [disabled] ="isInputDisabled" [(ngModel)]="updatedBankName"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
             </div>
-          </div>
-        </a>
-
-          <div class="flex flex-col items-center">
-            <div class="bg-blue-500 text-white rounded-full w-6 h-6 mt-5 mb-5 flex items-center justify-center text-xl font-bold">
-              <i class="material-icons" style="font-size: 16px;">delete</i>
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Nombre
+              </label>
+              <input type="email" [value]="companyProfiles?.name" [disabled]="isInputDisabled" [(ngModel)]="updatedName"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
             </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Email
+              </label>
+              <input type="email" [value]="companyProfiles?.emails_associated[0]?.email" [disabled]="isInputDisabled" [(ngModel)]="updatedEmail"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Documento legal
+              </label>
+              <input type="email" [value]="companyProfiles?.legal_document" [disabled]="isInputDisabled" [(ngModel)]="updatedlegal_document"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+            <button *ngIf="isInputDisabled" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px;" (click)="enableInput()">
+              Editar
+            </button>
+
+            <button *ngIf="!isInputDisabled" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px;" (click)="saveAndDisableInput()">
+              Guardar
+            </button>
           </div>
         </li>
       </ul>
+
+
+    </div>
+
+    <div *ngIf="!isEmployeeButtonActive">
+      <div class="users-container">
+
+        <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+          <h1 class="text-2xl font-bold mb-2">Users</h1>
+        </div>
+
+        <!--div  class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
+          <input [(ngModel)]="searchInput" type="text" placeholder="Search users" class="search-input border p-2">
+          <button class="button-38" role="button" (click)="onSearchClick()">Buscar</button>
+        </div-->
+
+        <div class="table-container">
+        <main >
+          <table>
+            <thead style="background-color: #01539B;">
+              <tr style="background-color: #01539B;">
+                <th style="background-color: #01539B;">
+                  Email
+                </th>
+                <th style="background-color: #01539B;">
+                  First Name
+                </th>
+                <th style="background-color: #01539B;">
+                  Last Name
+                </th>
+                <th style="background-color: #01539B;">
+                  Username
+                </th>
+                <th style="background-color: #01539B;">
+                  Acciones
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-row" *ngFor="let userData of userProfiles?.results">
+                <td data-title="Email">
+                  {{ userData.user.email }}
+                </td>
+                <td data-title="First Name">
+                  {{ userData.user.first_name }}
+                </td>
+                <td data-title="Last Name">
+                  {{ userData.user.last_name }}
+                </td>
+                <td data-title="Username">
+                  {{ userData.user.username }}
+                </td>
+                <!--td data-title="Acciones">
+                  <button role="button" (click)="onSelectUserProfile(userData.user.id)">
+                    <span class="material-icons sidenav-link-icon">person</span>
+                  </button>
+                </td-->
+              </tr>
+            </tbody>
+          </table>
+        </main>
+      </div>
+
+        <div class="center">
+          <div class="pagination">
+            <a class="button-38" (click)="onPreviousClick()">&laquo;</a>
+            <a class="button-38" >{{paginationNumber()}}</a>
+            <a class="button-38" (click)="onNextClick()">&raquo;</a>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>

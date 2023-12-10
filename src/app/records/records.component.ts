@@ -21,6 +21,8 @@ export class RecordsComponent implements OnInit {
   showUserProfile: boolean = false;
   showCompaniesProfile: boolean = false;
   showUserEdit: boolean = false;
+  showCreateUser: boolean = false;
+  showCreateCompany: boolean = false;
 
   onToggleSideNav(data: SideNavToggle): void{
     this.screenWidth = data.screenWidth;
@@ -35,6 +37,8 @@ export class RecordsComponent implements OnInit {
       this.showUserProfile = false;
       this.showCompaniesProfile = false;
       this.showUserEdit = false;
+      this.showCreateUser = false;
+      this.showCreateCompany = false;
       this.showUsers = true;
     });
 
@@ -43,6 +47,8 @@ export class RecordsComponent implements OnInit {
       this.showUserProfile = false;
       this.showCompaniesProfile = false;
       this.showUserEdit = false;
+      this.showCreateUser = false;
+      this.showCreateCompany = false;
       this.showCompanies = true;
     });
 
@@ -51,6 +57,8 @@ export class RecordsComponent implements OnInit {
       this.showUsers = false;
       this.showCompaniesProfile = false;
       this.showUserEdit = false;
+      this.showCreateUser = false;
+      this.showCreateCompany = false;
       this.showUserProfile = true;
     });
 
@@ -59,6 +67,8 @@ export class RecordsComponent implements OnInit {
       this.showUsers = false;
       this.showCompaniesProfile = false;
       this.showUserProfile = false;
+      this.showCreateUser = false;
+      this.showCreateCompany = false;
       this.showUserEdit = true;
     });
 
@@ -67,7 +77,29 @@ export class RecordsComponent implements OnInit {
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
+      this.showCreateUser = false;
+      this.showCreateCompany = false;
       this.showCompaniesProfile = true;
+    });
+
+    this.communicationService.createUserClicked$.subscribe(() => {
+      this.showUsers = false;
+      this.showUserProfile = false;
+      this.showCompanies = false;
+      this.showUserEdit = false;
+      this.showCompaniesProfile = false;
+      this.showCreateCompany = false;
+      this.showCreateUser = true;
+    });
+
+    this.communicationService.createCompanyClicked$.subscribe(() => {
+      this.showUsers = false;
+      this.showUserProfile = false;
+      this.showCompanies = false;
+      this.showUserEdit = false;
+      this.showCompaniesProfile = false;
+      this.showCreateUser = false;
+      this.showCreateCompany = true;
     });
   }
 }
