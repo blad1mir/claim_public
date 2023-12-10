@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,12 @@ export class LoginComponent implements OnInit {
   public username: string = '';
   public password: string = '';
 
-  constructor(public http: HttpClient, private router: Router, private snackBar: MatSnackBar) {}
+  constructor(
+    public http: HttpClient,
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private authService: AuthService,
+    ) {}
 
   ngOnInit(): void {}
 
@@ -24,6 +30,7 @@ export class LoginComponent implements OnInit {
         (response) => {
           console.log(response);
           if (response && (response.message == "Inicio de Sesion Existoso")) {
+            this.authService.setAuthTokens(response.token, response.refresh_token);
             this.router.navigate(['/records']);
           }
         },

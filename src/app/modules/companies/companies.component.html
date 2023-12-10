@@ -1,27 +1,24 @@
 <div class="reputation-container-total">
-  <div class="reputation-box-total flex items-center rounded-md">
-    <div class="users-container">
+  <div class="reputation-box-total items-center rounded-md">
+
+    <ul class="hidden text-sm font-medium text-center text-gray-700 rounded-lg shadow sm:flex divide-gray-200">
+      <li class="w-full">
+          <button (click)="toggleBuscarButton(true)" class="inline-block w-full p-4 border-gray-300 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none" [ngClass]="{'bg-white border-r  rounded-e-lg': !isBuscarButtonActive, 'active text-gray-900 bg-gray-100 border-r': isBuscarButtonActive }">Buscar</button>
+      </li>
+      <li class="w-full">
+          <button (click)="toggleBuscarButton(false)" class="  inline-block w-full p-4 border-gray-300 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none" [ngClass]="{'bg-white border-0  rounded-e-lg': isBuscarButtonActive, 'active text-gray-900 bg-gray-100 border-0': !isBuscarButtonActive}">Busqueda Avz.</button>
+      </li>
+    </ul>
+
+    <div class="users-container" *ngIf="isBuscarButtonActive">
+
+      <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+        <h1 class="text-2xl font-bold mb-2">Empresas</h1>
+      </div>
 
       <div  class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
 
         <input [(ngModel)]="searchInput" type="text" placeholder="Search users" class="search-input border p-2">
-
-        <div style="position: relative;">
-          <div class="relative inline-block text-left" [ngClass]="{ 'open': open }">
-            <button (click)="toggleDropdown()" class="button-38">
-              Filtros
-            </button>
-
-            <div *ngIf="open" (click)="stopPropagation($event)" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-              <div class="py-1">
-                <label *ngFor="let option of ['nombre', 'email','documento legal' ]" class="flex items-center space-x-2 px-4 py-2 cursor-pointer">
-                  <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" [checked]="checkboxSelections[option]" (change)="onCheckboxChange(option); toggleCheckbox(option)" />
-                  <span>{{ option }}</span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <button class="button-38" role="button" (click)="onSearchClick()">Buscar</button>
       </div>
@@ -32,13 +29,13 @@
             <thead style="background-color: #01539B;">
               <tr style="background-color: #01539B;">
                 <th style="background-color: #01539B;">
-                  Email
+                  Correo
                 </th>
                 <th style="background-color: #01539B;">
                   Nombre
                 </th>
                 <th style="background-color: #01539B;">
-                  Document Legal
+                  Documento Legal
                 </th>
                 <th style="background-color: #01539B;">
                   Acciones
@@ -47,24 +44,18 @@
             </thead>
             <tbody>
               <tr class="table-row" *ngFor="let companyData of companyProfiles.results">
-                <td data-title="Email">
-                  {{ companyData.emails.email }}
+                <td data-title="Correo">
+                  {{ companyData.email.email }}
                 </td>
                 <td data-title="Nombre">
                   {{ companyData.name }}
                 </td>
-                <td data-title="Document Legal">
+                <td data-title="Documento Legal">
                   {{ companyData.legal_document }}
                 </td>
                 <td data-title="Acciones">
-                  <button role="button" (click)="onUserProfileClick">
+                  <button role="button" (click)="onSelectCompanyProfile(companyData.enterprise_id)">
                     <span class="material-icons sidenav-link-icon">person</span>
-                  </button>
-                  <button role="button">
-                    <span class="material-icons sidenav-link-icon">edit</span>
-                  </button>
-                  <button role="button">
-                    <span class="material-icons sidenav-link-icon">delete</span>
                   </button>
                 </td>
               </tr>
@@ -80,6 +71,44 @@
           <a class="button-38" (click)="onNextClick()">&raquo;</a>
         </div>
       </div>
+    </div>
+
+    <div class="flex justify-center items-center" *ngIf="!isBuscarButtonActive">
+      <ul>
+
+        <li>
+          <div class="p-6.5">
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Nombre
+              </label>
+              <input type="email" placeholder="Nombre" [(ngModel)]="nombreInput"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Email
+              </label>
+              <input type="email" placeholder="Email" [(ngModel)]="emailInput"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <div class="mb-4.5">
+              <label class="mb-2.5 block text-black">
+                Documento legal
+              </label>
+              <input type="email" placeholder="Documento legal" [(ngModel)]="documentoLegalInput"
+                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+            </div>
+
+            <button (click)="onSearchAvzClick()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38">
+              Buscar
+            </button>
+          </div>
+        </li>
+      </ul>
     </div>
 
   </div>

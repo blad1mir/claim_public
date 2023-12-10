@@ -8,7 +8,7 @@ export class CommunicationService {
   private userClickedSource = new Subject<boolean | string>();
   userClicked$ = this.userClickedSource.asObservable();
 
-  private companyClickedSource = new Subject<boolean>();
+  private companyClickedSource = new Subject<boolean | string>();
   companyClicked$ = this.companyClickedSource.asObservable();
 
   private userProfileClickedSource = new Subject<boolean | string>(); // Puede ser booleano o string
@@ -17,23 +17,23 @@ export class CommunicationService {
   private userEditClickedSource = new Subject<boolean>();
   userEditClicked$ = this.userEditClickedSource.asObservable();
 
-  private companyProfileClickedSource = new Subject<boolean>();
+  private companyProfileClickedSource = new Subject<boolean | string>();
   companyProfileClicked$ = this.companyProfileClickedSource.asObservable();
+
+  private createUserClickedSource = new Subject<boolean>();
+  createUserClicked$ = this.createUserClickedSource.asObservable();
+
+  private createCompanyClickedSource = new Subject<boolean>();
+  createCompanyClicked$ = this.createCompanyClickedSource.asObservable();
 
   emitUserClicked() {
     this.companyClickedSource.next(false);
     this.userProfileClickedSource.next(false);
     this.companyProfileClickedSource.next(false);
     this.userEditClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createUserClickedSource.next(false);
     this.userClickedSource.next(true);
-  }
-
-  emitCompanyClicked() {
-    this.userClickedSource.next(false);
-    this.userProfileClickedSource.next(false);
-    this.companyProfileClickedSource.next(false);
-    this.userEditClickedSource.next(false);
-    this.companyClickedSource.next(true);
   }
 
   emitUserProfileClicked(usernameOrBoolean?: boolean | string) {
@@ -41,6 +41,8 @@ export class CommunicationService {
     this.companyClickedSource.next(false);
     this.companyProfileClickedSource.next(false);
     this.userEditClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createUserClickedSource.next(false);
     if (typeof usernameOrBoolean === 'string') {
       this.userProfileClickedSource.next(usernameOrBoolean);
     } else {
@@ -53,6 +55,8 @@ export class CommunicationService {
     this.userProfileClickedSource.next(false);
     this.companyProfileClickedSource.next(false);
     this.userEditClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createUserClickedSource.next(false);
     if (typeof PeopleOrBoolean === 'string') {
       this.userClickedSource.next(PeopleOrBoolean);
     } else {
@@ -60,22 +64,61 @@ export class CommunicationService {
     }
   }
 
-
-
+  emitCompanyClicked(CompanyOrBoolean?: boolean | string) {
+    this.userClickedSource.next(false);
+    this.userProfileClickedSource.next(false);
+    this.companyProfileClickedSource.next(false);
+    this.userEditClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createUserClickedSource.next(false);
+    if (typeof CompanyOrBoolean === 'string') {
+      this.companyClickedSource.next(CompanyOrBoolean);
+    } else {
+      this.companyClickedSource.next(true);
+    }
+  }
 
   emitUserEditClicked() {
     this.userClickedSource.next(false);
     this.companyClickedSource.next(false);
     this.companyProfileClickedSource.next(false);
     this.userProfileClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createUserClickedSource.next(false);
     this.userEditClickedSource.next(true);
   }
 
-  emitCompanyProfileClicked() {
+  emitCompanyProfileClicked(CompanyOrBoolean?: boolean | string) {
     this.userClickedSource.next(false);
     this.userProfileClickedSource.next(false);
     this.companyClickedSource.next(false);
     this.userEditClickedSource.next(false);
-    this.companyProfileClickedSource.next(true);
+    this.createCompanyClickedSource.next(false);
+    this.createUserClickedSource.next(false);
+    if (typeof CompanyOrBoolean === 'string') {
+      this.companyProfileClickedSource.next(CompanyOrBoolean);
+    } else {
+      this.companyProfileClickedSource.next(true);
+    }
+  }
+
+  emitCreateUserClicked() {
+    this.companyClickedSource.next(false);
+    this.userProfileClickedSource.next(false);
+    this.companyProfileClickedSource.next(false);
+    this.userEditClickedSource.next(false);
+    this.userClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createUserClickedSource.next(true);
+  }
+
+  emitCreateCompanyClicked() {
+    this.companyClickedSource.next(false);
+    this.userProfileClickedSource.next(false);
+    this.companyProfileClickedSource.next(false);
+    this.userEditClickedSource.next(false);
+    this.userClickedSource.next(false);
+    this.createUserClickedSource.next(false);
+    this.createCompanyClickedSource.next(true);
   }
 }

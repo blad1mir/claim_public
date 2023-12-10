@@ -16,6 +16,8 @@ import { CompanyProfileComponent } from './modules/companies/company-profile/com
 import { UserEditComponent } from './modules/users/user-edit/user-edit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UserCreateComponent } from './modules/users/user-create/user-create.component';
+import { CompanyCreateComponent } from './modules/companies/company-create/company-create.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     CompaniesComponent,
     UserProfileComponent,
     CompanyProfileComponent,
-    UserEditComponent
+    UserEditComponent,
+    UserCreateComponent,
+    CompanyCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

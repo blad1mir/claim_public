@@ -5,10 +5,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class SelectedUserService {
-  private selectedUsernameSubject = new BehaviorSubject<string | null>(null);
-  selectedUsername$ = this.selectedUsernameSubject.asObservable();
+  private selectedUseridSubject = new BehaviorSubject<string | null>(null);
+  selectedUserid$ = this.selectedUseridSubject.asObservable();
 
-  setSelectedUsername(username: string | null): void {
-    this.selectedUsernameSubject.next(username);
+  setSelectedUserid(userid: string | null): void {
+    this.selectedUseridSubject.next(userid);
   }
 }

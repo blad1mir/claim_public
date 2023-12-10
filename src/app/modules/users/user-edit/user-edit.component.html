@@ -6,72 +6,50 @@
     <div class="reputation-box-total flex items-center space-x-2 p-2 rounded-md">
 
       <div class="flex justify-center items-center">
+
         <ul>
+
+          <li>
+            <div style="position: relative;">
+              <div class="relative inline-block text-left" [ngClass]="{ 'open': open }">
+                <button (click)="toggleDropdown()" class="button-38">
+                  Usuarios
+                </button>
+
+                <div *ngIf="open" (click)="stopPropagation($event)" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <div class="py-1">
+                    <label *ngFor="let option of dropdownOptions" class="flex items-center space-x-2 px-4 py-2 cursor-pointer">
+                      <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" [checked]="checkboxSelections[option.username]" (change)="onCheckboxChange(option.username); toggleCheckbox(option.username); updateSelectedUserId(option)" />
+                      <span>{{ option.username }}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
 
           <li>
             <div class="p-6.5">
               <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
                 <div class="w-full xl:w-1/2">
                   <label class="mb-2.5 block text-black">
-                    First name
+                    Contraseña
                   </label>
-                  <input type="text" placeholder="Enter your first name"
+                  <input type="text" placeholder="Enter your first name" [(ngModel)]="passwordInput"
                     class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                 </div>
 
                 <div class="w-full xl:w-1/2">
                   <label class="mb-2.5 block text-black">
-                    Middle Name
+                    Confirmar contraseña
                   </label>
-                  <input type="text" placeholder="Enter your last middle name"
+                  <input type="text" placeholder="Enter your last middle name" [(ngModel)]="passwordConfirmationInput"
                     class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                 </div>
               </div>
 
-              <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                <div class="w-full xl:w-1/2">
-                  <label class="mb-2.5 block text-black">
-                    Last Name
-                  </label>
-                  <input type="text" placeholder="Enter your last name"
-                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                </div>
-
-                <div class="w-full xl:w-1/2">
-                  <label class="mb-2.5 block text-black">
-                    Second Last name
-                  </label>
-                  <input type="text" placeholder="Enter your second last name"
-                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                </div>
-              </div>
-
-              <div class="mb-4.5">
-                <label class="mb-2.5 block text-black">
-                  Nombre de usuario
-                </label>
-                <input type="email" placeholder="Enter your username"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-              <div class="mb-4.5">
-                <label class="mb-2.5 block text-black">
-                  Email
-                </label>
-                <input type="email" placeholder="Enter your email address"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-              <div class="mb-4.5">
-                <label class="mb-2.5 block text-black">
-                  Legal Document
-                </label>
-                <input type="email" placeholder="Enter your legal document"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-              <button class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container">
-                Send Message
+              <button (click)="enableUser()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container">
+                Crear
               </button>
             </div>
           </li>

@@ -19,6 +19,8 @@ export class NavbarMenuComponent implements OnInit {
   collapsed = true;
   screenWidth = 0;
   isUserMenuOpen = false;
+  isUsersMenuOpen = false;
+  isCompanyMenuOpen = false;
 
   constructor(private communicationService: CommunicationService) { }
 
@@ -38,16 +40,24 @@ export class NavbarMenuComponent implements OnInit {
   }
 
   onUserClick() {
+    this.communicationService.emitPeopleClicked('person');
+  }
+
+  onContactClick(){
     this.isUserMenuOpen = !this.isUserMenuOpen;
-    //this.communicationService.emitUserClicked();
+  }
+
+  onUsersMenuClick(){
+    this.isUsersMenuOpen = !this.isUsersMenuOpen;
   }
 
   onCompanyClick() {
-    this.communicationService.emitCompanyClicked();
+    this.isCompanyMenuOpen = !this.isCompanyMenuOpen;
+    //this.communicationService.emitCompanyClicked();
   }
 
-  onPeopleClick() {
-    this.communicationService.emitPeopleClicked('persona');
+  onProvidersClick() {
+    this.communicationService.emitPeopleClicked('proveedor');
   }
 
   onClientsClick() {
@@ -57,4 +67,54 @@ export class NavbarMenuComponent implements OnInit {
   onProfessionalsClick() {
     this.communicationService.emitPeopleClicked('profesional');
   }
+
+  onPrescriptorsClick() {
+    this.communicationService.emitPeopleClicked('prescriptor');
+  }
+
+  onTramitersClick() {
+    this.communicationService.emitPeopleClicked('tramitador');
+  }
+
+
+  onClientsCompanyClick(){
+  this.communicationService.emitCompanyClicked('cliente');
+  }
+
+  onProvidersCompanyClick(){
+    this.communicationService.emitCompanyClicked('proveedor');
+    }
+
+  onProfessionalsCompanyClick(){
+    this.communicationService.emitCompanyClicked('profesional');
+  }
+
+  onAssistantsCompanyClick(){
+    this.communicationService.emitCompanyClicked('asistencia');
+  }
+
+  onRepairersCompanyClick(){
+    this.communicationService.emitCompanyClicked('reparador');
+  }
+
+  onCollaboratorsCompanyClick(){
+    this.communicationService.emitCompanyClicked('colaborador');
+  }
+
+  onAIDEsCompanyClick(){
+    this.communicationService.emitCompanyClicked('AIDE');
+  }
+
+  onCreateUserClick() {
+    this.communicationService.emitCreateUserClicked();
+  }
+
+  onEnableUserClick() {
+    this.communicationService.emitUserEditClicked();
+  }
+
+  onCreateCompanyClick() {
+    this.communicationService.emitCreateCompanyClicked();
+  }
+
 }

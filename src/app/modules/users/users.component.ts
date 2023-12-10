@@ -14,9 +14,19 @@ export class UsersComponent implements OnInit {
   private readonly userProfilesUrl: string;
   userProfiles: any;
   searchInput: string = '';
+  usernameInput: string = "";
+  nombreInput: string = "";
+  apellidoInput: string = "";
+  segundoNombreInput: string = "";
+  segundoApellidoInput: string = "";
+  emailInput: string = "";
+  telefonoInput: string = "";
+  documentoLegalInput: string = "";
+
   lastClickedCategory: string | boolean = false;
   open: boolean = false;
   checkboxSelections: { [key: string]: boolean } = {};
+  isBuscarButtonActive: boolean = true;
 
   toggleDropdown() {
     this.open = !this.open;
@@ -51,19 +61,13 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {}
 
   onSearchClick(): void {
+    this.toggleBuscarButton(true);
+
     if (typeof this.lastClickedCategory === 'string') {
       const categoryQuery = this.getCategoryQuery(this.lastClickedCategory);
 
       let searchUrl = `${this.userProfilesUrl}?profile__categories__category=${categoryQuery}`;
-
-      if (this.checkboxSelections['username']) searchUrl += `&username=${this.searchInput}`;
-      if (this.checkboxSelections['nombre']) searchUrl += `&first_name=${this.searchInput}`;
-      if (this.checkboxSelections['apellido']) searchUrl += `&last_name=${this.searchInput}`;
-      if (this.checkboxSelections['email']) searchUrl += `&email=${this.searchInput}`;
-      if (this.checkboxSelections['segundo nombre']) searchUrl += `&profile__middle_name=${this.searchInput}`;
-      if (this.checkboxSelections['telefono']) searchUrl += `&profile__phones_associated__phone_number=${this.searchInput}`;
-      if (this.checkboxSelections['documento legal']) searchUrl += `&profile__legal_document=${this.searchInput}`;
-
+      searchUrl += `&search=${this.searchInput}`;
 
       console.log(searchUrl);
 
@@ -76,6 +80,56 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  onSearchAvzClick(): void {
+    this.toggleBuscarButton(true);
+
+    if (typeof this.lastClickedCategory === 'string') {
+      const categoryQuery = this.getCategoryQuery(this.lastClickedCategory);
+
+      let searchUrl = `${this.userProfilesUrl}?profile__categories__category=${categoryQuery}`;
+
+      searchUrl += `&username=${this.getUsernameInput()}&first_name=${this.getNombreInput()}&last_name=${this.getApellidoInput()}&email=${this.getEmailInput()}&profile__middle_name=${this.getSegundoNombreInput()}&profile__phones_associated__phone_number=${this.getTelefonoInput()}&profile__legal_document=${this.getDocumentoLegalInput()}`;
+
+      console.log(searchUrl);
+
+      this.http.get(searchUrl).subscribe((data) => {
+        this.userProfiles = data;
+        console.log(data);
+      });
+    } else {
+      console.error('No se pudo obtener la categoría para la búsqueda.');
+    }
+  }
+
+  getDocumentoLegalInput(): string {
+    return this.documentoLegalInput || "";
+  }
+
+  getTelefonoInput(): string {
+    return this.telefonoInput || "";
+  }
+
+  getSegundoNombreInput(): string {
+    return this.segundoNombreInput || "";
+  }
+
+
+  getEmailInput(): string {
+    return this.emailInput || "";
+  }
+
+  getApellidoInput(): string {
+    return this.apellidoInput || "";
+  }
+
+  getNombreInput(): string {
+    return this.nombreInput || "";
+  }
+
+  getUsernameInput(): string {
+    return this.usernameInput || "";
+  }
+
   onCheckboxChange(selectedCategory: string): void {
     Object.keys(this.checkboxSelections).forEach((category) => {
       if (category !== selectedCategory) {
@@ -85,38 +139,56 @@ export class UsersComponent implements OnInit {
   }
 
   private handleUserClicked(category: string | boolean): void {
+    let url: string;
+
     if (typeof category === 'string') {
       const categoryQuery = this.getCategoryQuery(category);
-      const url = `${this.userProfilesUrl}?profile__categories__category=${categoryQuery}`;
-      console.log(url);
-      this.http.get(url).subscribe((data) => {
-        this.userProfiles = data;
-        console.log(data);
-      });
+      if (categoryQuery !== '') {
+        url = `${this.userProfilesUrl}?profile__categories__category=${categoryQuery}`;
+      } else {
+        url = `${this.userProfilesUrl}?is_active=1`;
+      }
+    } else {
+      url = `${this.userProfilesUrl}?is_active=1`;
     }
+    console.log(url);
+
+    this.http.get(url).subscribe((data) => {
+      this.userProfiles = data;
+      console.log(data);
+    });
   }
 
   private getCategoryQuery(category: string): string {
     switch (category) {
-      case 'persona':
-        return 'Persona';
+      case 'person':
+        return '';
+      case 'proveedor':
+        return 'Proveedor';
       case 'cliente':
         return 'Cliente';
       case 'profesional':
         return 'Profesional';
+        case 'prescriptor':
+        return 'Prescriptor';
+        case 'tramitador':
+        return 'Tramitador';
       default:
-        return 'personas';
+        return 'persona';
     }
   }
 
-  onSelectUserProfile(username: string): void {
-    this.selectedUserService.setSelectedUsername(username); // Establece el usuario seleccionado
+
+
+  onSelectUserProfile(id: string): void {
+    this.selectedUserService.setSelectedUserid(id);
     this.onUserProfileClick();
   }
 
   onUserProfileClick() {
     this.communicationService.emitUserProfileClicked();
   }
+
 
 
   paginationNumber(): number  {
@@ -159,5 +231,9 @@ export class UsersComponent implements OnInit {
     // Extrae el valor de 'offset' de la URL
     const match = /offset=(\d+)/.exec(url);
     return match ? +match[1] : 0;
+  }
+
+  toggleBuscarButton(activate: boolean): void {
+    this.isBuscarButtonActive = activate;
   }
 }
