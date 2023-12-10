@@ -84,11 +84,11 @@ constructor(
         case 'asistencia':
           return 'Asistencia';
         case 'reparador':
-          return 'Reparador';
+          return 'Reparador Alternativo';
         case 'colaborador':
-          return 'Colaborador';
+          return 'Empresa Colaboradora';
         case 'AIDE':
-          return 'AIDE';
+          return 'Reparador AIDE';
         default:
           return 'persona';
       }
