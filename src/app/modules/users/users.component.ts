@@ -166,13 +166,13 @@ export class UsersComponent implements OnInit {
       case 'proveedor':
         return 'Proveedor';
       case 'cliente':
-        return 'Cliente';
+        return 'Cliente Particular';
       case 'profesional':
         return 'Profesional';
         case 'prescriptor':
         return 'Prescriptor';
         case 'tramitador':
-        return 'Tramitador';
+        return 'Tramitador Compañía';
       default:
         return 'persona';
     }
