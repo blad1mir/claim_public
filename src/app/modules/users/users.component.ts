@@ -28,6 +28,8 @@ export class UsersComponent implements OnInit {
   checkboxSelections: { [key: string]: boolean } = {};
   isBuscarButtonActive: boolean = true;
 
+  isContactMode: boolean = false;
+
   toggleDropdown() {
     this.open = !this.open;
   }
@@ -143,16 +145,23 @@ export class UsersComponent implements OnInit {
 
     if (typeof category === 'string') {
       const categoryQuery = this.getCategoryQuery(category);
-      if (categoryQuery !== '') {
-        url = `${this.userProfilesUrl}?profile__categories__category=${categoryQuery}`;
+
+      if (categoryQuery === 'Contacto') {
+        this.isContactMode = true;
+        url = `${this.userProfilesUrl}dropdown/?is_active=0`;
       } else {
-        url = `${this.userProfilesUrl}?is_active=1`;
+        this.isContactMode = false;
+        url = `${this.userProfilesUrl}?profile__categories__category=${categoryQuery}`;
       }
     } else {
-      url = `${this.userProfilesUrl}?is_active=1`;
+      this.isContactMode = false;
+      url = `${this.userProfilesUrl}dropdown/?is_active=1`;
     }
-    console.log(url);
 
+    this.fetchUserProfiles(url);
+  }
+
+  private fetchUserProfiles(url: string): void {
     this.http.get(url).subscribe((data) => {
       this.userProfiles = data;
       console.log(data);
@@ -173,6 +182,8 @@ export class UsersComponent implements OnInit {
         return 'Prescriptor';
         case 'tramitador':
         return 'Tramitador Compañía';
+        case 'contacto':
+        return 'Contacto';
       default:
         return 'persona';
     }
@@ -189,6 +200,13 @@ export class UsersComponent implements OnInit {
     this.communicationService.emitUserProfileClicked();
   }
 
+  onCreateUserClick() {
+    this.communicationService.emitCreateUserClicked();
+  }
+
+  onEnableUserClick() {
+    this.communicationService.emitUserEditClicked();
+  }
 
 
   paginationNumber(): number  {

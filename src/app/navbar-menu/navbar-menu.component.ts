@@ -44,7 +44,8 @@ export class NavbarMenuComponent implements OnInit {
   }
 
   onContactClick(){
-    this.isUserMenuOpen = !this.isUserMenuOpen;
+    //this.isUserMenuOpen = !this.isUserMenuOpen;
+    this.communicationService.emitPeopleClicked('contacto');
   }
 
   onUsersMenuClick(){
@@ -111,10 +112,6 @@ export class NavbarMenuComponent implements OnInit {
 
   onEnableUserClick() {
     this.communicationService.emitUserEditClicked();
-  }
-
-  onCreateCompanyClick() {
-    this.communicationService.emitCreateCompanyClicked();
   }
 
 }

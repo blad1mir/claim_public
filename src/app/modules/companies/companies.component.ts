@@ -214,5 +214,9 @@ constructor(
     onCompanyProfileClick() {
       this.communicationService.emitCompanyProfileClicked();
     }
+
+    onCreateCompanyClick() {
+      this.communicationService.emitCreateCompanyClicked();
+    }
   }
 

@@ -2,25 +2,27 @@
 
   <div class="reputation-box-total  items-center rounded-md">
 
-    <ul class="hidden text-sm font-medium text-center text-gray-700 rounded-lg shadow sm:flex divide-gray-200">
-      <li class="w-full">
-          <button (click)="toggleBuscarButton(true)" class="inline-block w-full p-4 border-gray-300 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none" [ngClass]="{'bg-white border-r  rounded-e-lg': !isBuscarButtonActive, 'active text-gray-900 bg-gray-100 border-r': isBuscarButtonActive }">Buscar</button>
-      </li>
-      <li class="w-full">
-          <button (click)="toggleBuscarButton(false)" class="  inline-block w-full p-4 border-gray-300 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none" [ngClass]="{'bg-white border-0  rounded-e-lg': isBuscarButtonActive, 'active text-gray-900 bg-gray-100 border-0': !isBuscarButtonActive}">Busqueda Avz.</button>
-      </li>
-    </ul>
+    <div *ngIf="!isContactMode">
+      <ul class="hidden text-sm font-medium text-center text-gray-700 rounded-lg shadow sm:flex divide-gray-200">
+        <li class="w-full">
+            <button (click)="toggleBuscarButton(true)" class="inline-block w-full p-4 border-gray-300 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none" [ngClass]="{'bg-white border-r  rounded-e-lg': !isBuscarButtonActive, 'active text-gray-900 bg-gray-100 border-r': isBuscarButtonActive }">Buscar</button>
+        </li>
+        <li class="w-full">
+            <button (click)="toggleBuscarButton(false)" class="  inline-block w-full p-4 border-gray-300 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none" [ngClass]="{'bg-white border-0  rounded-e-lg': isBuscarButtonActive, 'active text-gray-900 bg-gray-100 border-0': !isBuscarButtonActive}">Busqueda Avz.</button>
+        </li>
+      </ul>
+    </div>
 
-    <div *ngIf="isBuscarButtonActive">
+    <div *ngIf="isBuscarButtonActive && !isContactMode">
       <div class="users-container">
 
         <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
-          <h1 class="text-2xl font-bold mb-2">Users</h1>
+          <h1 class="text-2xl font-bold mb-2">Usuarios</h1>
         </div>
 
         <div  class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
 
-          <input [(ngModel)]="searchInput" type="text" placeholder="Search users" class="search-input border p-2">
+          <input [(ngModel)]="searchInput" type="text" placeholder="Buscar Usuarios" class="search-input border p-2">
 
           <!--div style="position: relative;">
             <div class="relative inline-block text-left" [ngClass]="{ 'open': open }">
@@ -39,7 +41,9 @@
             </div>
           </div-->
 
-          <button class="button-38" role="button" (click)="onSearchClick()">Buscar</button>
+          <button (click)="onSearchClick()" class="button-38" role="button">Buscar</button>
+
+          <button (click)="onEnableUserClick()" class="button-38" role="button" style="margin-left: auto;">Crear</button>
         </div>
 
         <div class="table-container">
@@ -48,16 +52,16 @@
             <thead style="background-color: #01539B;">
               <tr style="background-color: #01539B;">
                 <th style="background-color: #01539B;">
-                  Email
+                  Correo
                 </th>
                 <th style="background-color: #01539B;">
-                  First Name
+                  Nombre
                 </th>
                 <th style="background-color: #01539B;">
-                  Last Name
+                  Apellido
                 </th>
                 <th style="background-color: #01539B;">
-                  Username
+                  Nombre de usuario
                 </th>
                 <th style="background-color: #01539B;">
                   Acciones
@@ -66,16 +70,16 @@
             </thead>
             <tbody>
               <tr class="table-row" *ngFor="let userData of userProfiles.results">
-                <td data-title="Email">
+                <td data-title="Correo">
                   {{ userData.user.email }}
                 </td>
-                <td data-title="First Name">
+                <td data-title="Nombre">
                   {{ userData.user.first_name }}
                 </td>
-                <td data-title="Last Name">
+                <td data-title="Apellido">
                   {{ userData.user.last_name }}
                 </td>
-                <td data-title="Username">
+                <td data-title="Nombre de usuario">
                   {{ userData.user.username }}
                 </td>
                 <td data-title="Acciones">
@@ -98,6 +102,58 @@
         </div>
       </div>
     </div>
+
+    <div *ngIf="isContactMode">
+      <div class="users-container">
+
+        <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+          <h1 class="text-2xl font-bold mb-2">Contactos</h1>
+        </div>
+
+        <div  class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
+          <button (click)="onCreateUserClick()" class="button-38" role="button" style="margin-left: auto;">Crear</button>
+        </div>
+
+        <div class="table-container">
+          <main>
+            <table>
+              <thead style="background-color: #01539B;">
+                <tr style="background-color: #01539B;">
+                  <th style="background-color: #01539B;">
+                    Nombre de usuario
+                  </th>
+                  <th style="background-color: #01539B;">
+                    Acciones
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-row" *ngFor="let userData of userProfiles">
+                  <td data-title="Nombre de usuario">
+                    {{ userData.username }}
+                  </td>
+                  <td data-title="Acciones">
+                    <button role="button" (click)="onSelectUserProfile(userData.id)">
+                      <span class="material-icons sidenav-link-icon">person</span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </main>
+        </div>
+
+        <div class="center">
+          <div class="pagination">
+            <a class="button-38" (click)="onPreviousClick()">&laquo;</a>
+            <a class="button-38" >{{paginationNumber()}}</a>
+            <a class="button-38" (click)="onNextClick()">&raquo;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
     <div class="flex justify-center items-center" *ngIf="!isBuscarButtonActive">
       <ul>
@@ -160,9 +216,9 @@
 
             <div class="mb-4.5">
               <label class="mb-2.5 block text-black">
-                Email
+                Correo
               </label>
-              <input type="email" placeholder="Email" [(ngModel)]="emailInput"
+              <input type="email" placeholder="Correo" [(ngModel)]="emailInput"
                 class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
             </div>
 
