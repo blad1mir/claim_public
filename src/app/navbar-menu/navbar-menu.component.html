@@ -15,28 +15,12 @@
       </a>
     </li>
     <ul class="sidenav-nav2 dynamic-height" *ngIf="isUsersMenuOpen">
-      <li class="sidenav-nav-item">
+      <!--li class="sidenav-nav-item">
         <a class="sidenav-nav-link" (click)="onUserClick()">
           <span class="material-icons sidenav-link-icon" style="font-size: 30px;">group</span>
           <span class="sidenav-link-text" *ngIf="collapsed">Lista de Usuarios</span>
         </a>
-      </li>
-      <li  class="sidenav-nav-item">
-        <a class="sidenav-nav-link" (click)="onEnableUserClick()">
-          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">add_circle</span>
-          <span class="sidenav-link-text" *ngIf="collapsed">Crear</span>
-        </a>
-      </li>
-    </ul>
-
-    <li class="sidenav-nav-item">
-      <a class="sidenav-nav-link" (click)="onContactClick()">
-        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">badge</span>
-        <span class="sidenav-link-text" *ngIf="collapsed">Contactos</span>
-      </a>
-    </li>
-
-    <ul class="sidenav-nav2 dynamic-height" *ngIf="isUserMenuOpen">
+      </li-->
       <li class="sidenav-nav-item">
         <a class="sidenav-nav-link" (click)="onProvidersClick()">
           <span class="material-icons sidenav-link-icon" style="font-size: 30px;">group</span>
@@ -67,13 +51,20 @@
           <span class="sidenav-link-text" *ngIf="collapsed">Tramitador Compañía</span>
         </a>
       </li>
-      <li  class="sidenav-nav-item">
-        <a class="sidenav-nav-link" (click)="onCreateUserClick()">
+      <!--li  class="sidenav-nav-item">
+        <a class="sidenav-nav-link" (click)="onEnableUserClick()">
           <span class="material-icons sidenav-link-icon" style="font-size: 30px;">add_circle</span>
           <span class="sidenav-link-text" *ngIf="collapsed">Crear</span>
         </a>
-      </li>
+      </li-->
     </ul>
+
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" (click)="onContactClick()">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">badge</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Contactos</span>
+      </a>
+    </li>
 
     <li class="sidenav-nav-item">
       <a class="sidenav-nav-link" (click)="onCompanyClick()">
@@ -125,15 +116,9 @@
             <span class="sidenav-link-text" *ngIf="collapsed">Reparador AIDE</span>
           </a>
         </li>
-      <li  class="sidenav-nav-item">
-        <a class="sidenav-nav-link" (click)="onCreateCompanyClick()">
-          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">add_circle</span>
-          <span class="sidenav-link-text" *ngIf="collapsed">Crear</span>
-        </a>
-      </li>
     </ul>
 
-    <li class="sidenav-nav-item">
+    <!--li class="sidenav-nav-item">
       <a class="sidenav-nav-link" href="">
         <span class="material-icons sidenav-link-icon" style="font-size: 30px;">description</span>
         <span class="sidenav-link-text" *ngIf="collapsed">Expedientes</span>
@@ -145,7 +130,7 @@
         <span class="material-icons sidenav-link-icon" style="font-size: 30px;">playlist_add_check</span>
         <span class="sidenav-link-text" *ngIf="collapsed">Tareas</span>
       </a>
-    </li>
+    </li-->
   </ul>
 </div>
 
