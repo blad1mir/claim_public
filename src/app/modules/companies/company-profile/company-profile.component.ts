@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { SelectedCompanyService } from '../selected-company.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-company-profile',
@@ -31,7 +32,8 @@ export class CompanyProfileComponent implements OnInit {
     public service: HttpClientService,
     private selectedCompanyService: SelectedCompanyService,
     public http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
     ) {
       this.selectedCompanySubscription = this.selectedCompanyService.selectedCompanyid$.subscribe((companyid) => {
         this.selectedCompanyid = companyid;
@@ -124,6 +126,11 @@ export class CompanyProfileComponent implements OnInit {
     this.isInputDisabled = true;
   }
   saveAndDisableInput() {
+    if (!this.updatedName || !this.updatedlegal_document || !this.updatedBankName || !this.updatedEmail )
+    {
+      this.showWarningMessage('Por favor, complete todos los campos.');
+      return;
+    }
     const authToken = this.authService.getAuthToken();
 
     if (authToken) {
@@ -151,6 +158,7 @@ export class CompanyProfileComponent implements OnInit {
       this.http.patch(url, updatedData, { headers }).subscribe(
         (response) => {
           console.log('Edición parcial exitosa', response);
+          this.showWarningMessage('Edición exitosa');
 
           this.disableInput();
         },
@@ -161,5 +169,12 @@ export class CompanyProfileComponent implements OnInit {
     } else {
       console.error('No hay token de autorización disponible.');
     }
+  }
+
+  private showWarningMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      panelClass: ['warning-snackbar'],
+    });
   }
 }
