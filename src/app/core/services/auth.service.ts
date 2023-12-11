@@ -4,30 +4,30 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  private authToken: string = '';
-  private refreshToken: string = '';
+  private authTokenKey = 'authToken';
+  private refreshTokenKey = 'refreshToken';
 
-  constructor() {}
+  // ...
 
   setAuthTokens(authToken: string, refreshToken: string): void {
-    this.authToken = authToken;
-    this.refreshToken = refreshToken;
+    localStorage.setItem(this.authTokenKey, authToken);
+    localStorage.setItem(this.refreshTokenKey, refreshToken);
   }
 
   getAuthToken(): string {
-    return this.authToken;
+    return localStorage.getItem(this.authTokenKey) || '';
   }
 
   getRefreshToken(): string {
-    return this.refreshToken;
+    return localStorage.getItem(this.refreshTokenKey) || '';
   }
 
   clearAuthTokens(): void {
-    this.authToken = '';
-    this.refreshToken = '';
+    localStorage.removeItem(this.authTokenKey);
+    localStorage.removeItem(this.refreshTokenKey);
   }
 
   isAuthenticated(): boolean {
-    return !!this.authToken;  // Retorna true si hay un token, false si no lo hay
+    return !!this.authTokenKey;  // Retorna true si hay un token, false si no lo hay
   }
 }

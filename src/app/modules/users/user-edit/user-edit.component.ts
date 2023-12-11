@@ -3,6 +3,7 @@ import { CommunicationService } from '../../../communication.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { environment } from 'src/environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface UserProfile {
   id: number;
@@ -45,7 +46,8 @@ export class UserEditComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    public http: HttpClient
+    public http: HttpClient,
+    private snackBar: MatSnackBar,
   ) {
     this.userProfilesDropdownUrl = `${this.baseUrl}user_profiles/dropdown/?is_active=0`;
   }
@@ -75,6 +77,10 @@ export class UserEditComponent implements OnInit {
   }
 
   enableUser() {
+    if (!this.passwordInput || !this.passwordConfirmationInput)
+    {
+      this.showWarningMessage('Por favor, complete todos los campos.'); return;
+    }
     const authToken = this.authService.getAuthToken();
 
     if (authToken && this.selectedUserId) {
@@ -94,6 +100,7 @@ export class UserEditComponent implements OnInit {
       this.http.put(enableUserEndpoint, requestBody, { headers }).subscribe(
         (response) => {
           console.log('Usuario habilitado con éxito', response);
+          this.showWarningMessage('Usuario habilitado con éxito');
         },
         (error) => {
           console.error('Error al habilitar al usuario', error);
@@ -102,5 +109,12 @@ export class UserEditComponent implements OnInit {
     } else {
       console.error('No hay token de autorización disponible o no se ha seleccionado ningún usuario.');
     }
+  }
+
+  private showWarningMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,  // Duración en milisegundos
+      panelClass: ['warning-snackbar'],  // Clase CSS personalizada para el estilo del mensaje de advertencia
+    });
   }
 }

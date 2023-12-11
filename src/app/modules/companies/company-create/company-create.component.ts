@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { environment } from 'src/environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-company-create',
@@ -37,6 +38,7 @@ export class CompanyCreateComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
+    private snackBar: MatSnackBar,
   ) {
     this.companyProfilesUrl = this.baseUrl + 'enterprises/';
   }
@@ -46,6 +48,10 @@ export class CompanyCreateComponent implements OnInit {
 
   // Método para enviar la solicitud de creación de empresa
   createCompany(): void {
+    if (!this.companyName || !this.legalDocument || !this.isPrivate || !this.bankName || !this.accountNumber || !this.bankAbbr || !this.accountingCode || !this.category || !this.phoneNumber || !this.phoneDescription || !this.phoneType || !this.email || !this.emailDescription || !this.country || !this.state || !this.city || !this.street || !this.zipCode || !this.webPageUrl) {
+      this.showWarningMessage('Por favor, complete todos los campos.');
+      return;
+    }
     const authToken = this.authService.getAuthToken();
 
 
@@ -90,7 +96,8 @@ export class CompanyCreateComponent implements OnInit {
       this.http.post(this.companyProfilesUrl, companyData, { headers }).subscribe(
         (response) => {
           console.log('Empresa creada exitosamente', response);
-          // Puedes realizar acciones adicionales después de la creación exitosa
+          this.showWarningMessage('Empresa creada exitosamente.');
+
         },
         (error) => {
           console.error('Error al crear la empresa', error);
@@ -99,5 +106,14 @@ export class CompanyCreateComponent implements OnInit {
     } else {
       console.error('No hay token de autorización disponible.');
     }
+
   }
+
+  private showWarningMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,  // Duración en milisegundos
+      panelClass: ['warning-snackbar'],  // Clase CSS personalizada para el estilo del mensaje de advertencia
+    });
+  }
+
 }

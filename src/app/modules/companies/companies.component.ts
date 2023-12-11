@@ -20,6 +20,11 @@ export class CompaniesComponent implements OnInit {
   emailInput: string = "";
   documentoLegalInput: string = "";
 
+  showErrorSpinner: boolean = false;
+  errorTimer: any;
+  hasInitialLoadCompleted: boolean = false;
+  loading: boolean = true;
+
   lastClickedCategory: string | boolean = false;
   open: boolean = false;
   checkboxSelections: { [key: string]: boolean } = {};
@@ -66,11 +71,38 @@ constructor(
       }
       console.log(url);
 
-      this.http.get(url).subscribe((data) => {
-        this.companyProfiles = data;
-        console.log(data);
-      });
+      this.showErrorSpinner = true;
+    this.fetchCompanyProfiles(url);
+    }
 
+    private fetchCompanyProfiles(url: string, retryCount: number = 0): void {
+      this.loading = true;
+      this.http.get(url).subscribe(
+        (data) => {
+          this.companyProfiles = data;
+          console.log(data);
+          // Reinicia la bandera de carga
+          this.loading = false;
+          // Reinicia la bandera de error y el temporizador
+          this.showErrorSpinner = false;
+          if (this.errorTimer) {
+            clearTimeout(this.errorTimer);
+          }
+        },
+        (error) => {
+          // Muestra el spinner y programa un temporizador para intentar de nuevo (hasta 3 intentos)
+          if (retryCount < 3) {
+            this.errorTimer = setTimeout(() => {
+              this.fetchCompanyProfiles(url, retryCount + 1);
+            }, 500);
+          } else {
+            console.error('Error en la obtención de perfiles de usuario después de varios intentos.', error);
+            this.showErrorSpinner = false; // Puedes manejar este caso según tus necesidades
+            // Reinicia la bandera de carga
+            this.loading = false;
+          }
+        }
+      );
     }
 
     private getCategoryQuery(category: string): string {
