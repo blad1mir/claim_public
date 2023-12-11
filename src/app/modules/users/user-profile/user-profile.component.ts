@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { SelectedUserService } from '../selected-user.service'; // Ajusta la ruta según tu estructura
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-profile',
@@ -48,7 +49,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private selectedUserService: SelectedUserService,
     public service: HttpClientService,
     public http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
   ) {
     // Suscribe a los cambios en el nombre de usuario seleccionado
     this.selectedUserSubscription = this.selectedUserService.selectedUserid$.subscribe((userid) => {
@@ -96,6 +98,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.isInputDisabled = true;
   }
   saveAndDisableInput() {
+    if (!this.updatedFirst_name || !this.updatedLast_name || !this.updatedEmail || !this.updatedUsername || !this.updatedMiddle_name || !this.updatedSecond_last_name || !this.updatedlegal_document || !this.updatedPhone_number )
+    {
+      this.showWarningMessage('Por favor, complete todos los campos.');
+      return;
+    }
     const authToken = this.authService.getAuthToken();
 
     if (authToken) {
@@ -128,6 +135,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       this.http.patch(url, updatedData, { headers }).subscribe(
         (response) => {
           console.log('Edición parcial exitosa', response);
+          this.showWarningMessage('Edición exitosa');
 
           this.disableInput();
         },
@@ -139,5 +147,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     } else {
       console.error('No hay token de autorización disponible.');
     }
+  }
+
+  private showWarningMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      panelClass: ['warning-snackbar'],
+    });
   }
 }

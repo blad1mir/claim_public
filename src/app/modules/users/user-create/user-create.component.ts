@@ -146,8 +146,8 @@ export class UserCreateComponent implements OnInit {
 
   private showWarningMessage(message: string): void {
     this.snackBar.open(message, 'Cerrar', {
-      duration: 5000,  // Duración en milisegundos
-      panelClass: ['warning-snackbar'],  // Clase CSS personalizada para el estilo del mensaje de advertencia
+      duration: 5000,
+      panelClass: ['warning-snackbar'],
     });
   }
 
