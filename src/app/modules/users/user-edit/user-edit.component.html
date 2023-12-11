@@ -1,8 +1,5 @@
 <div class="reputation-container-total flex justify-center">
   <ul>
-    <li>
-      <h1 class=" title-text text-2xl font-bold mb-2">Perfil</h1>
-    </li>
     <div class="reputation-box-total flex items-center space-x-2 p-2 rounded-md">
 
       <div class="flex justify-center items-center">
@@ -12,7 +9,7 @@
           <li>
             <div style="position: relative;">
               <div class="relative inline-block text-left" [ngClass]="{ 'open': open }">
-                <button (click)="toggleDropdown()" class="button-38">
+                <button (click)="toggleDropdown()" class="button-38" style="margin-bottom: 20px;">
                   Usuarios
                 </button>
 
@@ -48,7 +45,7 @@
                 </div>
               </div>
 
-              <button (click)="enableUser()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container">
+              <button (click)="enableUser()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px;">
                 Crear
               </button>
             </div>

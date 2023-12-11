@@ -41,6 +41,11 @@ export class LoginComponent implements OnInit {
       );
   }
 
+  logout() {
+    this.authService.clearAuthTokens();
+    this.router.navigate(['/login']);
+  }
+
   private showErrorMessage(message: string): void {
     this.snackBar.open(message, 'Cerrar', {
       duration: 5000,  // Duración en milisegundos

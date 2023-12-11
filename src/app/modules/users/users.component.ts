@@ -26,9 +26,15 @@ export class UsersComponent implements OnInit {
   lastClickedCategory: string | boolean = false;
   open: boolean = false;
   checkboxSelections: { [key: string]: boolean } = {};
-  isBuscarButtonActive: boolean = true;
+  isBuscarButtonActive: boolean = false;
+  isBuscarAvzButtonActive: boolean = false;
 
   isContactMode: boolean = false;
+
+  showErrorSpinner: boolean = false;
+  errorTimer: any;
+  hasInitialLoadCompleted: boolean = false;
+  loading: boolean = true;
 
   toggleDropdown() {
     this.open = !this.open;
@@ -62,8 +68,16 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  ngOnDestroy(): void {
+    // Limpia el temporizador cuando el componente se destruye
+    if (this.errorTimer) {
+      clearTimeout(this.errorTimer);
+    }
+  }
+
+
   onSearchClick(): void {
-    this.toggleBuscarButton(true);
+    this.toggleBuscarButton();
 
     if (typeof this.lastClickedCategory === 'string') {
       const categoryQuery = this.getCategoryQuery(this.lastClickedCategory);
@@ -83,7 +97,7 @@ export class UsersComponent implements OnInit {
   }
 
   onSearchAvzClick(): void {
-    this.toggleBuscarButton(true);
+    this.toggleBuscarButton();
 
     if (typeof this.lastClickedCategory === 'string') {
       const categoryQuery = this.getCategoryQuery(this.lastClickedCategory);
@@ -151,6 +165,7 @@ export class UsersComponent implements OnInit {
         url = `${this.userProfilesUrl}dropdown/?is_active=0`;
       } else {
         this.isContactMode = false;
+        this.isBuscarButtonActive = true;
         url = `${this.userProfilesUrl}?profile__categories__category=${categoryQuery}`;
       }
     } else {
@@ -158,14 +173,38 @@ export class UsersComponent implements OnInit {
       url = `${this.userProfilesUrl}dropdown/?is_active=1`;
     }
 
+    this.showErrorSpinner = true;
     this.fetchUserProfiles(url);
   }
 
-  private fetchUserProfiles(url: string): void {
-    this.http.get(url).subscribe((data) => {
-      this.userProfiles = data;
-      console.log(data);
-    });
+  private fetchUserProfiles(url: string, retryCount: number = 0): void {
+    this.loading = true;
+    this.http.get(url).subscribe(
+      (data) => {
+        this.userProfiles = data;
+        console.log(data);
+        // Reinicia la bandera de carga
+        this.loading = false;
+        // Reinicia la bandera de error y el temporizador
+        this.showErrorSpinner = false;
+        if (this.errorTimer) {
+          clearTimeout(this.errorTimer);
+        }
+      },
+      (error) => {
+        // Muestra el spinner y programa un temporizador para intentar de nuevo (hasta 3 intentos)
+        if (retryCount < 3) {
+          this.errorTimer = setTimeout(() => {
+            this.fetchUserProfiles(url, retryCount + 1);
+          }, 500);
+        } else {
+          console.error('Error en la obtención de perfiles de usuario después de varios intentos.', error);
+          this.showErrorSpinner = false; // Puedes manejar este caso según tus necesidades
+          // Reinicia la bandera de carga
+          this.loading = false;
+        }
+      }
+    );
   }
 
   private getCategoryQuery(category: string): string {
@@ -251,7 +290,13 @@ export class UsersComponent implements OnInit {
     return match ? +match[1] : 0;
   }
 
-  toggleBuscarButton(activate: boolean): void {
-    this.isBuscarButtonActive = activate;
+  toggleBuscarButton(): void {
+    this.isBuscarButtonActive = true;
+    this.isBuscarAvzButtonActive = false;
+  }
+
+  toggleBuscarAvzButton(): void {
+    this.isBuscarButtonActive = false;
+    this.isBuscarAvzButtonActive = true;
   }
 }
