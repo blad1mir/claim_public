@@ -4,7 +4,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { environment } from 'src/environments/environment';
 
-
 @Component({
   selector: 'app-user-create',
   templateUrl: './user-create.component.html',
@@ -48,6 +47,8 @@ export class UserCreateComponent implements OnInit {
   first_role: string = '';
   second_role: string = '';
 
+  categories: any[] = [];
+
 
 
   constructor(
@@ -59,7 +60,29 @@ export class UserCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fetchCategories();
   }
+
+  fetchCategories(): void {
+    const authToken = this.authService.getAuthToken();
+    if (authToken) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      });
+
+      this.http.get('http://v.claimcenter.com:8000/api/categories/', { headers })
+        .subscribe((response: any) => {
+          // Aquí asumes que la respuesta tiene un campo 'results' que contiene las categorías
+          this.categories = response.results;
+        }, (error) => {
+          console.error('Error al obtener las categorías', error);
+        });
+    } else {
+      console.error('No hay token de autorización disponible.');
+    }
+  }
+
 
   createUser(): void {
     if (!this.username || !this.first_name || !this.last_name || !this.email || !this.password || !this.password_confirmation || !this.second_last_name || !this.middle_name || !this.profile_info || !this.enterprise || !this.legal_document || !this.is_private || !this.bank_name || !this.account_number || !this.bank_abbr || !this.accounting_code || !this.first_category || !this.second_category || !this.third_category  || !this.phone_number  || !this.phone_description  || !this.phone_type  || !this.email_associated  || !this.email_description  || !this.country  || !this.state  || !this.city  || !this.street  || !this.zip_code  || !this.claims_handler  || !this.first_role  || !this.second_role )
