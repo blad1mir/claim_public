@@ -1,15 +1,27 @@
-<div class="reputation-container-total flex justify-center">
-  <ul>
-    <div class="reputation-box-total flex items-center space-x-2 p-2 rounded-md">
+<div style="margin-top: 100px;">
+  <div class="form-style">
+    <div class="container rounded-md">
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Usuarios</h1>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="passwordInput" class="bg-color"  type="text" required>
+          <div class="underline"></div>
+          <label for="">Contraseña</label>
+        </div>
+        <div class="input-data">
+          <input [(ngModel)]="passwordConfirmationInput" class="bg-color"  type="text" required>
+          <div class="underline"></div>
+          <label for="">Confirmar contraseña</label>
+        </div>
+      </div>
 
       <div class="flex justify-center items-center">
-
         <ul>
-
           <li>
             <div style="position: relative;">
               <div class="relative inline-block text-left" [ngClass]="{ 'open': open }">
-                <button (click)="toggleDropdown()" class="button-38" style="margin-bottom: 20px;">
+                <button (click)="toggleDropdown()" class="button-38" style="padding-top: 10px; padding-bottom: 10px;">
                   Usuarios
                 </button>
 
@@ -24,35 +36,15 @@
               </div>
             </div>
           </li>
-
-          <li>
-            <div class="p-6.5">
-              <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                <div class="w-full xl:w-1/2">
-                  <label class="mb-2.5 block text-black">
-                    Contraseña
-                  </label>
-                  <input type="text" placeholder="Enter your first name" [(ngModel)]="passwordInput"
-                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                </div>
-
-                <div class="w-full xl:w-1/2">
-                  <label class="mb-2.5 block text-black">
-                    Confirmar contraseña
-                  </label>
-                  <input type="text" placeholder="Enter your last middle name" [(ngModel)]="passwordConfirmationInput"
-                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                </div>
-              </div>
-
-              <button (click)="enableUser()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px;">
-                Crear
-              </button>
-            </div>
-          </li>
         </ul>
       </div>
 
+      <div class="select-input-data">
+        <button (click)="enableUser()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px;">
+          Crear
+        </button>
+      </div>
+
     </div>
-  </ul>
+  </div>
 </div>

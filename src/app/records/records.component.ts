@@ -19,6 +19,7 @@ export class RecordsComponent implements OnInit {
   showUsers: boolean = false;
   showCompanies: boolean = false;
   showUserProfile: boolean = false;
+  landing: boolean = true;
   showCompaniesProfile: boolean = false;
   showUserEdit: boolean = false;
   showCreateUser: boolean = false;
@@ -39,6 +40,7 @@ export class RecordsComponent implements OnInit {
       this.showUserEdit = false;
       this.showCreateUser = false;
       this.showCreateCompany = false;
+      this.landing = false;
       this.showUsers = true;
     });
 
@@ -49,6 +51,7 @@ export class RecordsComponent implements OnInit {
       this.showUserEdit = false;
       this.showCreateUser = false;
       this.showCreateCompany = false;
+      this.landing = false;
       this.showCompanies = true;
     });
 
@@ -59,6 +62,7 @@ export class RecordsComponent implements OnInit {
       this.showUserEdit = false;
       this.showCreateUser = false;
       this.showCreateCompany = false;
+      this.landing = false;
       this.showUserProfile = true;
     });
 
@@ -69,6 +73,7 @@ export class RecordsComponent implements OnInit {
       this.showUserProfile = false;
       this.showCreateUser = false;
       this.showCreateCompany = false;
+      this.landing = false;
       this.showUserEdit = true;
     });
 
@@ -79,6 +84,7 @@ export class RecordsComponent implements OnInit {
       this.showUserEdit = false;
       this.showCreateUser = false;
       this.showCreateCompany = false;
+      this.landing = false;
       this.showCompaniesProfile = true;
     });
 
@@ -89,6 +95,7 @@ export class RecordsComponent implements OnInit {
       this.showUserEdit = false;
       this.showCompaniesProfile = false;
       this.showCreateCompany = false;
+      this.landing = false;
       this.showCreateUser = true;
     });
 
@@ -99,6 +106,7 @@ export class RecordsComponent implements OnInit {
       this.showUserEdit = false;
       this.showCompaniesProfile = false;
       this.showCreateUser = false;
+      this.landing = false;
       this.showCreateCompany = true;
     });
   }

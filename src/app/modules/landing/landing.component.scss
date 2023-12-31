@@ -1,0 +1,126 @@
+.landing-tittle{
+  color: #5a5a5a;
+  font-size: 40px;
+}
+
+.reputation-container-total .reputation-box-total {
+  background-color: #fbfcff;
+  border: 1px solid transparent;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: background-color 0.5s, border 0.5s, box-shadow 0.5s;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-left: 300px;
+  margin-right: 40px;
+  padding: 50px;
+}
+
+.reputation-container .reputation-box {
+  background-color: #fbfcff;
+  border: 1px solid transparent;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: background-color 0.5s, border 0.5s, box-shadow 0.5s;
+  padding-bottom: 20px;
+  width: 350px;
+  padding-left: 20px;
+  padding-right: 30px;
+}
+
+.reputation-container:hover .reputation-box {
+  background-color: #fbfcff;
+  border: 1px solid #d1d8ec;
+  box-shadow: 0 4px 8px rgba(193, 206, 246, 0.3);
+}
+
+.search-input{
+  width: 180px;
+}
+
+.users-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-list li {
+  flex: 0 0 calc(33.333% - 20px);
+  margin: 10px;
+}
+
+.center {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pagination {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.search{
+ margin-left: 150px;
+}
+
+body {
+  font-family: 'lato', sans-serif;
+}
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+  small {
+    font-size: 0.5em;
+  }
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+@media only screen and (max-width: 1200px) {
+  .reputation-container-total .reputation-box-total {
+    padding: 20px;
+    margin-left: 100px;
+  }
+
+  .reputation-container-total .reputation-container-text  {
+    margin-left: 60px;
+  }
+
+  .reputation-container .reputation-box {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

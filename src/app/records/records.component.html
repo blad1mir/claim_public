@@ -9,6 +9,7 @@
 
     <!-- Contenido central (ocupando dos tercios) -->
     <div class="flex-1 mx-auto">
+      <app-landing *ngIf="landing"></app-landing>
       <app-users *ngIf="showUsers"></app-users>
       <app-companies *ngIf="showCompanies"></app-companies>
       <app-user-profile *ngIf="showUserProfile"></app-user-profile>

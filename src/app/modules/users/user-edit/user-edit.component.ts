@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BackendService } from 'src/app/core/services/backend.service';
 
 interface UserProfile {
   id: number;
@@ -48,18 +49,31 @@ export class UserEditComponent implements OnInit {
     private authService: AuthService,
     public http: HttpClient,
     private snackBar: MatSnackBar,
+    private backendService: BackendService,
   ) {
     this.userProfilesDropdownUrl = `${this.baseUrl}user_profiles/dropdown/?is_active=0`;
   }
 
   ngOnInit(): void {
-    // Realiza la solicitud HTTP GET al endpoint y carga las opciones del dropdown
+    this.checkBackendConnection();
     this.http.get<UserProfile[]>(this.userProfilesDropdownUrl).subscribe(
       (data) => {
         this.dropdownOptions = data;
       },
       (error) => {
         console.error('Error al obtener los perfiles de usuario', error);
+      }
+    );
+  }
+
+  private checkBackendConnection(): void {
+    this.backendService.checkConnection().subscribe(
+      () => {
+        console.log('Conexión con el backend establecida. Puedes realizar acciones adicionales si es necesario.');
+      },
+      (error) => {
+        console.error('No se pudo establecer conexión con el backend.', error);
+        this.showWarningMessage('No se pudo establecer conexión con el backend');
       }
     );
   }

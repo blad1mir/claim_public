@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientService } from 'src/app/core/http/data-layer/http-client.service';
 import { environment } from 'src/environments/environment';
 import { SelectedUserService } from './selected-user.service'; // Ajusta la ruta según tu estructura
+import { BackendService } from 'src/app/core/services/backend.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -26,7 +28,7 @@ export class UsersComponent implements OnInit {
   lastClickedCategory: string | boolean = false;
   open: boolean = false;
   checkboxSelections: { [key: string]: boolean } = {};
-  isBuscarButtonActive: boolean = false;
+  isBuscarButtonActive: boolean = true;
   isBuscarAvzButtonActive: boolean = false;
 
   isContactMode: boolean = false;
@@ -56,7 +58,9 @@ export class UsersComponent implements OnInit {
     private communicationService: CommunicationService,
     private selectedUserService: SelectedUserService,
     public service: HttpClientService,
-    public http: HttpClient
+    public http: HttpClient,
+    private backendService: BackendService,
+    private snackBar: MatSnackBar,
   ) {
     this.userProfilesUrl = this.baseUrl + 'user_profiles/';
 
@@ -66,15 +70,27 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.checkBackendConnection();
+  }
 
   ngOnDestroy(): void {
-    // Limpia el temporizador cuando el componente se destruye
     if (this.errorTimer) {
       clearTimeout(this.errorTimer);
     }
   }
 
+  private checkBackendConnection(): void {
+    this.backendService.checkConnection().subscribe(
+      () => {
+        console.log('Conexión con el backend establecida. Puedes realizar acciones adicionales si es necesario.');
+      },
+      (error) => {
+        console.error('No se pudo establecer conexión con el backend.', error);
+        this.showWarningMessage('No se pudo establecer conexión con el backend');
+      }
+    );
+  }
 
   onSearchClick(): void {
     this.toggleBuscarButton();
@@ -99,12 +115,9 @@ export class UsersComponent implements OnInit {
   onSearchAvzClick(): void {
     this.toggleBuscarButton();
 
-    if (typeof this.lastClickedCategory === 'string') {
-      const categoryQuery = this.getCategoryQuery(this.lastClickedCategory);
+      let searchUrl = `${this.userProfilesUrl}`;
 
-      let searchUrl = `${this.userProfilesUrl}?profile__categories__category=${categoryQuery}`;
-
-      searchUrl += `&username=${this.getUsernameInput()}&first_name=${this.getNombreInput()}&last_name=${this.getApellidoInput()}&email=${this.getEmailInput()}&profile__middle_name=${this.getSegundoNombreInput()}&profile__phones_associated__phone_number=${this.getTelefonoInput()}&profile__legal_document=${this.getDocumentoLegalInput()}`;
+      searchUrl += `?username=${this.getUsernameInput()}&first_name=${this.getNombreInput()}&last_name=${this.getApellidoInput()}&email=${this.getEmailInput()}&profile__middle_name=${this.getSegundoNombreInput()}&profile__phones_associated__phone_number=${this.getTelefonoInput()}&profile__legal_document=${this.getDocumentoLegalInput()}&dropdown/?is_active=0`;
 
       console.log(searchUrl);
 
@@ -112,9 +125,7 @@ export class UsersComponent implements OnInit {
         this.userProfiles = data;
         console.log(data);
       });
-    } else {
-      console.error('No se pudo obtener la categoría para la búsqueda.');
-    }
+
   }
 
   getDocumentoLegalInput(): string {
@@ -298,5 +309,13 @@ export class UsersComponent implements OnInit {
   toggleBuscarAvzButton(): void {
     this.isBuscarButtonActive = false;
     this.isBuscarAvzButtonActive = true;
+  }
+
+
+  private showWarningMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      panelClass: ['warning-snackbar'],
+    });
   }
 }
