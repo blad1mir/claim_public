@@ -1,4 +1,99 @@
-<div class="reputation-container-total">
+<div style="margin-top: 100px;">
+
+
+<ul *ngIf="!loading && isContactMode" class="tab-box-total flex flex-wrap text-sm font-medium text-center text-gray-500 dark:border-gray-700 dark:text-gray-400">
+  <li class="me-2">
+    <a (click)="toggleBuscarButton()" class="tab-paddings inline-block p-4 rounded-t-lg"
+
+    [ngClass]="{'text-blue-600 bg-color active': isBuscarButtonActive, 'hover:text-gray-600 hover:bg-gray-50': !isBuscarButtonActive }">
+    Buscar
+  </a>
+  </li>
+  <li class="me-2">
+    <a (click)="toggleBuscarAvzButton()" class="tab-paddings inline-block p-4 rounded-t-lg"
+    [ngClass]="{'text-blue-600 bg-color active': !isBuscarButtonActive, 'hover:text-gray-600 hover:bg-gray-50':
+    isBuscarButtonActive }">
+    Busqueda Avz
+  </a>
+  </li>
+</ul>
+
+<div class="form-style" *ngIf="!loading && isBuscarAvzButtonActive && !showErrorSpinner">
+  <div class="container rounded-md">
+    <h3 class="text">
+       Busqueda avanzada
+   </h3>
+
+    <div class="form-row">
+      <div class="input-data">
+        <input class="bg-color" [(ngModel)]="nombreInput" type="text" required>
+        <div class="underline"></div>
+        <label for="">Nombre</label>
+      </div>
+      <div class="input-data">
+        <input class="bg-color" [(ngModel)]="apellidoInput" type="text" required>
+        <div class="underline"></div>
+        <label for="">Apellido</label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-data">
+        <input class="bg-color" [(ngModel)]="segundoNombreInput" type="text" required>
+        <div class="underline"></div>
+        <label for="">Segundo nombre</label>
+      </div>
+      <div class="input-data">
+        <input class="bg-color" [(ngModel)]="segundoApellidoInput" type="text" required>
+        <div class="underline"></div>
+        <label for="">Segundo apellido</label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-data">
+        <input class="bg-color" [(ngModel)]="usernameInput" type="text" required>
+        <div class="underline"></div>
+        <label for="">Nombre de Usuario</label>
+      </div>
+      <div class="input-data">
+        <input class="bg-color" [(ngModel)]="telefonoInput" type="text" required>
+        <div class="underline"></div>
+        <label for="">Telefono</label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-data textarea">
+        <textarea class="bg-color" [(ngModel)]="emailInput" rows="8" cols="80" required></textarea>
+        <br />
+        <div class="underline"></div>
+        <label for="">Correo</label>
+        <br />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-data textarea">
+        <textarea class="bg-color" [(ngModel)]="documentoLegalInput" rows="8" cols="80" required></textarea>
+        <br />
+        <div class="underline"></div>
+        <label for="">DNI</label>
+        <br />
+      </div>
+
+    </div>
+
+    <div class="select-input-data">
+      <button class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px;" (click)="onSearchAvzClick()">
+        Buscar
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div class="reputation-container-total" *ngIf="!isBuscarAvzButtonActive">
 
   <div class="reputation-box-total  items-center rounded-md">
 
@@ -11,7 +106,7 @@
     </div>
 
     <div>
-      <div *ngIf="!loading && !isContactMode && !showErrorSpinner">
+      <!--div *ngIf="!loading && !isContactMode && !showErrorSpinner">
         <ul class="hidden text-sm font-medium text-center text-gray-700 rounded-lg shadow sm:flex divide-gray-200">
           <li class="w-full">
               <button (click)="toggleBuscarButton()" class="inline-block w-full p-4 border-gray-300 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none" [ngClass]="{'bg-white border-r  rounded-e-lg': !isBuscarButtonActive, 'active text-gray-900 bg-gray-100 border-r': isBuscarButtonActive }">Buscar</button>
@@ -20,16 +115,16 @@
               <button (click)="toggleBuscarAvzButton()" class="  inline-block w-full p-4 border-gray-300 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none" [ngClass]="{'bg-white border-0  rounded-e-lg': isBuscarButtonActive, 'active text-gray-900 bg-gray-100 border-0': !isBuscarButtonActive}">Busqueda Avz.</button>
           </li>
         </ul>
-      </div>
+      </div-->
 
       <div *ngIf="isBuscarButtonActive && !isContactMode && !showErrorSpinner">
         <div class="users-container">
 
-          <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+          <div class="container-old search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
             <h1 class="text-2xl font-bold mb-2">Usuarios</h1>
           </div>
 
-          <div  class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
+          <div  class="container-old search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
 
             <input [(ngModel)]="searchInput" type="text" placeholder="Buscar Usuarios" class="search-input border p-2">
 
@@ -41,7 +136,7 @@
 
                 <div *ngIf="open" (click)="stopPropagation($event)" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                   <div class="py-1">
-                    <label *ngFor="let option of ['username', 'nombre', 'segundo nombre', 'apellido', 'segundo apellido', 'email', 'telefono', 'documento legal' ]" class="flex items-center space-x-2 px-4 py-2 cursor-pointer">
+                    <label *ngFor="let option of ['username', 'nombre', 'segundo nombre', 'apellido', 'segundo apellido', 'email', 'telefono', 'DNI' ]" class="flex items-center space-x-2 px-4 py-2 cursor-pointer">
                       <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" [checked]="checkboxSelections[option]" (change)="onCheckboxChange(option); toggleCheckbox(option)" />
                       <span>{{ option }}</span>
                     </label>
@@ -55,13 +150,46 @@
             <button (click)="onEnableUserClick()" class="button-38" role="button" style="margin-left: auto;">Crear</button>
           </div>
 
-          <div class="table-container">
+          <div class="table-style">
+            <section class="table__body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th> Nombre de Usuario</th>
+                            <th> Nombre</th>
+                            <th> Apellido</th>
+                            <th> Número</th>
+                            <th> Correo</th>
+                            <th> Perfil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let userData of userProfiles.results">
+                            <td data-title="Nombre de usuario"> {{ userData.user.username }} </td>
+                            <td data-title="Nombre"> {{ userData.user.first_name }} </td>
+                            <td data-title="Apellido"> {{ userData.user.last_name }} </td>
+                            <td data-title="Correo">  {{ userData.user.email }} </td>
+                            <td data-title="Equipo"></td>
+                            <td>
+                              <button (click)="onSelectUserProfile(userData.user.id)" style="padding-left: 5px; padding-right: 5px;" role="button" class="status delivered">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                              </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+          </div>
+
+        <!--div class="table-container">
           <main >
             <table>
               <thead style="background-color: #01539B;">
                 <tr style="background-color: #01539B;">
                   <th style="background-color: #01539B;">
-                    Correo
+                    Correo <span class="material-icons sidenav-link-icon">person</span>
                   </th>
                   <th style="background-color: #01539B;">
                     Nombre
@@ -100,7 +228,7 @@
               </tbody>
             </table>
           </main>
-        </div>
+        </div-->
 
           <div class="center">
             <div class="pagination">
@@ -115,42 +243,48 @@
       <div *ngIf="!loading && isContactMode && !showErrorSpinner">
         <div class="users-container">
 
-          <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+          <div class="container-old search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
             <h1 class="text-2xl font-bold mb-2">Contactos</h1>
           </div>
 
-          <div  class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
+          <div  class="container-old search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
             <button (click)="onCreateUserClick()" class="button-38" role="button" style="margin-left: auto;">Crear</button>
           </div>
 
-          <div class="table-container">
-            <main>
-              <table>
-                <thead style="background-color: #01539B;">
-                  <tr style="background-color: #01539B;">
-                    <th style="background-color: #01539B;">
-                      Nombre de usuario
-                    </th>
-                    <th style="background-color: #01539B;">
-                      Acciones
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="table-row" *ngFor="let userData of userProfiles">
-                    <td data-title="Nombre de usuario">
-                      {{ userData.username }}
-                    </td>
-                    <td data-title="Acciones">
-                      <button role="button" (click)="onSelectUserProfile(userData.id)">
-                        <span class="material-icons sidenav-link-icon">person</span>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </main>
+
+
+          <div class="table-style">
+            <section class="table__body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th> Primer Nombre</th>
+                            <th> Apellido</th>
+                            <th> Correo Electronico</th>
+                            <th> Telefono</th>
+                            <th> Perfil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let userData of userProfiles">
+                            <td data-title="Nombre"> {{ userData.username }} </td>
+                            <td data-title="Apellido"> {{ userData.user?.last_name }} </td>
+                            <td data-title="Correo Electronico"> {{ userData.user?.email }} </td>
+                            <td data-title="Número"> {{ userData.profile?.phones_associated?.phone_number }}  </td>
+                            <td>
+                              <button (click)="onSelectUserProfile(userData.id)" style="padding-left: 5px; padding-right: 5px;" role="button" class="status delivered">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                              </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
           </div>
+
+
 
           <div class="center">
             <div class="pagination">
@@ -164,7 +298,8 @@
 
 
 
-      <div class="flex justify-center items-center" *ngIf="!loading && isBuscarAvzButtonActive && !showErrorSpinner">
+      <!--div class="flex justify-center items-center" *ngIf="!loading && isBuscarAvzButtonActive && !showErrorSpinner">
+
         <ul>
 
           <li>
@@ -174,7 +309,7 @@
                   <label class="mb-2.5 block text-black">
                     Nombre
                   </label>
-                  <input type="text" placeholder="Nombre" [(ngModel)]="nombreInput"
+                  <input type="text" placeholder="Nombre"
                     class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                 </div>
 
@@ -182,7 +317,7 @@
                   <label class="mb-2.5 block text-black">
                     Apellido
                   </label>
-                  <input type="text" placeholder="Apellido" [(ngModel)]="apellidoInput"
+                  <input type="text" placeholder="Apellido"
                     class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                 </div>
               </div>
@@ -192,7 +327,7 @@
                   <label class="mb-2.5 block text-black">
                     Segundo nombre
                   </label>
-                  <input type="text" placeholder="Segundo nombre" [(ngModel)]="segundoNombreInput"
+                  <input type="text" placeholder="Segundo nombre"
                     class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                 </div>
 
@@ -200,7 +335,7 @@
                   <label class="mb-2.5 block text-black">
                     Segundo apellido
                   </label>
-                  <input type="text" placeholder="Segundo apellido" [(ngModel)]="segundoApellidoInput"
+                  <input type="text" placeholder="Segundo apellido"
                     class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                 </div>
               </div>
@@ -210,7 +345,7 @@
                   <label class="mb-2.5 block text-black">
                     Nombre de Usuario
                   </label>
-                  <input type="text" placeholder="Nombre de Usuario" [(ngModel)]="usernameInput"
+                  <input type="text" placeholder="Nombre de Usuario"
                     class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                 </div>
 
@@ -218,7 +353,7 @@
                   <label class="mb-2.5 block text-black">
                     Telefono
                   </label>
-                  <input type="text" placeholder="Telefono" [(ngModel)]="telefonoInput"
+                  <input type="text" placeholder="Telefono"
                     class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
                 </div>
               </div>
@@ -227,15 +362,15 @@
                 <label class="mb-2.5 block text-black">
                   Correo
                 </label>
-                <input type="email" placeholder="Correo" [(ngModel)]="emailInput"
+                <input type="email" placeholder="Correo"
                   class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
               </div>
 
               <div class="mb-4.5">
                 <label class="mb-2.5 block text-black">
-                  Documento legal
+                  DNI
                 </label>
-                <input type="email" placeholder="Documento legal" [(ngModel)]="documentoLegalInput"
+                <input type="email" placeholder="DNI"
                   class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
               </div>
 
@@ -245,8 +380,9 @@
             </div>
           </li>
         </ul>
-      </div>
+      </div-->
     </div>
 
   </div>
+</div>
 </div>

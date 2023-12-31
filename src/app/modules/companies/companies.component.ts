@@ -4,6 +4,8 @@ import { HttpClientService } from 'src/app/core/http/data-layer/http-client.serv
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { SelectedCompanyService } from './selected-company.service';
+import { BackendService } from 'src/app/core/services/backend.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-companies',
@@ -29,6 +31,7 @@ export class CompaniesComponent implements OnInit {
   open: boolean = false;
   checkboxSelections: { [key: string]: boolean } = {};
   isBuscarButtonActive: boolean = true;
+  isBuscarAvzButtonActive: boolean = false;
 
   toggleDropdown() {
     this.open = !this.open;
@@ -50,6 +53,8 @@ constructor(
     private communicationService: CommunicationService,
     public service: HttpClientService,
     private selectedCompanyService: SelectedCompanyService,
+    private backendService: BackendService,
+    private snackBar: MatSnackBar,
     public http: HttpClient) {
       this.companyProfilesUrl = this.baseUrl + 'enterprises/';
 
@@ -127,10 +132,12 @@ constructor(
     }
 
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+      this.checkBackendConnection();
+    }
 
     onSearchClick(): void {
-      this.toggleBuscarButton(true);
+      this.toggleBuscarButton();
 
       if (typeof this.lastClickedCategory === 'string') {
         const categoryQuery = this.getCategoryQuery(this.lastClickedCategory);
@@ -162,7 +169,7 @@ constructor(
     }
 
     onSearchAvzClick(): void {
-      this.toggleBuscarButton(true);
+      this.toggleBuscarButton();
 
       if (typeof this.lastClickedCategory === 'string') {
         const categoryQuery = this.getCategoryQuery(this.lastClickedCategory);
@@ -234,8 +241,14 @@ constructor(
       return match ? +match[1] : 0;
     }
 
-    toggleBuscarButton(activate: boolean): void {
-      this.isBuscarButtonActive = activate;
+    toggleBuscarButton(): void {
+      this.isBuscarButtonActive = true;
+      this.isBuscarAvzButtonActive = false;
+    }
+
+    toggleBuscarAvzButton(): void {
+      this.isBuscarButtonActive = false;
+      this.isBuscarAvzButtonActive = true;
     }
 
     onSelectCompanyProfile(id: string): void {
@@ -250,5 +263,24 @@ constructor(
     onCreateCompanyClick() {
       this.communicationService.emitCreateCompanyClicked();
     }
-  }
+
+    private checkBackendConnection(): void {
+      this.backendService.checkConnection().subscribe(
+        () => {
+          console.log('Conexión con el backend establecida. Puedes realizar acciones adicionales si es necesario.');
+        },
+        (error) => {
+          console.error('No se pudo establecer conexión con el backend.', error);
+          this.showWarningMessage('No se pudo establecer conexión con el backend');
+        }
+      );
+    }
+
+    private showWarningMessage(message: string): void {
+      this.snackBar.open(message, 'Cerrar', {
+        duration: 5000,
+        panelClass: ['warning-snackbar'],
+      });
+    }
+}
 

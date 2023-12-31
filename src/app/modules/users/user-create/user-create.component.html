@@ -1,298 +1,345 @@
-<div class="reputation-container-total">
-  <div class="reputation-box-total items-center rounded-md">
+<div class="margin-init">
+  <div class="container rounded-md">
 
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Crear Contacto</h1>
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="first_name" type="text" required>
+          <div class="underline"></div>
+          <label for="">Nombre</label>
+        </div>
+        <div class="input-data">
+          <input [(ngModel)]="last_name" type="text" required>
+          <div class="underline"></div>
+          <label for="">Apellido</label>
+        </div>
+      </div>
 
-    <div class="flex justify-center items-center">
-      <ul>
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="middle_name" type="text" required>
+          <div class="underline"></div>
+          <label for="">Segundo Nombre</label>
+        </div>
+        <div class="input-data">
+          <input [(ngModel)]="second_last_name" type="text" required>
+          <div class="underline"></div>
+          <label for="">Segundo Apellido</label>
+        </div>
+      </div>
 
-        <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
-          <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px;">Crear Contacto</h1>
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="legal_document" type="text" required>
+          <div class="underline"></div>
+          <label for="">DNI</label>
+        </div>
+      </div>
+
+      <div class="mb-4.5 check-input-data">
+        <input type="checkbox" [(ngModel)]="create_account" (change)="toggleUserCheck()"
+        id="default-checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="default-checkbox" class="mb-2.5 text-sm text-black" style="margin-left: 5px;">Crear Cuenta</label>
+      </div>
+
+      <div *ngIf="isUserCheckActive">
+
+        <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Información de cuenta</h2>
+
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="username" type="text" required>
+            <div class="underline"></div>
+            <label for="">Nombre de Usuario</label>
+          </div>
         </div>
 
-        <li>
-          <div class="p-6.5">
-
-            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Nombre
-                </label>
-                <input type="text" [(ngModel)]="first_name"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Apellido
-                </label>
-                <input type="text" [(ngModel)]="last_name"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-            </div>
-
-            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Segundo Nombre
-                </label>
-                <input type="text" [(ngModel)]="middle_name"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Segundo Apellido
-                </label>
-                <input type="text" [(ngModel)]="second_last_name"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">
-                Nombre de usuario
-              </label>
-              <input type="text" [(ngModel)]="username"
-                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">
-                Correo
-              </label>
-              <input type="text" [(ngModel)]="email"
-                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-            </div>
-
-            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Contraseña
-                </label>
-                <input type="email" [(ngModel)]="password"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Confirmar contraseña
-                </label>
-                <input type="text" [(ngModel)]="password_confirmation"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">
-                Empresa
-              </label>
-              <input type="text" [(ngModel)]="enterprise"
-                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-            </div>
-
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">
-                Documento legal
-              </label>
-              <input type="text" [(ngModel)]="legal_document"
-                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-            </div>
-
-            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Banco
-                </label>
-                <input type="text" [(ngModel)]="bank_name"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  abreviatura de banco
-                </label>
-                <input type="text" [(ngModel)]="bank_abbr"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">
-                Numero de cuenta
-              </label>
-              <input type="text" [(ngModel)]="account_number"
-                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">
-                Codigo de contabilidad
-              </label>
-              <input type="text" [(ngModel)]="accounting_code"
-                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">Primera Categoría</label>
-              <select [(ngModel)]="first_category" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
-              </select>
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">Segunda Categoría</label>
-              <select [(ngModel)]="second_category" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
-              </select>
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">Tercera Categoría</label>
-              <select [(ngModel)]="third_category" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
-              </select>
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">
-                Numero de celular
-              </label>
-              <input type="text" [(ngModel)]="phone_number"
-                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-            </div>
-
-            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Descripción de celular
-                </label>
-                <input type="text" [(ngModel)]="phone_description"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Tipo de celular
-                </label>
-                <input type="text" [(ngModel)]="phone_type"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-            </div>
-
-            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Correo asociado
-                </label>
-                <input type="text" [(ngModel)]="email_associated"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Descripción de correo
-                </label>
-                <input type="text" [(ngModel)]="email_description"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-            </div>
-
-            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  País
-                </label>
-                <input type="text" [(ngModel)]="country"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Estado
-                </label>
-                <input type="text" [(ngModel)]="state"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-            </div>
-
-            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Ciudad
-                </label>
-                <input type="text" [(ngModel)]="city"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Dirección
-                </label>
-                <input type="text" [(ngModel)]="street"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">
-                Codigo Postal
-              </label>
-              <input type="text" [(ngModel)]="zip_code"
-                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">
-                manejo de reclamos
-              </label>
-              <input type="text" [(ngModel)]="claims_handler"
-                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-            </div>
-
-            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Primer Rol
-                </label>
-                <input type="text" [(ngModel)]="first_role"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Segundo Rol
-                </label>
-                <input type="text" [(ngModel)]="second_role"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">
-                Información de perfil
-              </label>
-              <textarea [(ngModel)]="profile_info" id="message" rows="4" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"  placeholder="Ingrese información del perfil"></textarea>
-            </div>
-
-            <div class="mb-4.5" style="margin-top: 20px; margin-bottom: 20px;">
-              <input type="checkbox" [(ngModel)]="is_private"
-              id="default-checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-              <label for="default-checkbox" class="mb-2.5 text-sm text-black">Privado</label>
-            </div>
-
-            <button (click)="createUser()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px;">
-              Guardar
-            </button>
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="password" type="text" required>
+            <div class="underline"></div>
+            <label for="">Contraseña</label>
           </div>
-        </li>
-      </ul>
+          <div class="input-data">
+            <input [(ngModel)]="password_confirmation" type="text" required>
+            <div class="underline"></div>
+            <label for="">Confirmar Contraseña</label>
+          </div>
+        </div>
+      </div>
 
+      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Direcciones</h2>
 
-    </div>
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="street" type="text" required>
+          <div class="underline"></div>
+          <label for="">Dirección</label>
+        </div>
+        <div class="input-data">
+          <input [(ngModel)]="city" type="text" required>
+          <div class="underline"></div>
+          <label for="">Ciudad</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="zip_code" type="text" required>
+          <div class="underline"></div>
+          <label for="">Código Postal</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="country" type="text" required>
+          <div class="underline"></div>
+          <label for="">País</label>
+        </div>
+        <div class="input-data">
+          <input [(ngModel)]="state" type="text" required>
+          <div class="underline"></div>
+          <label for="">Estado</label>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Correos Electronicos</h2>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="email_description" type="text" required>
+          <div class="underline"></div>
+          <label for="">Descripción de Correo</label>
+        </div>
+        <div class="input-data">
+          <input [(ngModel)]="email_associated" type="text" required>
+          <div class="underline"></div>
+          <label for="">Correo Asociado</label>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Celulares</h2>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="phone_description" type="text" required>
+          <div class="underline"></div>
+          <label for="">Descripción de Celular</label>
+        </div>
+        <div class="input-data">
+          <input [(ngModel)]="phone_number" type="text" required>
+          <div class="underline"></div>
+          <label for="">Numero de Celular</label>
+        </div>
+      </div>
+
+      <div class="mb-4.5 check-input-data">
+        <input type="checkbox" [(ngModel)]="is_private"
+        id="default-checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="default-checkbox" class="mb-2.5 text-sm text-black" style="margin-left: 5px;">Privado</label>
+      </div>
+
+      <div class="select-input-data">
+        <label class="block text-black">Empresa</label>
+          <div class="input-data">
+          <select [(ngModel)]="selectedEnterprise">
+              <option *ngFor="let enterprise of enterprises" [value]="enterprise">{{ enterprise }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data textarea">
+          <textarea rows="8" cols="80" [(ngModel)]="profile_info" required></textarea>
+          <br />
+          <div class="underline"></div>
+          <label for="">Información de perfil</label>
+          <br />
+        </div>
+      </div>
+
+      <div *ngIf="isUserCheckActive">
+
+        <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Información de cuenta</h2>
+
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="bank_name" type="text" required>
+            <div class="underline"></div>
+            <label for="">Banco</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="bank_abbr" type="text" required>
+            <div class="underline"></div>
+            <label for="">Abreviatura de Banco</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="account_number" type="text" required>
+            <div class="underline"></div>
+            <label for="">Número de Cuenta</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="accounting_code" type="text" required>
+            <div class="underline"></div>
+            <label for="">Codigo de Contabilidad</label>
+          </div>
+        </div>
+
+        <div class="select-input-data">
+          <label class="block text-black">Primera Categoría</label>
+          <div class="input-data">
+          <select [(ngModel)]="first_category" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
+          </select>
+          </div>
+        </div>
+
+        <div class="select-input-data">
+          <label class="block text-black">Segunda Categoría</label>
+          <div class="input-data">
+            <select [(ngModel)]="second_category" (change)="handleCategoryChange()" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+              <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="select-input-data">
+          <label class="block text-black">Tercera Categoría</label>
+          <div class="input-data">
+            <select [(ngModel)]="third_category" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+              <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="select-input-data">
+          <label class="block text-black">Primer Rol</label>
+          <div class="input-data">
+            <select [(ngModel)]="first_role" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+              <option *ngFor="let role of roles" [value]="role.id">{{ role?.customrole }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="select-input-data">
+          <label class="block text-black">Segundo Rol</label>
+          <div class="input-data">
+            <select [(ngModel)]="second_role" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+              <option *ngFor="let role of roles" [value]="role.id">{{ role?.customrole }}</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="createUser()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
+          Guardar
+        </button>
+      </div>
+
   </div>
-</div>
+
+
+  <!--div class="reputation-container-total">
+    <div class="reputation-box-total items-center rounded-md">
+
+
+      <div class="flex justify-center items-center">
+        <ul>
+          <li>
+                  <div class="w-full xl:w-1/2">
+                    <label class="mb-2.5 block text-black">
+                      Tipo de celular
+                    </label>
+                    <input type="text" [(ngModel)]="phone_type"
+                      class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                  </div-->
+
+                <!--div class="mb-4.5">
+                  <label class="mb-2.5 block text-black">
+                    Empresa
+                  </label>
+                  <input type="text" [(ngModel)]="enterprise"
+                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                </div-->
+
+
+                <!--div class="mb-4.5">
+                  <label class="mb-2.5 block text-black">
+                    Correo
+                  </label>
+                  <input type="text" [(ngModel)]="email"
+                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                </div-->
+
+                <!--div class="mb-4.5">
+                  <label class="mb-2.5 block text-black">
+                    manejo de reclamos
+                  </label>
+                  <input type="text" [(ngModel)]="claims_handler"
+                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                </div>
+
+
+              <div *ngIf="isProfessionalInformationButtonActive">
+
+                <div class="mb-4.5">
+                  <label class="mb-2.5 block text-black">
+                    Titulación academica
+                  </label>
+                  <input type="text"
+                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                </div>
+
+                <div class="mb-4.5">
+                  <label class="mb-2.5 block text-black">
+                    Número colegiado
+                  </label>
+                  <input type="text"
+                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                </div>
+
+                <div class="mb-4.5">
+                  <label class="mb-2.5 block text-black">
+                    Categoría profesional
+                  </label>
+                  <input type="text"
+                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                </div>
+
+                <div class="mb-4.5">
+                  <label class="mb-2.5 block text-black">
+                    Firma
+                  </label>
+                </div>
+
+                <div class="mb-4.5">
+                  <label class="mb-2.5 block text-black">
+                    Zona actuacion
+                  </label>
+                  <input type="text"
+                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                </div>
+
+                <div class="mb-4.5">
+                  <label class="mb-2.5 block text-black">
+                    Código Sinexia
+                  </label>
+                  <input type="text"
+                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                </div>
+
+              </div>
+
+
+          </li>
+        </ul-->
+

@@ -2,8 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { BackendService } from 'src/app/core/services/backend.service';
 import { environment } from 'src/environments/environment';
 
+interface Enterprise {
+  enterprise_id: number;
+  name: string;
+}
 @Component({
   selector: 'app-user-create',
   templateUrl: './user-create.component.html',
@@ -13,6 +18,7 @@ export class UserCreateComponent implements OnInit {
 
   private readonly baseUrl: string = environment.apiUrl;
   private readonly userProfilesUrl: string;
+
 
   username: string = '';
   first_name: string = '';
@@ -47,7 +53,19 @@ export class UserCreateComponent implements OnInit {
   first_role: string = '';
   second_role: string = '';
 
+  create_account: boolean = false;
+
   categories: any[] = [];
+  roles: any[] = [];
+
+  selectedEnterprise: string = '';
+  enterprises: string[] = [];
+
+  isContactInformationButtonActive: boolean = true;
+  isUserInformationButtonActive: boolean = false;
+  isProfessionalInformationButtonActive: boolean = false;
+  isUserCheckActive: boolean = false;
+  isProfessionalCategorySelected: boolean = false;
 
 
 
@@ -55,13 +73,31 @@ export class UserCreateComponent implements OnInit {
     private http: HttpClient,
     private authService: AuthService,
     private snackBar: MatSnackBar,
+    private backendService: BackendService,
   ) {
     this.userProfilesUrl = this.baseUrl + 'user_profiles/';
+
   }
 
   ngOnInit(): void {
+    this.checkBackendConnection();
     this.fetchCategories();
+    this.fetchRoles();
+    this.fetchEnterprises();
   }
+
+  private checkBackendConnection(): void {
+    this.backendService.checkConnection().subscribe(
+      () => {
+        console.log('Conexión con el backend establecida. Puedes realizar acciones adicionales si es necesario.');
+      },
+      (error) => {
+        console.error('No se pudo establecer conexión con el backend.', error);
+        this.showWarningMessage('No se pudo establecer conexión con el backend');
+      }
+    );
+  }
+
 
   fetchCategories(): void {
     const authToken = this.authService.getAuthToken();
@@ -78,6 +114,53 @@ export class UserCreateComponent implements OnInit {
         }, (error) => {
           console.error('Error al obtener las categorías', error);
         });
+    } else {
+      console.error('No hay token de autorización disponible.');
+    }
+  }
+
+  fetchRoles(): void {
+    const authToken = this.authService.getAuthToken();
+    if (authToken) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      });
+
+      this.http.get('http://v.claimcenter.com:8000/api/user_profiles/roles/', { headers })
+        .subscribe(
+          (response: any) => {
+            console.log('Roles Response:', response); // Log the response for debugging
+
+            // Assuming roles are directly in the response, adjust if needed
+            this.roles = response;
+
+            // If roles are nested inside a 'results' property, use the following line
+            // this.roles = response.results;
+          },
+          (error) => {
+            console.error('Error fetching roles:', error);
+          }
+        );
+    } else {
+      console.error('No hay token de autorización disponible.');
+    }
+  }
+
+  fetchEnterprises(): void {
+    const authToken = this.authService.getAuthToken();
+    if (authToken) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      });
+
+      this.http.get('http://v.claimcenter.com:8000/api/enterprises/', { headers })
+    .subscribe((response: any) => {
+      this.enterprises = response.results.map((result: any) => result.name);
+    }, (error) => {
+      console.error('Error al obtener las empresas', error);
+    });
     } else {
       console.error('No hay token de autorización disponible.');
     }
@@ -156,14 +239,16 @@ export class UserCreateComponent implements OnInit {
       this.http.post(this.userProfilesUrl, userData, { headers }).subscribe(
         (response) => {
           console.log('Contacto creada exitosamente', response);
-          this.showWarningMessage('Contacto creada exitosamente.');
+          this.showWarningMessage('Contacto creada exitosamente');
         },
         (error) => {
           console.error('Error al crear la contacto', error);
+          this.showWarningMessage('Llene los campos correctamente');
         }
       );
     } else {
       console.error('No hay token de autorización disponible.');
+      this.showWarningMessage('Su sesión ha expirado');
     }
   }
 
@@ -173,5 +258,37 @@ export class UserCreateComponent implements OnInit {
       panelClass: ['warning-snackbar'],
     });
   }
+
+  toggleContactInformation(): void {
+    this. isContactInformationButtonActive= true;
+    this.isUserInformationButtonActive = false;
+    this.isProfessionalInformationButtonActive = false;
+  }
+
+  toggleUserInformation(): void {
+    this.isContactInformationButtonActive = false;
+    this.isUserInformationButtonActive = true;
+    this.isProfessionalInformationButtonActive = false;
+  }
+
+  toggleProfessionalInformation(): void {
+    this.isContactInformationButtonActive = false;
+    this.isUserInformationButtonActive = false;
+    this.isProfessionalInformationButtonActive = true;
+  }
+
+  toggleUserCheck(): void {
+    this.isUserCheckActive = this.create_account;
+  }
+
+  handleCategoryChange(): void {
+    if(this.second_category === 2)
+    {
+      this.isProfessionalCategorySelected = true;
+    } else {
+      this.isProfessionalCategorySelected = false;
+    }
+  }
+
 
 }

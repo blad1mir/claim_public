@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BackendService } from 'src/app/core/services/backend.service';
 
 @Component({
   selector: 'app-company-create',
@@ -39,14 +40,27 @@ export class CompanyCreateComponent implements OnInit {
     private http: HttpClient,
     private authService: AuthService,
     private snackBar: MatSnackBar,
+    private backendService: BackendService,
   ) {
     this.companyProfilesUrl = this.baseUrl + 'enterprises/';
   }
 
   ngOnInit(): void {
+    this.checkBackendConnection();
   }
 
-  // Método para enviar la solicitud de creación de empresa
+  private checkBackendConnection(): void {
+    this.backendService.checkConnection().subscribe(
+      () => {
+        console.log('Conexión con el backend establecida. Puedes realizar acciones adicionales si es necesario.');
+      },
+      (error) => {
+        console.error('No se pudo establecer conexión con el backend.', error);
+        this.showWarningMessage('No se pudo establecer conexión con el backend');
+      }
+    );
+  }
+
   createCompany(): void {
     if (!this.companyName || !this.legalDocument || !this.isPrivate || !this.bankName || !this.accountNumber || !this.bankAbbr || !this.accountingCode || !this.category || !this.phoneNumber || !this.phoneDescription || !this.phoneType || !this.email || !this.emailDescription || !this.country || !this.state || !this.city || !this.street || !this.zipCode || !this.webPageUrl) {
       this.showWarningMessage('Por favor, complete todos los campos.');

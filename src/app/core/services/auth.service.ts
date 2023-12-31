@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BackendService } from './backend.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,9 @@ export class AuthService {
   private authTokenKey = 'authToken';
   private refreshTokenKey = 'refreshToken';
 
-  // ...
+  constructor(
+    private backendService: BackendService
+  ) {}
 
   setAuthTokens(authToken: string, refreshToken: string): void {
     localStorage.setItem(this.authTokenKey, authToken);
@@ -28,6 +31,17 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!this.authTokenKey;  // Retorna true si hay un token, false si no lo hay
+    return !!this.authTokenKey;
+  }
+
+  checkBackendConnection(): void {
+    this.backendService.checkConnection().subscribe(
+      () => {
+        console.log('Conexión con el backend establecida.');
+      },
+      (error) => {
+        console.error('No se pudo establecer conexión con el servidor.');
+      }
+    );
   }
 }
