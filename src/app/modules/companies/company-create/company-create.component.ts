@@ -16,14 +16,34 @@ export class CompanyCreateComponent implements OnInit {
   private readonly companyProfilesUrl: string;
 
   // Agrega propiedades para almacenar los datos de la empresa
-  companyName: string = 'Prueba';
+  companyName: string = '';
+  legalDocument: string = '';
+  isPrivate: boolean = false;
+  bankName: string = '';
+  accountNumber: string = '';
+  bankAbbr: string = '';
+  accountingCode: string = '';
+  category: number = 1;
+  phoneNumber: string = '';
+  phoneDescription: string = '';
+  phoneType: string = '';
+  email: string = '';
+  emailDescription: string = '';
+  country: string = '';
+  state: string = '';
+  city: string = '';
+  street: string = '';
+  zipCode: string = '';
+  webPageUrl: string = '';
+
+  /*companyName: string = 'Prueba';
   legalDocument: string = 'J-86055199';
   isPrivate: boolean = true;
   bankName: string = 'BVVA';
   accountNumber: string = '010940058856998990009';
   bankAbbr: string = 'BVVA';
   accountingCode: string = '19734799';
-  category: number = 10; // Ejemplo de categoría
+  category: number = 1;
   phoneNumber: string = '+584243408999';
   phoneDescription: string = 'Numero pivado';
   phoneType: string = 'private_cellphone';
@@ -34,7 +54,9 @@ export class CompanyCreateComponent implements OnInit {
   city: string = 'Boadilla del Monte';
   street: string = 'Avenida Siglo XXI 18 1-B prueba';
   zipCode: string = '28669';
-  webPageUrl: string = 'www.cliamsoft.com';
+  webPageUrl: string = 'www.cliamsoft.com';*/
+
+  categories: any[] = [];
 
   constructor(
     private http: HttpClient,
@@ -46,7 +68,28 @@ export class CompanyCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fetchCategories();
     this.checkBackendConnection();
+  }
+
+  fetchCategories(): void {
+    const authToken = this.authService.getAuthToken();
+    if (authToken) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      });
+
+      this.http.get('http://v.claimcenter.com:8000/api/categories/', { headers })
+        .subscribe((response: any) => {
+          // Aquí asumes que la respuesta tiene un campo 'results' que contiene las categorías
+          this.categories = response.results;
+        }, (error) => {
+          console.error('Error al obtener las categorías', error);
+        });
+    } else {
+      console.error('No hay token de autorización disponible.');
+    }
   }
 
   private checkBackendConnection(): void {
