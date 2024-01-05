@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: 'records',
     component: RecordsComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
   }
 
 ];

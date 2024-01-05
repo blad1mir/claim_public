@@ -1,85 +1,114 @@
-<div class="reputation-container-total">
+<div style="margin-top: 100px;">
+
+  <ul class="tab-box-total flex flex-wrap text-sm font-medium text-center text-gray-500 dark:border-gray-700 dark:text-gray-400">
+    <li class="me-2">
+      <a (click)="toggleEmployeeButton(true)" class="tab-paddings inline-block p-4 rounded-t-lg"
+
+      [ngClass]="{'text-blue-600 bg-color active': isEmployeeButtonActive, 'hover:text-gray-600 hover:bg-gray-50': !isEmployeeButtonActive }">
+      Empresa
+    </a>
+    </li>
+    <li class="me-2">
+      <a (click)="toggleEmployeeButton(false)" class="tab-paddings inline-block p-4 rounded-t-lg"
+      [ngClass]="{'text-blue-600 bg-color active': !isEmployeeButtonActive, 'hover:text-gray-600 hover:bg-gray-50':
+      isEmployeeButtonActive }">
+      Empleados
+    </a>
+    </li>
+  </ul>
+
+  <div class="form-style" *ngIf="isEmployeeButtonActive">
+    <div class="container rounded-md">
+      <h3 class="text">
+         Busqueda avanzada
+     </h3>
+
+     <div class="form-row">
+      <div class="input-data">
+        <input [value]="companyProfiles?.name" class="bg-color" type="text" required>
+        <div class="underline"></div>
+        <label for="">Nombre</label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-data">
+        <input [value]="companyProfiles?.legal_document"  class="bg-color" type="text" required>
+        <div class="underline"></div>
+        <label for="">DNI / CIF</label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-data">
+        <input [value]="companyProfiles?.emails_associated[0]?.email"  class="bg-color" type="text" required>
+        <div class="underline"></div>
+        <label for="">Correo</label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-data">
+        <input [value]="companyProfiles?.bank_details[0]?.bank_name "  class="bg-color" type="text" required>
+        <div class="underline"></div>
+        <label for="">Banco</label>
+      </div>
+    </div>
+
+     <div class="form-row">
+      <div class="input-data">
+        <input [value]="companyProfiles?.categories[0]?.category" class="bg-color" type="text" required>
+        <div class="underline"></div>
+        <label for="">Categoría</label>
+      </div>
+    </div>
+
+      <div class="select-input-data">
+
+        <button *ngIf="isInputDisabled" (click)="enableInput()" style="margin-top: 20px; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px;" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38">
+          Editar
+        </button>
+
+        <button *ngIf="!isInputDisabled" (click)="saveAndDisableInput()" style="margin-top: 20px; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px;" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38">
+          Guardar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="reputation-container-total" *ngIf="!isEmployeeButtonActive">
   <div class="reputation-box-total items-center rounded-md">
 
-    <ul class="hidden text-sm font-medium text-center text-gray-700 rounded-lg shadow sm:flex divide-gray-200">
-      <li class="w-full">
-          <button (click)="toggleEmployeeButton(true)" class="inline-block w-full p-4 border-gray-300 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none" [ngClass]="{'bg-white border-r  rounded-e-lg': !isEmployeeButtonActive, 'active text-gray-900 bg-gray-100 border-r': isEmployeeButtonActive }">Empresa</button>
-      </li>
-      <li class="w-full">
-          <button (click)="toggleEmployeeButton(false)" class="  inline-block w-full p-4 border-gray-300 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none" [ngClass]="{'bg-white border-0  rounded-e-lg': isEmployeeButtonActive, 'active text-gray-900 bg-gray-100 border-0': !isEmployeeButtonActive}">Empleados</button>
-      </li>
-    </ul>
-
-
-    <div class="flex justify-center items-center" *ngIf="isEmployeeButtonActive">
+    <!--div class="flex justify-center items-center" *ngIf="isEmployeeButtonActive">
       <ul>
-
         <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
           <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px;">Perfil de empresa</h1>
         </div>
-
         <li>
           <div class="p-6.5">
-
             <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
               <div class="w-full xl:w-1/2">
                 <label class="mb-2.5 block text-black">
                   Categoría
                 </label>
-                <input type="text" [value]="companyProfiles?.categories[0]?.category " [disabled]="isInputDisabled"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-              </div>
-
-              <div class="w-full xl:w-1/2">
-                <label class="mb-2.5 block text-black">
-                  Banco
-                </label>
-                <input type="text" [value]="companyProfiles?.bank_details[0]?.bank_name " [disabled] ="isInputDisabled" [(ngModel)]="updatedBankName"
-                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+                <input type="text" [value]="companyProfiles?.categories[0]?.category" [disabled]="isInputDisabled">
               </div>
             </div>
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">
-                Nombre
-              </label>
-              <input type="email" [value]="companyProfiles?.name" [disabled]="isInputDisabled" [(ngModel)]="updatedName"
-                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">
-                Email
-              </label>
-              <input type="email" [value]="companyProfiles?.emails_associated[0]?.email" [disabled]="isInputDisabled" [(ngModel)]="updatedEmail"
-                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-            </div>
-
-            <div class="mb-4.5">
-              <label class="mb-2.5 block text-black">
-                DNI
-              </label>
-              <input type="email" [value]="companyProfiles?.legal_document" [disabled]="isInputDisabled" [(ngModel)]="updatedlegal_document"
-                class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-            </div>
-            <button *ngIf="isInputDisabled" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px;" (click)="enableInput()">
-              Editar
-            </button>
-
-            <button *ngIf="!isInputDisabled" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px;" (click)="saveAndDisableInput()">
-              Guardar
-            </button>
           </div>
         </li>
       </ul>
+    </div-->
 
-
-    </div>
-
-    <div *ngIf="!isEmployeeButtonActive">
+    <div>
       <div class="users-container">
 
         <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
-          <h1 class="text-2xl font-bold mb-2">Users</h1>
+          <h1 class="text-2xl font-bold mb-2">Empleados</h1>
         </div>
 
         <!--div  class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
@@ -87,52 +116,41 @@
           <button class="button-38" role="button" (click)="onSearchClick()">Buscar</button>
         </div-->
 
-        <div class="table-container">
-        <main >
-          <table>
-            <thead style="background-color: #01539B;">
-              <tr style="background-color: #01539B;">
-                <th style="background-color: #01539B;">
-                  Email
-                </th>
-                <th style="background-color: #01539B;">
-                  First Name
-                </th>
-                <th style="background-color: #01539B;">
-                  Last Name
-                </th>
-                <th style="background-color: #01539B;">
-                  Username
-                </th>
-                <th style="background-color: #01539B;">
-                  Acciones
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="table-row" *ngFor="let userData of userProfiles?.results">
-                <td data-title="Email">
-                  {{ userData.user.email }}
-                </td>
-                <td data-title="First Name">
-                  {{ userData.user.first_name }}
-                </td>
-                <td data-title="Last Name">
-                  {{ userData.user.last_name }}
-                </td>
-                <td data-title="Username">
-                  {{ userData.user.username }}
-                </td>
-                <!--td data-title="Acciones">
-                  <button role="button" (click)="onSelectUserProfile(userData.user.id)">
-                    <span class="material-icons sidenav-link-icon">person</span>
-                  </button>
-                </td-->
-              </tr>
-            </tbody>
-          </table>
-        </main>
-      </div>
+        <div class="table-style">
+          <section class="table__body">
+              <table *ngIf="userProfiles?.results && userProfiles.results.length > 0; else noResults">
+                  <thead>
+                      <tr>
+                          <th> Primer Nombre</th>
+                          <th> Segundo Nombre</th>
+                          <th> Apellido</th>
+                          <th> Segundo Apellido</th>
+                          <th> Correo Electronico</th>
+                          <th> DNI/CIF</th>
+                          <th> Número</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let userData of userProfiles?.results">
+                          <td data-title="Nombre"> {{ userData.user.first_name }} </td>
+                          <td data-title="Segundo Nombre"> {{ userData.profile?.middle_name }} </td>
+                          <td data-title="Apellido"> {{ userData.user?.last_name }} </td>
+                          <td data-title="Segundo Apellido"> {{ userData.profile?.second_last_name }} </td>
+                          <td data-title="Correo Electronico"> {{ userData.user?.email }} </td>
+                          <td data-title="DNI / CIF"> {{ userData.profile?.legal_document }} </td>
+                          <td data-title="Número"> {{ userData.profile?.phones_associated?.phone_number }}  </td>
+                      </tr>
+                  </tbody>
+              </table>
+              <ng-template #noResults>
+                <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+                  <h3 class="text-2xl font-bold mb-2">No hay resultados</h3>
+                </div>
+              </ng-template>
+          </section>
+        </div>
+
+
 
         <div class="center">
           <div class="pagination">

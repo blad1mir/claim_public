@@ -32,7 +32,7 @@
         <div class="input-data">
           <input [(ngModel)]="legal_document" type="text" required>
           <div class="underline"></div>
-          <label for="">DNI</label>
+          <label for="">DNI / CIF</label>
         </div>
       </div>
 
@@ -68,7 +68,7 @@
         </div>
       </div>
 
-      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Direcciones</h2>
+      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Domicilios</h2>
 
       <div class="form-row">
         <div class="input-data">
@@ -93,14 +93,14 @@
 
       <div class="form-row">
         <div class="input-data">
+          <input [(ngModel)]="state" type="text" required>
+          <div class="underline"></div>
+          <label for="">Provincia/Estado</label>
+        </div>
+        <div class="input-data">
           <input [(ngModel)]="country" type="text" required>
           <div class="underline"></div>
           <label for="">País</label>
-        </div>
-        <div class="input-data">
-          <input [(ngModel)]="state" type="text" required>
-          <div class="underline"></div>
-          <label for="">Estado</label>
         </div>
       </div>
 

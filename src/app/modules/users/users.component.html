@@ -56,6 +56,9 @@
         <div class="underline"></div>
         <label for="">Nombre de Usuario</label>
       </div>
+    </div>
+
+    <div class="form-row">
       <div class="input-data">
         <input class="bg-color" [(ngModel)]="telefonoInput" type="text" required>
         <div class="underline"></div>
@@ -68,7 +71,7 @@
         <textarea class="bg-color" [(ngModel)]="emailInput" rows="8" cols="80" required></textarea>
         <br />
         <div class="underline"></div>
-        <label for="">Correo</label>
+        <label style="background-color: #fbfcff;" for="">Correo</label>
         <br />
       </div>
     </div>
@@ -78,7 +81,7 @@
         <textarea class="bg-color" [(ngModel)]="documentoLegalInput" rows="8" cols="80" required></textarea>
         <br />
         <div class="underline"></div>
-        <label for="">DNI</label>
+        <label style="background-color: #fbfcff;" for="">DNI / CIF</label>
         <br />
       </div>
 
@@ -136,7 +139,7 @@
 
                 <div *ngIf="open" (click)="stopPropagation($event)" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                   <div class="py-1">
-                    <label *ngFor="let option of ['username', 'nombre', 'segundo nombre', 'apellido', 'segundo apellido', 'email', 'telefono', 'DNI' ]" class="flex items-center space-x-2 px-4 py-2 cursor-pointer">
+                    <label *ngFor="let option of ['username', 'nombre', 'segundo nombre', 'apellido', 'segundo apellido', 'email', 'telefono', 'DNI / CIF' ]" class="flex items-center space-x-2 px-4 py-2 cursor-pointer">
                       <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" [checked]="checkboxSelections[option]" (change)="onCheckboxChange(option); toggleCheckbox(option)" />
                       <span>{{ option }}</span>
                     </label>
@@ -160,6 +163,7 @@
                             <th> Apellido</th>
                             <th> Número</th>
                             <th> Correo</th>
+                            <th> Equipo</th>
                             <th> Perfil</th>
                         </tr>
                     </thead>
@@ -168,6 +172,7 @@
                             <td data-title="Nombre de usuario"> {{ userData.user.username }} </td>
                             <td data-title="Nombre"> {{ userData.user.first_name }} </td>
                             <td data-title="Apellido"> {{ userData.user.last_name }} </td>
+                            <td data-title="Número">  {{ userData.profile.phone }} </td>
                             <td data-title="Correo">  {{ userData.user.email }} </td>
                             <td data-title="Equipo"></td>
                             <td>
@@ -248,10 +253,13 @@
           </div>
 
           <div  class="container-old search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
+
+            <input [(ngModel)]="searchInput" type="text" placeholder="Buscar Usuarios" class="search-input border p-2">
+
+            <button (click)="onSearchClick()" class="button-38" role="button">Buscar</button>
+
             <button (click)="onCreateUserClick()" class="button-38" role="button" style="margin-left: auto;">Crear</button>
           </div>
-
-
 
           <div class="table-style">
             <section class="table__body">
@@ -368,9 +376,9 @@
 
               <div class="mb-4.5">
                 <label class="mb-2.5 block text-black">
-                  DNI
+                  DNI / CIF
                 </label>
-                <input type="email" placeholder="DNI"
+                <input type="email" placeholder="DNI / CIF"
                   class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
               </div>
 

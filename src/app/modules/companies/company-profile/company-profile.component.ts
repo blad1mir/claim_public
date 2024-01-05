@@ -49,7 +49,7 @@ export class CompanyProfileComponent implements OnInit {
 
           // Realizar el segundo llamado después de obtener la información de la empresa
           //const companyNameForSearch = this.companyProfiles?.name?.replace(/\s+/g, '+') || '';
-          const searchUrl = `${this.baseUrl}user_profiles/?search=${this.companyProfiles?.name}/`;
+          const searchUrl = `${this.baseUrl}user_profiles/?profile__enterprise__name${this.companyProfiles?.name}/`;
           this.http.get(searchUrl).subscribe((userData) => {
             console.log(searchUrl);
             console.log(userData);
