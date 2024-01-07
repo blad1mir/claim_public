@@ -168,7 +168,7 @@ export class UserCreateComponent implements OnInit {
 
 
   createUser(): void {
-    if (!this.username || !this.first_name || !this.last_name || !this.email || !this.password || !this.password_confirmation || !this.second_last_name || !this.middle_name || !this.profile_info || !this.enterprise || !this.legal_document || !this.is_private || !this.bank_name || !this.account_number || !this.bank_abbr || !this.accounting_code || !this.first_category || !this.second_category || !this.third_category  || !this.phone_number  || !this.phone_description  || !this.phone_type  || !this.email_associated  || !this.email_description  || !this.country  || !this.state  || !this.city  || !this.street  || !this.zip_code  || !this.claims_handler  || !this.first_role  || !this.second_role )
+    if (!this.first_name || !this.last_name || !this.email || !this.second_last_name || !this.middle_name || !this.profile_info || !this.enterprise || !this.legal_document || !this.is_private   || !this.phone_number  || !this.phone_description  || !this.phone_type  || !this.email_associated  || !this.email_description  || !this.country  || !this.state  || !this.city  || !this.street  || !this.zip_code  || !this.claims_handler)
     {
       this.showWarningMessage('Por favor, complete todos los campos.'); return;
     }
