@@ -41,7 +41,6 @@ export class UserCreateComponent implements OnInit {
   third_category: number = 3;
   phone_number: string = '';
   phone_description: string = '';
-  phone_type: string = '';
   email_associated: string = '';
   email_description: string = '';
   country: string = '';
@@ -49,9 +48,9 @@ export class UserCreateComponent implements OnInit {
   city: string = '';
   street: string = '';
   zip_code: string = '';
-  claims_handler: string = '';
-  first_role: string = '';
-  second_role: string = '';
+  //claims_handler: string = '';
+  first_role: string = 'viewer';
+  second_role: string = 'external_user';
 
   create_account: boolean = false;
 
@@ -59,7 +58,7 @@ export class UserCreateComponent implements OnInit {
   roles: any[] = [];
 
   selectedEnterprise: string = '';
-  enterprises: string[] = [];
+  enterprises: { enterprise_id: string; name: string }[] = [];
 
   isContactInformationButtonActive: boolean = true;
   isUserInformationButtonActive: boolean = false;
@@ -130,13 +129,8 @@ export class UserCreateComponent implements OnInit {
       this.http.get('http://v.claimcenter.com:8000/api/user_profiles/roles/', { headers })
         .subscribe(
           (response: any) => {
-            console.log('Roles Response:', response); // Log the response for debugging
-
-            // Assuming roles are directly in the response, adjust if needed
+            console.log('Roles Response:', response);
             this.roles = response;
-
-            // If roles are nested inside a 'results' property, use the following line
-            // this.roles = response.results;
           },
           (error) => {
             console.error('Error fetching roles:', error);
@@ -157,7 +151,8 @@ export class UserCreateComponent implements OnInit {
 
       this.http.get('http://v.claimcenter.com:8000/api/enterprises/', { headers })
     .subscribe((response: any) => {
-      this.enterprises = response.results.map((result: any) => result.name);
+      console.log('empresas Response:', response);
+      this.enterprises = response.results;
     }, (error) => {
       console.error('Error al obtener las empresas', error);
     });
@@ -168,12 +163,47 @@ export class UserCreateComponent implements OnInit {
 
 
   createUser(): void {
-    if (!this.first_name || !this.last_name || !this.email || !this.second_last_name || !this.middle_name || !this.profile_info || !this.enterprise || !this.legal_document || !this.is_private   || !this.phone_number  || !this.phone_description  || !this.phone_type  || !this.email_associated  || !this.email_description  || !this.country  || !this.state  || !this.city  || !this.street  || !this.zip_code  || !this.claims_handler)
+    /*console.log("prueba de enterprise:", this.enterprise)
+    console.log("username:", this.username,
+"nombre",this.first_name,
+"apellido",this.last_name,
+"correo",this.email,
+"contraseña",this.password,
+"contraseña 1",this.password_confirmation,
+"segundo apellido",this.second_last_name,
+"segundo nombre",this.middle_name,
+"informacion",this.profile_info,
+"empresa",this.enterprise,
+"documento legal",this.legal_document,
+"privacidad",this.is_private,
+"banco",this.bank_name,
+"numero de cuenta",this.account_number,
+"banco abre",this.bank_abbr,
+"numero de contador",this.accounting_code,
+"categoria 1",this.first_category,
+"categoria 2",this.second_category,
+"categoria 3",this.third_category,
+"numero",this.phone_number,
+"descripcion numero",this.phone_description,
+"correo ",this.email_associated,
+"correo desc",this.email_description,
+"pais",this.country,
+"estado",this.state,
+"ciudad",this.city,
+"calle",this.street,
+"codigo",this.zip_code,
+"role 1",this.first_role,
+"role 2",this.second_role,)
+    /*if (!this.first_name || !this.last_name || !this.email|| !this.enterprise || !this.legal_document|| !this.country  || !this.state  || !this.city  || !this.street  || !this.zip_code)
     {
       this.showWarningMessage('Por favor, complete todos los campos.'); return;
-    }
+    }*/
     const authToken = this.authService.getAuthToken();
-
+    if(this.isUserCheckActive === false){
+      this.username = this.first_name + this.legal_document;
+      this.password = this.first_name + this.legal_document;
+      this.password_confirmation = this.first_name + this.legal_document;
+    }
 
     if (authToken) {
       const headers = new HttpHeaders({
@@ -215,7 +245,6 @@ export class UserCreateComponent implements OnInit {
           phones_associated: [{
             phone_number: this.phone_number,
             description: this.phone_description,
-            phone_type: this.phone_type,
           }],
           emails_associated: [{
             email: this.email_associated,
@@ -228,7 +257,7 @@ export class UserCreateComponent implements OnInit {
             street: this.street,
             zip_code: this.zip_code,
           }],
-          claims_handler: this.claims_handler,
+          //claims_handler: this.claims_handler,
         },
         roles: [
           this.first_role,

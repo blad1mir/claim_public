@@ -7,6 +7,7 @@ import { SelectedCompanyService } from '../selected-company.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SelectedUserService } from '../../users/selected-user.service';
 
 @Component({
   selector: 'app-company-profile',
@@ -34,6 +35,7 @@ export class CompanyProfileComponent implements OnInit {
     public http: HttpClient,
     private authService: AuthService,
     private snackBar: MatSnackBar,
+    private selectedUserService: SelectedUserService,
     ) {
       this.selectedCompanySubscription = this.selectedCompanyService.selectedCompanyid$.subscribe((companyid) => {
         this.selectedCompanyid = companyid;
@@ -176,5 +178,14 @@ export class CompanyProfileComponent implements OnInit {
       duration: 5000,
       panelClass: ['warning-snackbar'],
     });
+  }
+
+  onSelectUserProfile(id: string): void {
+    this.selectedUserService.setSelectedUserid(id);
+    this.onUserProfileClick();
+  }
+
+  onUserProfileClick() {
+    this.communicationService.emitUserProfileClicked();
   }
 }
