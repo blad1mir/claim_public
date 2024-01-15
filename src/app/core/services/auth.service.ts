@@ -7,6 +7,8 @@ import { BackendService } from './backend.service';
 export class AuthService {
   private authTokenKey = 'authToken';
   private refreshTokenKey = 'refreshToken';
+  private verifiedKey = 'verified';
+  private idkey = 'id';
 
   constructor(
     private backendService: BackendService
@@ -17,8 +19,25 @@ export class AuthService {
     localStorage.setItem(this.refreshTokenKey, refreshToken);
   }
 
+  setVerified(verified: string): void {
+    localStorage.setItem(this.verifiedKey, verified);
+  }
+
+  setId(id: string): void {
+    localStorage.setItem(this.idkey, id);
+  }
+
   getAuthToken(): string {
     return localStorage.getItem(this.authTokenKey) || '';
+  }
+
+  getVerified(): string {
+    console.log(this.verifiedKey);
+    return localStorage.getItem(this.verifiedKey) || '';
+  }
+
+  getId(): string {
+    return localStorage.getItem(this.idkey) || '';
   }
 
   getRefreshToken(): string {

@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit {
           console.log(response);
           if (response && (response.message == "Inicio de Sesion Existoso")) {
             this.authService.setAuthTokens(response.token, response.refresh_token);
+            this.authService.setVerified(response.user.is_verified);
+            this.authService.setId(response.user.id);
             this.router.navigate(['/records']);
           }
         },

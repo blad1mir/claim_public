@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommunicationService } from '../communication.service';
+import { AuthService } from '../core/services/auth.service';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -19,20 +20,32 @@ export class RecordsComponent implements OnInit {
   showUsers: boolean = false;
   showCompanies: boolean = false;
   showUserProfile: boolean = false;
-  landing: boolean = true;
+  landing: boolean = false;
   showCompaniesProfile: boolean = false;
   showUserEdit: boolean = false;
   showCreateUser: boolean = false;
   showCreateCompany: boolean = false;
+  showChangePassword: boolean = false;
+  showProfessional: boolean = false;
 
   onToggleSideNav(data: SideNavToggle): void{
     this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed;
   }
 
-  constructor(private communicationService: CommunicationService) { }
+  constructor(
+    private communicationService: CommunicationService,
+    private authService: AuthService
+    ) { }
 
   ngOnInit(): void {
+
+    if (this.authService.getVerified() === 'true') {
+      this.landing = true;
+    } else {
+      this.showChangePassword = true;
+    }
+
     this.communicationService.userClicked$.subscribe(() => {
       this.showCompanies = false;
       this.showUserProfile = false;
@@ -41,6 +54,8 @@ export class RecordsComponent implements OnInit {
       this.showCreateUser = false;
       this.showCreateCompany = false;
       this.landing = false;
+      this.showChangePassword = false;
+      this.showProfessional = false;
       this.showUsers = true;
     });
 
@@ -52,6 +67,8 @@ export class RecordsComponent implements OnInit {
       this.showCreateUser = false;
       this.showCreateCompany = false;
       this.landing = false;
+      this.showChangePassword = false;
+      this.showProfessional = false;
       this.showCompanies = true;
     });
 
@@ -63,6 +80,8 @@ export class RecordsComponent implements OnInit {
       this.showCreateUser = false;
       this.showCreateCompany = false;
       this.landing = false;
+      this.showChangePassword = false;
+      this.showProfessional = false;
       this.showUserProfile = true;
     });
 
@@ -74,6 +93,8 @@ export class RecordsComponent implements OnInit {
       this.showCreateUser = false;
       this.showCreateCompany = false;
       this.landing = false;
+      this.showChangePassword = false;
+      this.showProfessional = false;
       this.showUserEdit = true;
     });
 
@@ -85,6 +106,8 @@ export class RecordsComponent implements OnInit {
       this.showCreateUser = false;
       this.showCreateCompany = false;
       this.landing = false;
+      this.showChangePassword = false;
+      this.showProfessional = false;
       this.showCompaniesProfile = true;
     });
 
@@ -96,6 +119,8 @@ export class RecordsComponent implements OnInit {
       this.showCompaniesProfile = false;
       this.showCreateCompany = false;
       this.landing = false;
+      this.showChangePassword = false;
+      this.showProfessional = false;
       this.showCreateUser = true;
     });
 
@@ -107,7 +132,22 @@ export class RecordsComponent implements OnInit {
       this.showCompaniesProfile = false;
       this.showCreateUser = false;
       this.landing = false;
+      this.showChangePassword = false;
+      this.showProfessional = false;
       this.showCreateCompany = true;
+    });
+
+    this.communicationService.createProfessionalClicked$.subscribe(() => {
+      this.showUsers = false;
+      this.showUserProfile = false;
+      this.showCompanies = false;
+      this.showUserEdit = false;
+      this.showCompaniesProfile = false;
+      this.showCreateUser = false;
+      this.landing = false;
+      this.showChangePassword = false;
+      this.showCreateCompany = false;
+      this.showProfessional = true;
     });
   }
 }
