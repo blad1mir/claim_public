@@ -19,6 +19,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserCreateComponent } from './modules/users/user-create/user-create.component';
 import { CompanyCreateComponent } from './modules/companies/company-create/company-create.component';
 import { LandingComponent } from './modules/landing/landing.component';
+import { ChangePasswordComponent } from './modules/change-password/change-password.component';
+import { ProfessionalComponent } from './modules/professional/professional.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { LandingComponent } from './modules/landing/landing.component';
     UserCreateComponent,
     CompanyCreateComponent,
     LandingComponent,
+    ChangePasswordComponent,
+    ProfessionalComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CommunicationService } from 'src/app/communication.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BackendService } from 'src/app/core/services/backend.service';
 import { environment } from 'src/environments/environment';
@@ -36,9 +37,9 @@ export class UserCreateComponent implements OnInit {
   account_number: string = '';
   bank_abbr: string = '';
   accounting_code: string = '';
-  first_category: number = 1;
-  second_category: number = 2;
-  third_category: number = 3;
+  first_category: number = 0;
+  second_category: number = 0;
+  third_category: number = 0;
   phone_number: string = '';
   phone_description: string = '';
   email_associated: string = '';
@@ -49,8 +50,8 @@ export class UserCreateComponent implements OnInit {
   street: string = '';
   zip_code: string = '';
   //claims_handler: string = '';
-  first_role: string = 'viewer';
-  second_role: string = 'external_user';
+  first_role: string = '';
+  second_role: string = '';
 
   create_account: boolean = false;
 
@@ -59,6 +60,9 @@ export class UserCreateComponent implements OnInit {
 
   selectedEnterprise: string = '';
   enterprises: { enterprise_id: string; name: string }[] = [];
+  additionalMail: { email_associated: string, email_description: string }[] = [];
+  additionalPhones: { phone_number: string, description: string }[] = [];
+  additionalAddresses: {country: string, state: string, city: string, street: string, zip_code: string }[] = [];
 
   isContactInformationButtonActive: boolean = true;
   isUserInformationButtonActive: boolean = false;
@@ -73,6 +77,7 @@ export class UserCreateComponent implements OnInit {
     private authService: AuthService,
     private snackBar: MatSnackBar,
     private backendService: BackendService,
+    private communicationService: CommunicationService,
   ) {
     this.userProfilesUrl = this.baseUrl + 'user_profiles/';
 
@@ -83,6 +88,9 @@ export class UserCreateComponent implements OnInit {
     this.fetchCategories();
     this.fetchRoles();
     this.fetchEnterprises();
+    this.addPhoneField();
+    this.addMail();
+    this.addAdresses();
   }
 
   private checkBackendConnection(): void {
@@ -161,9 +169,12 @@ export class UserCreateComponent implements OnInit {
     }
   }
 
+  oncreateProfessionalClicked() {
+    this.communicationService.emitCreateProfesssionalClicked();
+  }
 
   createUser(): void {
-    /*console.log("prueba de enterprise:", this.enterprise)
+    //console.log("prueba de enterprise:", this.enterprise)
     console.log("username:", this.username,
 "nombre",this.first_name,
 "apellido",this.last_name,
@@ -183,10 +194,8 @@ export class UserCreateComponent implements OnInit {
 "categoria 1",this.first_category,
 "categoria 2",this.second_category,
 "categoria 3",this.third_category,
-"numero",this.phone_number,
-"descripcion numero",this.phone_description,
-"correo ",this.email_associated,
-"correo desc",this.email_description,
+"numero",this.additionalPhones,
+"correo ",this.additionalMail,
 "pais",this.country,
 "estado",this.state,
 "ciudad",this.city,
@@ -194,10 +203,10 @@ export class UserCreateComponent implements OnInit {
 "codigo",this.zip_code,
 "role 1",this.first_role,
 "role 2",this.second_role,)
-    /*if (!this.first_name || !this.last_name || !this.email|| !this.enterprise || !this.legal_document|| !this.country  || !this.state  || !this.city  || !this.street  || !this.zip_code)
+    if (!this.first_name || !this.last_name || !this.enterprise || !this.legal_document || !this.profile_info)
     {
       this.showWarningMessage('Por favor, complete todos los campos.'); return;
-    }*/
+    }
     const authToken = this.authService.getAuthToken();
     if(this.isUserCheckActive === false){
       this.username = this.first_name + this.legal_document;
@@ -242,21 +251,9 @@ export class UserCreateComponent implements OnInit {
             this.second_category,
             this.third_category,
           ],
-          phones_associated: [{
-            phone_number: this.phone_number,
-            description: this.phone_description,
-          }],
-          emails_associated: [{
-            email: this.email_associated,
-            description: this.email_description,
-          }],
-          addresses: [{
-            country: this.country,
-            state: this.state,
-            city: this.city,
-            street: this.street,
-            zip_code: this.zip_code,
-          }],
+          phones_associated: this.additionalPhones,
+          emails_associated: this.additionalMail,
+          addresses: this.additionalAddresses,
           //claims_handler: this.claims_handler,
         },
         roles: [
@@ -269,6 +266,17 @@ export class UserCreateComponent implements OnInit {
         (response) => {
           console.log('Contacto creada exitosamente', response);
           this.showWarningMessage('Contacto creada exitosamente');
+          if (response && (response as any).profile && (response as any).profile.categories) {
+            const categories = (response as any).profile.categories;
+
+            const isProfessional = categories.some((category: { category: string; }) => category.category === "Profesional");
+
+            if (isProfessional) {
+              console.log("categoriasss")
+              this.authService.setId((response as any).user.id);
+              this.oncreateProfessionalClicked();
+            }
+          }
         },
         (error) => {
           console.error('Error al crear la contacto', error);
@@ -319,5 +327,28 @@ export class UserCreateComponent implements OnInit {
     }
   }
 
+addPhoneField(): void {
+  this.additionalPhones.push({ phone_number: '', description: '' });
+}
+
+removePhoneField(index: number): void {
+  this.additionalPhones.splice(index, 1);
+}
+
+addMail(): void {
+  this.additionalMail.push({ email_associated: '', email_description: '' });
+}
+
+removeMail(index: number): void {
+  this.additionalMail.splice(index, 1);
+}
+
+addAdresses(): void {
+  this.additionalAddresses.push({ country: '', state: '', city: '', street: '', zip_code: '' });
+}
+
+removeAdresses(index: number): void {
+  this.additionalAddresses.splice(index, 1);
+}
 
 }

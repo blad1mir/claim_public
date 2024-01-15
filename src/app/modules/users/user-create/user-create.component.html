@@ -66,64 +66,112 @@
           </div>
         </div>
       </div>
+
+
       <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Domicilios</h2>
-      <div class="form-row">
-        <div class="input-data">
-          <input [(ngModel)]="street" type="text" required>
-          <div class="underline"></div>
-          <label for="">Dirección</label>
-        </div>
-        <div class="input-data">
-          <input [(ngModel)]="city" type="text" required>
-          <div class="underline"></div>
-          <label for="">Ciudad</label>
-        </div>
+      <div class="select-input-data">
+        <button (click)="addAdresses()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Ubicaicón</button>
       </div>
-      <div class="form-row">
-        <div class="input-data">
-          <input [(ngModel)]="zip_code" type="text" required>
-          <div class="underline"></div>
-          <label for="">Código Postal</label>
+      <div *ngFor="let adress of additionalAddresses; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="adress.street" type="text" required>
+            <div class="underline"></div>
+            <label for="">Dirección</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="adress.city" type="text" required>
+            <div class="underline"></div>
+            <label for="">Ciudad</label>
+          </div>
         </div>
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="adress.zip_code" type="text" required>
+            <div class="underline"></div>
+            <label for="">Código Postal</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="adress.state" type="text" required>
+            <div class="underline"></div>
+            <label for="">Provincia/Estado</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="adress.country" type="text" required>
+            <div class="underline"></div>
+            <label for="">País</label>
+          </div>
+          <button (click)="removeAdresses(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+          padding-right: 7px; line-height: 1;
+          display: inline-block;
+          font-size: 1.2rem;
+          text-decoration: none;
+          border-radius: 100%;
+          background-color: #d5d1defe;
+          color: #313131fe;"> X </button>
+        </div>
+
       </div>
-      <div class="form-row">
-        <div class="input-data">
-          <input [(ngModel)]="state" type="text" required>
-          <div class="underline"></div>
-          <label for="">Provincia/Estado</label>
-        </div>
-        <div class="input-data">
-          <input [(ngModel)]="country" type="text" required>
-          <div class="underline"></div>
-          <label for="">País</label>
-        </div>
-      </div>
+
       <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Correos Electronicos</h2>
-      <div class="form-row">
-        <div class="input-data">
-          <input [(ngModel)]="email_description" type="text" required>
-          <div class="underline"></div>
-          <label for="">Descripción de Correo</label>
-        </div>
-        <div class="input-data">
-          <input [(ngModel)]="email_associated" type="text" required>
-          <div class="underline"></div>
-          <label for="">Correo Asociado</label>
+      <div class="select-input-data">
+        <button (click)="addMail()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Correo Electronico</button>
+      </div>
+
+      <div *ngFor="let mail of additionalMail; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="mail.email_associated" type="text" required>
+            <div class="underline"></div>
+            <label for="">Correo Asociado</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="mail.email_description" type="text" required>
+            <div class="underline"></div>
+            <label for="">Descripción de Correo</label>
+          </div>
+          <button (click)="removeMail(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+          padding-right: 7px; line-height: 1;
+          display: inline-block;
+          font-size: 1.2rem;
+          text-decoration: none;
+          border-radius: 100%;
+          background-color: #d5d1defe;
+          color: #313131fe;"> X </button>
         </div>
       </div>
+
       <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Celulares</h2>
-      <div class="form-row">
-        <div class="input-data">
-          <input [(ngModel)]="phone_description" type="text" required>
-          <div class="underline"></div>
-          <label for="">Descripción de Celular</label>
-        </div>
-        <div class="input-data">
-          <input [(ngModel)]="phone_number" type="text" required>
-          <div class="underline"></div>
-          <label for="">Numero de Celular</label>
+      <div class="select-input-data">
+        <button (click)="addPhoneField()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Teléfono</button>
+      </div>
+
+      <div *ngFor="let phone of additionalPhones; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="phone.phone_number" type="text" required>
+            <div class="underline"></div>
+            <label for="">Número de Celular</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="phone.description" type="text" required>
+            <div class="underline"></div>
+            <label for="">Descripción de Celular</label>
+          </div>
+          <button (click)="removePhoneField(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+          padding-right: 7px; line-height: 1;
+          display: inline-block;
+          font-size: 1.2rem;
+          text-decoration: none;
+          border-radius: 100%;
+          background-color: #d5d1defe;
+          color: #313131fe;"> X </button>
         </div>
       </div>
+
+
       <div class="mb-4.5 check-input-data">
         <input type="checkbox" [(ngModel)]="is_private"
         id="default-checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">

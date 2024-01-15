@@ -26,12 +26,17 @@ export class CommunicationService {
   private createCompanyClickedSource = new Subject<boolean>();
   createCompanyClicked$ = this.createCompanyClickedSource.asObservable();
 
+  private createProfessionalClickedSource = new Subject<boolean>();
+  createProfessionalClicked$ = this.createProfessionalClickedSource.asObservable();
+
+
   emitUserClicked() {
     this.companyClickedSource.next(false);
     this.userProfileClickedSource.next(false);
     this.companyProfileClickedSource.next(false);
     this.userEditClickedSource.next(false);
     this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false)
     this.createUserClickedSource.next(false);
     this.userClickedSource.next(true);
   }
@@ -42,6 +47,7 @@ export class CommunicationService {
     this.companyProfileClickedSource.next(false);
     this.userEditClickedSource.next(false);
     this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false)
     this.createUserClickedSource.next(false);
     if (typeof usernameOrBoolean === 'string') {
       this.userProfileClickedSource.next(usernameOrBoolean);
@@ -56,6 +62,7 @@ export class CommunicationService {
     this.companyProfileClickedSource.next(false);
     this.userEditClickedSource.next(false);
     this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false)
     this.createUserClickedSource.next(false);
     if (typeof PeopleOrBoolean === 'string') {
       this.userClickedSource.next(PeopleOrBoolean);
@@ -70,6 +77,7 @@ export class CommunicationService {
     this.companyProfileClickedSource.next(false);
     this.userEditClickedSource.next(false);
     this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false)
     this.createUserClickedSource.next(false);
     if (typeof CompanyOrBoolean === 'string') {
       this.companyClickedSource.next(CompanyOrBoolean);
@@ -84,6 +92,7 @@ export class CommunicationService {
     this.companyProfileClickedSource.next(false);
     this.userProfileClickedSource.next(false);
     this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false)
     this.createUserClickedSource.next(false);
     this.userEditClickedSource.next(true);
   }
@@ -94,6 +103,7 @@ export class CommunicationService {
     this.companyClickedSource.next(false);
     this.userEditClickedSource.next(false);
     this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false)
     this.createUserClickedSource.next(false);
     if (typeof CompanyOrBoolean === 'string') {
       this.companyProfileClickedSource.next(CompanyOrBoolean);
@@ -109,6 +119,7 @@ export class CommunicationService {
     this.userEditClickedSource.next(false);
     this.userClickedSource.next(false);
     this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false)
     this.createUserClickedSource.next(true);
   }
 
@@ -119,6 +130,18 @@ export class CommunicationService {
     this.userEditClickedSource.next(false);
     this.userClickedSource.next(false);
     this.createUserClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false)
     this.createCompanyClickedSource.next(true);
+  }
+
+  emitCreateProfesssionalClicked(){
+    this.companyClickedSource.next(false);
+    this.userProfileClickedSource.next(false);
+    this.companyProfileClickedSource.next(false);
+    this.userEditClickedSource.next(false);
+    this.userClickedSource.next(false);
+    this.createUserClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(true)
   }
 }
