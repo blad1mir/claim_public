@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef  } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { BackendService } from 'src/app/core/services/backend.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -14,66 +13,61 @@ export class ProfessionalComponent implements OnInit {
 
   private readonly baseUrl: string = environment.apiUrl;
 
-  signature: string | null = null;
+  signature: File | null = null;
 
   id: string = '';
   academic_title: string = '';
   license_number: string = '';
   professional_category: string = '';
-  practice_area: string = '';
-  sinexia_code: string = '';
+  zone_codes: string = '';
+  professional_codes: string = '';
   profile: string = '';
+  fileNameDisplay: string = 'Sin archivo por escoger...';
+
+  additionalZoneCodes: { zone_codes: string }[] = [];
+  additionalProfessionalCodes: { professional_codes: string }[] = [];
+
+
 
   constructor(
     private http: HttpClient,
     private authService: AuthService,
     private snackBar: MatSnackBar,
-    private backendService: BackendService,
+    private el: ElementRef,
   ) { }
 
   ngOnInit(): void {
-  }
-
-  onFileChange(event: any): void {
-    const fileList: FileList = event.target.files;
-    if (fileList.length > 0) {
-      // Convertir la firma a una cadena base64
-      this.convertFileToBase64(fileList[0]);
-    }
-  }
-
-  convertFileToBase64(file: File): void {
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.signature = reader.result as string;
-    };
-    reader.readAsDataURL(file);
+    this.addProfessionalCodesField();
+    this.addZoneCodesField();
   }
 
   createProfessional(): void {
     const authToken = this.authService.getAuthToken();
     const userId = this.authService.getId();
 
-    if (authToken && userId) {
-      const headers = new HttpHeaders({
-        'Authorization': `Bearer ${authToken}`,
-        'Content-Type': 'application/json'
-      });
+    if (authToken && userId && this.signature) {
+      const formData = new FormData();
+      formData.append('signature', this.signature);
+      formData.append('academic_title', this.academic_title);
+      formData.append('license_number', this.license_number);
+      formData.append('professional_category', this.professional_category);
+      formData.append('profile', this.profile);
 
-      const changePasswordData = {
-        id: this.authService.getId(),
-        academic_title: this.academic_title,
-        license_number: this.license_number,
-        professional_category: this.professional_category,
-        signature: this.signature,
-        practice_area: this.practice_area,
-        sinexia_code: this.sinexia_code,
-        profile: this.profile,
-      };
+      for (let i = 0; i < this.additionalZoneCodes.length; i++) {
+        formData.append(`zone_codes[${i}]`, this.additionalZoneCodes[i].zone_codes);
+      }
+
+      for (let i = 0; i < this.additionalProfessionalCodes.length; i++) {
+        formData.append(`professional_codes[${i}]`, this.additionalProfessionalCodes[i].professional_codes);
+      }
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${authToken}`
+      });
 
       const endpoint = `${this.baseUrl}professionals/`;
 
-      this.http.post(endpoint, changePasswordData, { headers })
+      this.http.post(endpoint, formData, { headers })
         .subscribe(
           (response) => {
             console.log('Datos de profesional creados con éxito:', response);
@@ -87,4 +81,29 @@ export class ProfessionalComponent implements OnInit {
     }
   }
 
+  onFileChange(event: any): void {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      this.signature = fileList[0];
+      this.fileNameDisplay = this.signature.name;
+    } else {
+      this.fileNameDisplay = 'No file chosen...';
+    }
+  }
+
+  addProfessionalCodesField(): void {
+    this.additionalProfessionalCodes.push({ professional_codes: '' });
+  }
+
+  removeProfessionalCodesField(index: number): void {
+    this.additionalProfessionalCodes.splice(index, 1);
+  }
+
+  addZoneCodesField(): void {
+    this.additionalZoneCodes.push({ zone_codes: '' });
+  }
+
+  removeZoneCodesField(index: number): void {
+    this.additionalZoneCodes.splice(index, 1);
+  }
 }

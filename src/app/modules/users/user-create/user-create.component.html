@@ -177,6 +177,7 @@
         id="default-checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
         <label for="default-checkbox" class="mb-2.5 text-sm text-black" style="margin-left: 5px;">Privado</label>
       </div>
+
       <div class="select-input-data">
         <label class="block text-black">Empresa</label>
           <div class="input-data">
@@ -185,6 +186,7 @@
           </select>
         </div>
       </div>
+
       <div class="form-row">
         <div class="input-data textarea">
           <textarea rows="8" cols="80" [(ngModel)]="profile_info" required></textarea>
@@ -222,47 +224,70 @@
             <label for="">Codigo de Contabilidad</label>
           </div>
         </div>
+
         <div class="select-input-data">
           <label class="block text-black">Primera Categoría</label>
           <div class="input-data">
-          <select [(ngModel)]="first_category">
-            <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
-          </select>
+            <input [(ngModel)]="searchFirstCategory" (ngModelChange)="filterCategories(searchFirstCategory, 'first_category')" type="text" placeholder="Buscar...">
+            <select [(ngModel)]="first_category">
+              <option *ngFor="let category of filteredFirstCategories" [value]="category.id">{{ category.category }}</option>
+            </select>
           </div>
         </div>
+
         <div class="select-input-data">
           <label class="block text-black">Segunda Categoría</label>
           <div class="input-data">
-            <select [(ngModel)]="second_category" (change)="handleCategoryChange()">
-              <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
+            <input [(ngModel)]="searchSecondCategory" (ngModelChange)="filterCategories(searchSecondCategory, 'second_category')" type="text" placeholder="Buscar...">
+            <select [(ngModel)]="second_category">
+              <option *ngFor="let category of filteredSecondCategories" [value]="category.id">{{ category.category }}</option>
             </select>
           </div>
         </div>
+
         <div class="select-input-data">
           <label class="block text-black">Tercera Categoría</label>
           <div class="input-data">
-            <select [(ngModel)]="third_category" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-              <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
+            <input [(ngModel)]="searchThirdCategory" (ngModelChange)="filterCategories(searchThirdCategory, 'third_category')" type="text" placeholder="Buscar...">
+            <select [(ngModel)]="third_category">
+              <option *ngFor="let category of filteredThirdCategories" [value]="category.id">{{ category.category }}</option>
             </select>
           </div>
         </div>
-        <div class="select-input-data">
+
+        <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Roles</h2>
+      <div class="select-input-data">
+        <button (click)="addRole()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Rol Adicional</button>
+      </div>
+
+      <div *ngFor="let newRole of additionalRoles; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <select [(ngModel)]="additionalRoles[i]">
+              <option *ngFor="let role of roles" [value]="role.name">{{ role?.customrole }}</option>
+            </select>
+          </div>
+          <button (click)="removeRole(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+            padding-right: 7px; line-height: 1;
+            display: inline-block;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 100%;
+            background-color: #d5d1defe;
+            color: #313131fe;"> X </button>
+        </div>
+      </div>
+
+        <!--div class="select-input-data">
           <label class="block text-black">Primer Rol</label>
           <div class="input-data">
             <select [(ngModel)]="first_role">
               <option *ngFor="let role of roles" [value]="role.name">{{ role?.customrole }}</option>
             </select>
           </div>
-        </div>
-        <div class="select-input-data">
-          <label class="block text-black">Segundo Rol</label>
-          <div class="input-data">
-            <select [(ngModel)]="second_role">
-              <option *ngFor="let role of roles" [value]="role.name">{{ role?.customrole }}</option>
-            </select>
-          </div>
-        </div>
+        </div-->
       </div>
+
       <div class="select-input-data">
         <button (click)="createUser()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
           Guardar

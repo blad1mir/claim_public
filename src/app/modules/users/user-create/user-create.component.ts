@@ -50,8 +50,7 @@ export class UserCreateComponent implements OnInit {
   street: string = '';
   zip_code: string = '';
   //claims_handler: string = '';
-  first_role: string = '';
-  second_role: string = '';
+  first_role: string = 'viewer';
 
   create_account: boolean = false;
 
@@ -59,16 +58,30 @@ export class UserCreateComponent implements OnInit {
   roles: any[] = [];
 
   selectedEnterprise: string = '';
-  enterprises: { enterprise_id: string; name: string }[] = [];
+  enterprises: Enterprise[] = [];
   additionalMail: { email_associated: string, email_description: string }[] = [];
   additionalPhones: { phone_number: string, description: string }[] = [];
   additionalAddresses: {country: string, state: string, city: string, street: string, zip_code: string }[] = [];
+  additionalRoles: string [] = [];
 
   isContactInformationButtonActive: boolean = true;
   isUserInformationButtonActive: boolean = false;
   isProfessionalInformationButtonActive: boolean = false;
   isUserCheckActive: boolean = false;
   isProfessionalCategorySelected: boolean = false;
+
+  allCategories: any[] = [];
+  filteredCategories: any[] = [];
+  filteredFirstCategories: any[] = [];
+  filteredSecondCategories: any[] = [];
+  filteredThirdCategories: any[] = [];
+
+  searchFirstCategory: string = '';
+  searchSecondCategory: string = '';
+  searchThirdCategory: string = '';
+
+  selectedCategory: any | null = null;
+  isDropdownOpen: boolean = false;
 
 
 
@@ -91,6 +104,7 @@ export class UserCreateComponent implements OnInit {
     this.addPhoneField();
     this.addMail();
     this.addAdresses();
+    this.addRole();
   }
 
   private checkBackendConnection(): void {
@@ -116,8 +130,10 @@ export class UserCreateComponent implements OnInit {
 
       this.http.get('http://v.claimcenter.com:8000/api/categories/', { headers })
         .subscribe((response: any) => {
-          // Aquí asumes que la respuesta tiene un campo 'results' que contiene las categorías
-          this.categories = response.results;
+          this.allCategories = response.results;
+          this.filteredFirstCategories = this.allCategories;
+          this.filteredSecondCategories = this.allCategories;
+          this.filteredThirdCategories = this.allCategories;
         }, (error) => {
           console.error('Error al obtener las categorías', error);
         });
@@ -125,6 +141,8 @@ export class UserCreateComponent implements OnInit {
       console.error('No hay token de autorización disponible.');
     }
   }
+
+
 
   fetchRoles(): void {
     const authToken = this.authService.getAuthToken();
@@ -157,10 +175,10 @@ export class UserCreateComponent implements OnInit {
         'Content-Type': 'application/json'
       });
 
-      this.http.get('http://v.claimcenter.com:8000/api/enterprises/', { headers })
+      this.http.get('http://v.claimcenter.com:8000/api/enterprises/dropdown/', { headers })
     .subscribe((response: any) => {
       console.log('empresas Response:', response);
-      this.enterprises = response.results;
+      this.enterprises = response;
     }, (error) => {
       console.error('Error al obtener las empresas', error);
     });
@@ -201,8 +219,7 @@ export class UserCreateComponent implements OnInit {
 "ciudad",this.city,
 "calle",this.street,
 "codigo",this.zip_code,
-"role 1",this.first_role,
-"role 2",this.second_role,)
+"role 1",this.additionalRoles,)
     if (!this.first_name || !this.last_name || !this.enterprise || !this.legal_document || !this.profile_info)
     {
       this.showWarningMessage('Por favor, complete todos los campos.'); return;
@@ -256,10 +273,7 @@ export class UserCreateComponent implements OnInit {
           addresses: this.additionalAddresses,
           //claims_handler: this.claims_handler,
         },
-        roles: [
-          this.first_role,
-          this.second_role
-        ]
+        roles: this.additionalRoles,
       };
 
       this.http.post(this.userProfilesUrl, userData, { headers }).subscribe(
@@ -349,6 +363,45 @@ addAdresses(): void {
 
 removeAdresses(index: number): void {
   this.additionalAddresses.splice(index, 1);
+}
+
+addRole(): void {
+  this.additionalRoles.push('');
+}
+
+removeRole(index: number): void {
+  this.additionalRoles.splice(index, 1);
+}
+
+filterCategories(searchTerm: string, categoryType: string): void {
+  switch (categoryType) {
+    case 'first_category':
+      this.filteredFirstCategories = this.allCategories.filter(category =>
+        category.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      break;
+    case 'second_category':
+      this.filteredSecondCategories = this.allCategories.filter(category =>
+        category.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      break;
+    case 'third_category':
+      this.filteredThirdCategories = this.allCategories.filter(category =>
+        category.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      break;
+    default:
+      break;
+  }
+}
+
+toggleDropdown(): void {
+  this.isDropdownOpen = !this.isDropdownOpen;
+}
+
+selectCategory(category: any): void {
+  this.selectedCategory = category;
+  this.isDropdownOpen = false;
 }
 
 }
