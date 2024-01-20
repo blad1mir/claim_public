@@ -1,7 +1,7 @@
 <div class="margin-init">
   <div class="container rounded-md">
 
-    <div class="form-row">
+    <!--div class="form-row">
       <div class="input-data">
         <input [(ngModel)]="searchFirstCategory" (ngModelChange)="filterCategories(searchFirstCategory, 'first_category')"
                type="text" required (focus)="showCategoriesList()" (blur)="hideCategoriesList()">
@@ -16,7 +16,7 @@
           {{ category.category }}
         </div>
       </div>
-    </div>
+    </div-->
 
       <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Crear Contacto</h1>
       <div class="form-row">
@@ -243,16 +243,39 @@
           </div>
         </div>
 
-        <div class="select-input-data">
+        <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Categorías</h2>
+      <div class="select-input-data">
+        <button (click)="addCategory()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Categoría Adicional</button>
+      </div>
+
+      <div *ngFor="let newRole of additionalCategories; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <select [(ngModel)]="additionalCategories[i]">
+              <option *ngFor="let category of allCategories" [value]="category.id">{{ category?.category }}</option>
+            </select>
+          </div>
+          <button (click)="removeCategory(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+            padding-right: 7px; line-height: 1;
+            display: inline-block;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 100%;
+            background-color: #d5d1defe;
+            color: #313131fe;"> X </button>
+        </div>
+      </div>
+
+        <!--ddiv class="select-input-data">
           <label class="block text-black">Primera Categoría</label>
           <div class="input-data">
             <select [(ngModel)]="first_category">
-              <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
+              <option *ngFor="let category of allCategories" [value]="category.id">{{ category.category }}</option>
             </select>
           </div>
         </div>
 
-        <div class="select-input-data">
+        <iv class="select-input-data">
           <label class="block text-black">Segunda Categoría</label>
           <div class="input-data">
             <select [(ngModel)]="second_category" (change)="handleCategoryChange()">
@@ -268,9 +291,9 @@
               <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
             </select>
           </div>
-        </div>
+        </div-->
 
-        <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Roles</h2>
+      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Roles</h2>
       <div class="select-input-data">
         <button (click)="addRole()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Rol Adicional</button>
       </div>

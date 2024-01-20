@@ -63,6 +63,7 @@ export class UserCreateComponent implements OnInit {
   additionalPhones: { phone_number: string, description: string }[] = [];
   additionalAddresses: {country: string, state: string, city: string, street: string, zip_code: string }[] = [];
   additionalRoles: string [] = ['viewer'];
+  additionalCategories: string [] = ['1'];
 
   isContactInformationButtonActive: boolean = true;
   isUserInformationButtonActive: boolean = false;
@@ -211,9 +212,7 @@ export class UserCreateComponent implements OnInit {
 "numero de cuenta",this.account_number,
 "banco abre",this.bank_abbr,
 "numero de contador",this.accounting_code,
-"categoria 1",this.first_category,
-"categoria 2",this.second_category,
-"categoria 3",this.third_category,
+"categorias",this.additionalCategories,
 "numero",this.additionalPhones,
 "correo ",this.additionalMail,
 "pais",this.country,
@@ -265,9 +264,7 @@ export class UserCreateComponent implements OnInit {
           finance_details: {
             accounting_code: this.accounting_code,
           },
-          categories: [
-            this.first_category,
-          ],
+          categories: this.additionalCategories,
           phones_associated: this.additionalPhones,
           emails_associated: this.additionalMail,
           addresses: this.additionalAddresses,
@@ -363,6 +360,14 @@ addAdresses(): void {
 
 removeAdresses(index: number): void {
   this.additionalAddresses.splice(index, 1);
+}
+
+addCategory(): void {
+  this.additionalCategories.push('');
+}
+
+removeCategory(index: number): void {
+  this.additionalCategories.splice(index, 1);
 }
 
 addRole(): void {
