@@ -1,0 +1,129 @@
+<div class="margin-init">
+  <ul class="tab-box-total flex flex-wrap text-sm font-medium text-center text-gray-500 dark:border-gray-700 dark:text-gray-400" style="margin-left: 310px;">
+    <li class="me-2">
+      <a (click)="toggleBuscarButton()" class="tab-paddings inline-block p-4 rounded-t-lg"
+
+      [ngClass]="{'text-blue-600 bg-color active': isBuscarButtonActive, 'hover:text-gray-600 hover:bg-gray-50': !isBuscarButtonActive }">
+      Lista de Tareas
+    </a>
+    </li>
+    <li class="me-2">
+      <a (click)="toggleBuscarAvzButton()" class="tab-paddings inline-block p-4 rounded-t-lg"
+      [ngClass]="{'text-blue-600 bg-color active': !isBuscarButtonActive, 'hover:text-gray-600 hover:bg-gray-50':
+      isBuscarButtonActive }">
+      Busqueda
+    </a>
+    </li>
+  </ul>
+  <div class="container rounded-md">
+
+    <div *ngIf="isBuscarButtonActive && !isBuscarAvzButtonActive">
+      <div class="table-style">
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Estado</th>
+                        <th> Prioridad</th>
+                        <th> Referencia</th>
+                        <th> Nombre tarea</th>
+                        <th> Cliente</th>
+                        <th> F. compromiso</th>
+                        <th> Visita</th>
+                        <th> Lugar</th>
+                        <th> Último previo</th>
+                        <th> Fecha inicio</th>
+                        <th> Finalización</th>
+                        <th> Expediente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-title="Estado"> Texto </td>
+                        <td data-title="Prioridad"> Texto </td>
+                        <td data-title="Referencia"> Texto </td>
+                        <td data-title="Nombre tarea"> Texto </td>
+                        <td data-title="Cliente"> Texto </td>
+                        <td data-title="F. compromiso"> Texto </td>
+                        <td data-title="Visita"> Texto </td>
+                        <td data-title="Lugar"> Texto </td>
+                        <td data-title="Último previo"> Texto </td>
+                        <td data-title="Fecha inicio"> Texto </td>
+                        <td data-title="Finalización"> Texto </td>
+                        <td data-title="Finalización"> Texto </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+      </div>
+    </div>
+
+    <div *ngIf="!isBuscarButtonActive && isBuscarAvzButtonActive">
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Filtrar tareas</h1>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" required>
+          <div class="underline"></div>
+          <label for="">Referencia</label>
+        </div>
+        <div class="input-data">
+          <input type="text" required>
+          <div class="underline"></div>
+          <label for="">Palabras clave</label>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <label class="block text-black">Nombre</label>
+          <div class="input-data">
+          <select>
+            <option> </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" required>
+          <div class="underline"></div>
+          <label for="">Expediente</label>
+        </div>
+        <div class="input-data">
+          <input type="text" required>
+          <div class="underline"></div>
+          <label for="">Cliente</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" required>
+          <div class="underline"></div>
+          <label for="">Profesional</label>
+        </div>
+        <div class="input-data">
+          <input type="text" required>
+          <div class="underline"></div>
+          <label for="">Localización</label>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <label class="block text-black">Prioridad</label>
+          <div class="input-data">
+          <select>
+            <option> </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <button class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
+          Buscar
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

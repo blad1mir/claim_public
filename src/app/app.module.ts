@@ -21,6 +21,8 @@ import { CompanyCreateComponent } from './modules/companies/company-create/compa
 import { LandingComponent } from './modules/landing/landing.component';
 import { ChangePasswordComponent } from './modules/change-password/change-password.component';
 import { ProfessionalComponent } from './modules/professional/professional.component';
+import { FilesComponent } from './modules/files/files.component';
+import { TaskComponent } from './modules/task/task.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { ProfessionalComponent } from './modules/professional/professional.compo
     LandingComponent,
     ChangePasswordComponent,
     ProfessionalComponent,
+    FilesComponent,
+    TaskComponent,
   ],
   imports: [
     BrowserModule,

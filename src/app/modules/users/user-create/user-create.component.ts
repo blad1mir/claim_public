@@ -37,7 +37,7 @@ export class UserCreateComponent implements OnInit {
   account_number: string = '';
   bank_abbr: string = '';
   accounting_code: string = '';
-  first_category: number = 0;
+  first_category: number = 2;
   second_category: number = 0;
   third_category: number = 0;
   phone_number: string = '';
@@ -50,7 +50,7 @@ export class UserCreateComponent implements OnInit {
   street: string = '';
   zip_code: string = '';
   //claims_handler: string = '';
-  first_role: string = 'viewer';
+  //first_role: string = 'viewer';
 
   create_account: boolean = false;
 
@@ -62,7 +62,7 @@ export class UserCreateComponent implements OnInit {
   additionalMail: { email_associated: string, email_description: string }[] = [];
   additionalPhones: { phone_number: string, description: string }[] = [];
   additionalAddresses: {country: string, state: string, city: string, street: string, zip_code: string }[] = [];
-  additionalRoles: string [] = [];
+  additionalRoles: string [] = ['viewer'];
 
   isContactInformationButtonActive: boolean = true;
   isUserInformationButtonActive: boolean = false;
@@ -77,11 +77,14 @@ export class UserCreateComponent implements OnInit {
   filteredThirdCategories: any[] = [];
 
   searchFirstCategory: string = '';
+   selectedCategoryId: number | null = null;
   searchSecondCategory: string = '';
   searchThirdCategory: string = '';
 
   selectedCategory: any | null = null;
   isDropdownOpen: boolean = false;
+
+  isCategoriesListVisible: boolean = false;
 
 
 
@@ -104,7 +107,6 @@ export class UserCreateComponent implements OnInit {
     this.addPhoneField();
     this.addMail();
     this.addAdresses();
-    this.addRole();
   }
 
   private checkBackendConnection(): void {
@@ -265,8 +267,6 @@ export class UserCreateComponent implements OnInit {
           },
           categories: [
             this.first_category,
-            this.second_category,
-            this.third_category,
           ],
           phones_associated: this.additionalPhones,
           emails_associated: this.additionalMail,
@@ -403,5 +403,14 @@ selectCategory(category: any): void {
   this.selectedCategory = category;
   this.isDropdownOpen = false;
 }
+
+showCategoriesList(): void {
+  this.isCategoriesListVisible = true;
+}
+
+hideCategoriesList(): void {
+  this.isCategoriesListVisible = false;
+}
+
 
 }
