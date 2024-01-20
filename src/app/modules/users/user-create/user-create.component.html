@@ -1,5 +1,23 @@
 <div class="margin-init">
   <div class="container rounded-md">
+
+    <div class="form-row">
+      <div class="input-data">
+        <input [(ngModel)]="searchFirstCategory" (ngModelChange)="filterCategories(searchFirstCategory, 'first_category')"
+               type="text" required (focus)="showCategoriesList()" (blur)="hideCategoriesList()">
+        <div class="underline"></div>
+        <label for="">Primera Categoría</label>
+      </div>
+    </div>
+
+    <div class="filtered-categories-container">
+      <div class="filtered-categories" *ngIf="isCategoriesListVisible && filteredFirstCategories.length > 0">
+        <div *ngFor="let category of filteredFirstCategories" (click)="selectCategory(category)">
+          {{ category.category }}
+        </div>
+      </div>
+    </div>
+
       <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Crear Contacto</h1>
       <div class="form-row">
         <div class="input-data">
@@ -228,9 +246,8 @@
         <div class="select-input-data">
           <label class="block text-black">Primera Categoría</label>
           <div class="input-data">
-            <input [(ngModel)]="searchFirstCategory" (ngModelChange)="filterCategories(searchFirstCategory, 'first_category')" type="text" placeholder="Buscar...">
             <select [(ngModel)]="first_category">
-              <option *ngFor="let category of filteredFirstCategories" [value]="category.id">{{ category.category }}</option>
+              <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
             </select>
           </div>
         </div>
@@ -238,9 +255,8 @@
         <div class="select-input-data">
           <label class="block text-black">Segunda Categoría</label>
           <div class="input-data">
-            <input [(ngModel)]="searchSecondCategory" (ngModelChange)="filterCategories(searchSecondCategory, 'second_category')" type="text" placeholder="Buscar...">
-            <select [(ngModel)]="second_category">
-              <option *ngFor="let category of filteredSecondCategories" [value]="category.id">{{ category.category }}</option>
+            <select [(ngModel)]="second_category" (change)="handleCategoryChange()">
+              <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
             </select>
           </div>
         </div>
@@ -248,9 +264,8 @@
         <div class="select-input-data">
           <label class="block text-black">Tercera Categoría</label>
           <div class="input-data">
-            <input [(ngModel)]="searchThirdCategory" (ngModelChange)="filterCategories(searchThirdCategory, 'third_category')" type="text" placeholder="Buscar...">
             <select [(ngModel)]="third_category">
-              <option *ngFor="let category of filteredThirdCategories" [value]="category.id">{{ category.category }}</option>
+              <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
             </select>
           </div>
         </div>

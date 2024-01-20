@@ -55,6 +55,14 @@ export class NavbarMenuComponent implements OnInit {
     this.isCompanyMenuOpen = !this.isCompanyMenuOpen;
   }
 
+  onFilesClick() {
+    this.communicationService.emiFilesClicked();
+  }
+
+  onTaskClick() {
+    this.communicationService.emiTaskClicked();
+  }
+
   onProvidersClick() {
     this.communicationService.emitPeopleClicked('proveedor');
   }

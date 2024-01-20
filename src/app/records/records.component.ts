@@ -27,6 +27,8 @@ export class RecordsComponent implements OnInit {
   showCreateCompany: boolean = false;
   showChangePassword: boolean = false;
   showProfessional: boolean = false;
+  showFiles: boolean = false;
+  showTask: boolean = false;
 
   onToggleSideNav(data: SideNavToggle): void{
     this.screenWidth = data.screenWidth;
@@ -56,6 +58,8 @@ export class RecordsComponent implements OnInit {
       this.landing = false;
       this.showChangePassword = false;
       this.showProfessional = false;
+      this.showFiles = false;
+      this.showTask = false;
       this.showUsers = true;
     });
 
@@ -69,6 +73,8 @@ export class RecordsComponent implements OnInit {
       this.landing = false;
       this.showChangePassword = false;
       this.showProfessional = false;
+      this.showFiles = false;
+      this.showTask = false;
       this.showCompanies = true;
     });
 
@@ -82,6 +88,8 @@ export class RecordsComponent implements OnInit {
       this.landing = false;
       this.showChangePassword = false;
       this.showProfessional = false;
+      this.showFiles = false;
+      this.showTask = false;
       this.showUserProfile = true;
     });
 
@@ -95,6 +103,8 @@ export class RecordsComponent implements OnInit {
       this.landing = false;
       this.showChangePassword = false;
       this.showProfessional = false;
+      this.showFiles = false;
+      this.showTask = false;
       this.showUserEdit = true;
     });
 
@@ -108,6 +118,8 @@ export class RecordsComponent implements OnInit {
       this.landing = false;
       this.showChangePassword = false;
       this.showProfessional = false;
+      this.showFiles = false;
+      this.showTask = false;
       this.showCompaniesProfile = true;
     });
 
@@ -121,6 +133,8 @@ export class RecordsComponent implements OnInit {
       this.landing = false;
       this.showChangePassword = false;
       this.showProfessional = false;
+      this.showFiles = false;
+      this.showTask = false;
       this.showCreateUser = true;
     });
 
@@ -134,6 +148,8 @@ export class RecordsComponent implements OnInit {
       this.landing = false;
       this.showChangePassword = false;
       this.showProfessional = false;
+      this.showFiles = false;
+      this.showTask = false;
       this.showCreateCompany = true;
     });
 
@@ -147,7 +163,39 @@ export class RecordsComponent implements OnInit {
       this.landing = false;
       this.showChangePassword = false;
       this.showCreateCompany = false;
+      this.showFiles = false;
+      this.showTask = false;
       this.showProfessional = true;
+    });
+
+    this.communicationService.filesClicked$.subscribe(() => {
+      this.showUsers = false;
+      this.showUserProfile = false;
+      this.showCompanies = false;
+      this.showUserEdit = false;
+      this.showCompaniesProfile = false;
+      this.showCreateUser = false;
+      this.landing = false;
+      this.showChangePassword = false;
+      this.showCreateCompany = false;
+      this.showProfessional = false;
+      this.showTask = false;
+      this.showFiles = true;
+    });
+
+    this.communicationService.taskClicked$.subscribe(() => {
+      this.showUsers = false;
+      this.showUserProfile = false;
+      this.showCompanies = false;
+      this.showUserEdit = false;
+      this.showCompaniesProfile = false;
+      this.showCreateUser = false;
+      this.landing = false;
+      this.showChangePassword = false;
+      this.showCreateCompany = false;
+      this.showProfessional = false;
+      this.showFiles = false;
+      this.showTask = true;
     });
   }
 }
