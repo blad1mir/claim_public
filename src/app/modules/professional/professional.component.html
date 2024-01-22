@@ -1,0 +1,133 @@
+<div class="margin-init">
+  <div class="container rounded-md">
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Agregar Datos de profesional</h1>
+
+      <div class="form-row" style="display: none; visibility: hidden;">
+        <div class="input-data">
+          <input [(ngModel)]="id" type="text" required>
+          <div class="underline"></div>
+          <label for="">Id</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="academic_title" type="text" required>
+          <div class="underline"></div>
+          <label for="">Titulo Academico</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="license_number" type="text" required>
+          <div class="underline"></div>
+          <label for="">Numero de Licensia</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="professional_category" type="text" required>
+          <div class="underline"></div>
+          <label for="">Categoría de Profesional</label>
+        </div>
+      </div>
+
+      <!--div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="zone_codes" type="text" required>
+          <div class="underline"></div>
+          <label for="">código de zona</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="professional_codes" type="text" required>
+          <div class="underline"></div>
+          <label for="">código profesional</label>
+        </div>
+      </div-->
+
+      <div class="select-input-data">
+        <button (click)="addZoneCodesField()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Codigo de Zona</button>
+      </div>
+
+      <div class="form-row" *ngFor="let zoneCode of additionalZoneCodes; let i = index">
+        <div class="input-data">
+          <input [(ngModel)]="zoneCode.zone_codes" type="text" required>
+          <div class="underline"></div>
+          <label for="">Codigo de Zona {{ i + 1 }}</label>
+        </div>
+        <button (click)="removeZoneCodesField(i)"class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+        padding-right: 7px; line-height: 1;
+        display: inline-block;
+        font-size: 1.2rem;
+        text-decoration: none;
+        border-radius: 100%;
+        background-color: #d5d1defe;
+        color: #313131fe;"> X </button>
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="addProfessionalCodesField()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Codigo Profesional</button>
+      </div>
+
+      <div class="form-row" *ngFor="let professionalCode of additionalProfessionalCodes; let i = index">
+        <div class="input-data">
+          <input [(ngModel)]="professionalCode.professional_codes" type="text" required>
+          <div class="underline"></div>
+          <label for="">Codigo profesional {{ i + 1 }}</label>
+        </div>
+        <button (click)="removeProfessionalCodesField(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+        padding-right: 7px; line-height: 1;
+        display: inline-block;
+        font-size: 1.2rem;
+        text-decoration: none;
+        border-radius: 100%;
+        background-color: #d5d1defe;
+        color: #313131fe;"> X </button>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="profile" type="text" required>
+          <div class="underline"></div>
+          <label for="">Perfil</label>
+        </div>
+      </div>
+
+      <!--div class="form-row">
+        <div class="input-data">
+          <input type="file" (change)="onFileChange($event)" required>
+          <div class="underline"></div>
+          <label for="">Firma</label>
+        </div>
+      </div-->
+
+      <div class="form-row">
+        <div class="input-data">
+          <label for="">Firma</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <div class="file-upload">
+            <div class="file-select">
+              <div class="file-select-button" id="fileName">Escoger Archivo</div>
+              <div class="file-select-name" id="noFile">{{ fileNameDisplay }}</div>
+              <input type="file" name="chooseFile" id="chooseFile" (change)="onFileChange($event)" required>
+            </div>
+          </div>
+          <div class="underline"></div>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="createProfessional()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
+          Guardar
+        </button>
+      </div>
+  </div>

@@ -44,7 +44,6 @@ export class NavbarMenuComponent implements OnInit {
   }
 
   onContactClick(){
-    //this.isUserMenuOpen = !this.isUserMenuOpen;
     this.communicationService.emitPeopleClicked('contacto');
   }
 
@@ -54,7 +53,14 @@ export class NavbarMenuComponent implements OnInit {
 
   onCompanyClick() {
     this.isCompanyMenuOpen = !this.isCompanyMenuOpen;
-    //this.communicationService.emitCompanyClicked();
+  }
+
+  onFilesClick() {
+    this.communicationService.emiFilesClicked();
+  }
+
+  onTaskClick() {
+    this.communicationService.emiTaskClicked();
   }
 
   onProvidersClick() {

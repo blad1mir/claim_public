@@ -274,8 +274,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let userData of userProfiles">
-                            <td data-title="Nombre"> {{ userData.username }} </td>
+                        <tr *ngFor="let userData of userProfiles.results">
+                            <td data-title="Nombre"> {{ userData.user.first_name }} </td>
                             <td data-title="Apellido"> {{ userData.user?.last_name }} </td>
                             <td data-title="Correo Electronico"> {{ userData.user?.email }} </td>
                             <td data-title="Número"> {{ userData.profile?.phones_associated?.phone_number }}  </td>

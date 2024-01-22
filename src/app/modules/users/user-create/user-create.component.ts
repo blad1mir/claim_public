@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CommunicationService } from 'src/app/communication.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BackendService } from 'src/app/core/services/backend.service';
 import { environment } from 'src/environments/environment';
@@ -36,12 +37,11 @@ export class UserCreateComponent implements OnInit {
   account_number: string = '';
   bank_abbr: string = '';
   accounting_code: string = '';
-  first_category: number = 1;
-  second_category: number = 2;
-  third_category: number = 3;
+  first_category: number = 2;
+  second_category: number = 0;
+  third_category: number = 0;
   phone_number: string = '';
   phone_description: string = '';
-  phone_type: string = '';
   email_associated: string = '';
   email_description: string = '';
   country: string = '';
@@ -49,9 +49,8 @@ export class UserCreateComponent implements OnInit {
   city: string = '';
   street: string = '';
   zip_code: string = '';
-  claims_handler: string = '';
-  first_role: string = '';
-  second_role: string = '';
+  //claims_handler: string = '';
+  //first_role: string = 'viewer';
 
   create_account: boolean = false;
 
@@ -59,13 +58,34 @@ export class UserCreateComponent implements OnInit {
   roles: any[] = [];
 
   selectedEnterprise: string = '';
-  enterprises: string[] = [];
+  enterprises: Enterprise[] = [];
+  additionalMail: { email_associated: string, email_description: string }[] = [];
+  additionalPhones: { phone_number: string, description: string }[] = [];
+  additionalAddresses: {country: string, state: string, city: string, street: string, zip_code: string }[] = [];
+  additionalRoles: string [] = ['viewer'];
+  additionalCategories: string [] = ['1'];
 
   isContactInformationButtonActive: boolean = true;
   isUserInformationButtonActive: boolean = false;
   isProfessionalInformationButtonActive: boolean = false;
   isUserCheckActive: boolean = false;
   isProfessionalCategorySelected: boolean = false;
+
+  allCategories: any[] = [];
+  filteredCategories: any[] = [];
+  filteredFirstCategories: any[] = [];
+  filteredSecondCategories: any[] = [];
+  filteredThirdCategories: any[] = [];
+
+  searchFirstCategory: string = '';
+   selectedCategoryId: number | null = null;
+  searchSecondCategory: string = '';
+  searchThirdCategory: string = '';
+
+  selectedCategory: any | null = null;
+  isDropdownOpen: boolean = false;
+
+  isCategoriesListVisible: boolean = false;
 
 
 
@@ -74,6 +94,7 @@ export class UserCreateComponent implements OnInit {
     private authService: AuthService,
     private snackBar: MatSnackBar,
     private backendService: BackendService,
+    private communicationService: CommunicationService,
   ) {
     this.userProfilesUrl = this.baseUrl + 'user_profiles/';
 
@@ -84,6 +105,9 @@ export class UserCreateComponent implements OnInit {
     this.fetchCategories();
     this.fetchRoles();
     this.fetchEnterprises();
+    this.addPhoneField();
+    this.addMail();
+    this.addAdresses();
   }
 
   private checkBackendConnection(): void {
@@ -109,8 +133,10 @@ export class UserCreateComponent implements OnInit {
 
       this.http.get('http://v.claimcenter.com:8000/api/categories/', { headers })
         .subscribe((response: any) => {
-          // Aquí asumes que la respuesta tiene un campo 'results' que contiene las categorías
-          this.categories = response.results;
+          this.allCategories = response.results;
+          this.filteredFirstCategories = this.allCategories;
+          this.filteredSecondCategories = this.allCategories;
+          this.filteredThirdCategories = this.allCategories;
         }, (error) => {
           console.error('Error al obtener las categorías', error);
         });
@@ -118,6 +144,8 @@ export class UserCreateComponent implements OnInit {
       console.error('No hay token de autorización disponible.');
     }
   }
+
+
 
   fetchRoles(): void {
     const authToken = this.authService.getAuthToken();
@@ -130,13 +158,8 @@ export class UserCreateComponent implements OnInit {
       this.http.get('http://v.claimcenter.com:8000/api/user_profiles/roles/', { headers })
         .subscribe(
           (response: any) => {
-            console.log('Roles Response:', response); // Log the response for debugging
-
-            // Assuming roles are directly in the response, adjust if needed
+            console.log('Roles Response:', response);
             this.roles = response;
-
-            // If roles are nested inside a 'results' property, use the following line
-            // this.roles = response.results;
           },
           (error) => {
             console.error('Error fetching roles:', error);
@@ -155,9 +178,10 @@ export class UserCreateComponent implements OnInit {
         'Content-Type': 'application/json'
       });
 
-      this.http.get('http://v.claimcenter.com:8000/api/enterprises/', { headers })
+      this.http.get('http://v.claimcenter.com:8000/api/enterprises/dropdown/', { headers })
     .subscribe((response: any) => {
-      this.enterprises = response.results.map((result: any) => result.name);
+      console.log('empresas Response:', response);
+      this.enterprises = response;
     }, (error) => {
       console.error('Error al obtener las empresas', error);
     });
@@ -166,14 +190,47 @@ export class UserCreateComponent implements OnInit {
     }
   }
 
+  oncreateProfessionalClicked() {
+    this.communicationService.emitCreateProfesssionalClicked();
+  }
 
   createUser(): void {
-    if (!this.username || !this.first_name || !this.last_name || !this.email || !this.password || !this.password_confirmation || !this.second_last_name || !this.middle_name || !this.profile_info || !this.enterprise || !this.legal_document || !this.is_private || !this.bank_name || !this.account_number || !this.bank_abbr || !this.accounting_code || !this.first_category || !this.second_category || !this.third_category  || !this.phone_number  || !this.phone_description  || !this.phone_type  || !this.email_associated  || !this.email_description  || !this.country  || !this.state  || !this.city  || !this.street  || !this.zip_code  || !this.claims_handler  || !this.first_role  || !this.second_role )
+    //console.log("prueba de enterprise:", this.enterprise)
+    console.log("username:", this.username,
+"nombre",this.first_name,
+"apellido",this.last_name,
+"correo",this.email,
+"contraseña",this.password,
+"contraseña 1",this.password_confirmation,
+"segundo apellido",this.second_last_name,
+"segundo nombre",this.middle_name,
+"informacion",this.profile_info,
+"empresa",this.enterprise,
+"documento legal",this.legal_document,
+"privacidad",this.is_private,
+"banco",this.bank_name,
+"numero de cuenta",this.account_number,
+"banco abre",this.bank_abbr,
+"numero de contador",this.accounting_code,
+"categorias",this.additionalCategories,
+"numero",this.additionalPhones,
+"correo ",this.additionalMail,
+"pais",this.country,
+"estado",this.state,
+"ciudad",this.city,
+"calle",this.street,
+"codigo",this.zip_code,
+"role 1",this.additionalRoles,)
+    if (!this.first_name || !this.last_name || !this.enterprise || !this.legal_document || !this.profile_info)
     {
       this.showWarningMessage('Por favor, complete todos los campos.'); return;
     }
     const authToken = this.authService.getAuthToken();
-
+    if(this.isUserCheckActive === false){
+      this.username = this.first_name + this.legal_document;
+      this.password = this.first_name + this.legal_document;
+      this.password_confirmation = this.first_name + this.legal_document;
+    }
 
     if (authToken) {
       const headers = new HttpHeaders({
@@ -207,39 +264,30 @@ export class UserCreateComponent implements OnInit {
           finance_details: {
             accounting_code: this.accounting_code,
           },
-          categories: [
-            this.first_category,
-            this.second_category,
-            this.third_category,
-          ],
-          phones_associated: [{
-            phone_number: this.phone_number,
-            description: this.phone_description,
-            phone_type: this.phone_type,
-          }],
-          emails_associated: [{
-            email: this.email_associated,
-            description: this.email_description,
-          }],
-          addresses: [{
-            country: this.country,
-            state: this.state,
-            city: this.city,
-            street: this.street,
-            zip_code: this.zip_code,
-          }],
-          claims_handler: this.claims_handler,
+          categories: this.additionalCategories,
+          phones_associated: this.additionalPhones,
+          emails_associated: this.additionalMail,
+          addresses: this.additionalAddresses,
+          //claims_handler: this.claims_handler,
         },
-        roles: [
-          this.first_role,
-          this.second_role
-        ]
+        roles: this.additionalRoles,
       };
 
       this.http.post(this.userProfilesUrl, userData, { headers }).subscribe(
         (response) => {
           console.log('Contacto creada exitosamente', response);
           this.showWarningMessage('Contacto creada exitosamente');
+          if (response && (response as any).profile && (response as any).profile.categories) {
+            const categories = (response as any).profile.categories;
+
+            const isProfessional = categories.some((category: { category: string; }) => category.category === "Profesional");
+
+            if (isProfessional) {
+              console.log("categoriasss")
+              this.authService.setId((response as any).user.id);
+              this.oncreateProfessionalClicked();
+            }
+          }
         },
         (error) => {
           console.error('Error al crear la contacto', error);
@@ -289,6 +337,85 @@ export class UserCreateComponent implements OnInit {
       this.isProfessionalCategorySelected = false;
     }
   }
+
+addPhoneField(): void {
+  this.additionalPhones.push({ phone_number: '', description: '' });
+}
+
+removePhoneField(index: number): void {
+  this.additionalPhones.splice(index, 1);
+}
+
+addMail(): void {
+  this.additionalMail.push({ email_associated: '', email_description: '' });
+}
+
+removeMail(index: number): void {
+  this.additionalMail.splice(index, 1);
+}
+
+addAdresses(): void {
+  this.additionalAddresses.push({ country: '', state: '', city: '', street: '', zip_code: '' });
+}
+
+removeAdresses(index: number): void {
+  this.additionalAddresses.splice(index, 1);
+}
+
+addCategory(): void {
+  this.additionalCategories.push('');
+}
+
+removeCategory(index: number): void {
+  this.additionalCategories.splice(index, 1);
+}
+
+addRole(): void {
+  this.additionalRoles.push('');
+}
+
+removeRole(index: number): void {
+  this.additionalRoles.splice(index, 1);
+}
+
+filterCategories(searchTerm: string, categoryType: string): void {
+  switch (categoryType) {
+    case 'first_category':
+      this.filteredFirstCategories = this.allCategories.filter(category =>
+        category.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      break;
+    case 'second_category':
+      this.filteredSecondCategories = this.allCategories.filter(category =>
+        category.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      break;
+    case 'third_category':
+      this.filteredThirdCategories = this.allCategories.filter(category =>
+        category.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      break;
+    default:
+      break;
+  }
+}
+
+toggleDropdown(): void {
+  this.isDropdownOpen = !this.isDropdownOpen;
+}
+
+selectCategory(category: any): void {
+  this.selectedCategory = category;
+  this.isDropdownOpen = false;
+}
+
+showCategoriesList(): void {
+  this.isCategoriesListVisible = true;
+}
+
+hideCategoriesList(): void {
+  this.isCategoriesListVisible = false;
+}
 
 
 }

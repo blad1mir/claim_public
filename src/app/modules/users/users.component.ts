@@ -173,7 +173,7 @@ export class UsersComponent implements OnInit {
 
       if (categoryQuery === 'Contacto') {
         this.isContactMode = true;
-        url = `${this.userProfilesUrl}dropdown/?is_active=0`;
+        url = `${this.userProfilesUrl}?is_active=false`;
       } else {
         this.isContactMode = false;
         this.isBuscarButtonActive = true;
@@ -181,7 +181,7 @@ export class UsersComponent implements OnInit {
       }
     } else {
       this.isContactMode = false;
-      url = `${this.userProfilesUrl}dropdown/?is_active=1`;
+      url = `${this.userProfilesUrl}?is_active=true`;
     }
 
     this.showErrorSpinner = true;

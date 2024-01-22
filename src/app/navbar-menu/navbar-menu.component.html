@@ -118,6 +118,19 @@
         </li>
     </ul>
 
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" (click)="onFilesClick()">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">badge</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Expedientes</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" (click)="onTaskClick()">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">badge</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Tareas</span>
+      </a>
+    </li>
     <!--li class="sidenav-nav-item">
       <a class="sidenav-nav-link" href="">
         <span class="material-icons sidenav-link-icon" style="font-size: 30px;">description</span>

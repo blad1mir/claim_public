@@ -1,6 +1,23 @@
 <div class="margin-init">
   <div class="container rounded-md">
 
+    <!--div class="form-row">
+      <div class="input-data">
+        <input [(ngModel)]="searchFirstCategory" (ngModelChange)="filterCategories(searchFirstCategory, 'first_category')"
+               type="text" required (focus)="showCategoriesList()" (blur)="hideCategoriesList()">
+        <div class="underline"></div>
+        <label for="">Primera Categoría</label>
+      </div>
+    </div>
+
+    <div class="filtered-categories-container">
+      <div class="filtered-categories" *ngIf="isCategoriesListVisible && filteredFirstCategories.length > 0">
+        <div *ngFor="let category of filteredFirstCategories" (click)="selectCategory(category)">
+          {{ category.category }}
+        </div>
+      </div>
+    </div-->
+
       <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Crear Contacto</h1>
       <div class="form-row">
         <div class="input-data">
@@ -14,7 +31,6 @@
           <label for="">Apellido</label>
         </div>
       </div>
-
       <div class="form-row">
         <div class="input-data">
           <input [(ngModel)]="middle_name" type="text" required>
@@ -27,7 +43,6 @@
           <label for="">Segundo Apellido</label>
         </div>
       </div>
-
       <div class="form-row">
         <div class="input-data">
           <input [(ngModel)]="legal_document" type="text" required>
@@ -35,17 +50,13 @@
           <label for="">DNI / CIF</label>
         </div>
       </div>
-
       <div class="mb-4.5 check-input-data">
         <input type="checkbox" [(ngModel)]="create_account" (change)="toggleUserCheck()"
         id="default-checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
         <label for="default-checkbox" class="mb-2.5 text-sm text-black" style="margin-left: 5px;">Crear Cuenta</label>
       </div>
-
       <div *ngIf="isUserCheckActive">
-
         <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Información de cuenta</h2>
-
         <div class="form-row">
           <div class="input-data">
             <input [(ngModel)]="username" type="text" required>
@@ -53,7 +64,13 @@
             <label for="">Nombre de Usuario</label>
           </div>
         </div>
-
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="email" type="text" required>
+            <div class="underline"></div>
+            <label for="">Correo Electronico</label>
+          </div>
+        </div>
         <div class="form-row">
           <div class="input-data">
             <input [(ngModel)]="password" type="text" required>
@@ -68,71 +85,110 @@
         </div>
       </div>
 
+
       <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Domicilios</h2>
-
-      <div class="form-row">
-        <div class="input-data">
-          <input [(ngModel)]="street" type="text" required>
-          <div class="underline"></div>
-          <label for="">Dirección</label>
-        </div>
-        <div class="input-data">
-          <input [(ngModel)]="city" type="text" required>
-          <div class="underline"></div>
-          <label for="">Ciudad</label>
-        </div>
+      <div class="select-input-data">
+        <button (click)="addAdresses()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Ubicaicón</button>
       </div>
+      <div *ngFor="let adress of additionalAddresses; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="adress.street" type="text" required>
+            <div class="underline"></div>
+            <label for="">Dirección</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="adress.city" type="text" required>
+            <div class="underline"></div>
+            <label for="">Ciudad</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="adress.zip_code" type="text" required>
+            <div class="underline"></div>
+            <label for="">Código Postal</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="adress.state" type="text" required>
+            <div class="underline"></div>
+            <label for="">Provincia/Estado</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="adress.country" type="text" required>
+            <div class="underline"></div>
+            <label for="">País</label>
+          </div>
+          <button (click)="removeAdresses(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+          padding-right: 7px; line-height: 1;
+          display: inline-block;
+          font-size: 1.2rem;
+          text-decoration: none;
+          border-radius: 100%;
+          background-color: #d5d1defe;
+          color: #313131fe;"> X </button>
+        </div>
 
-      <div class="form-row">
-        <div class="input-data">
-          <input [(ngModel)]="zip_code" type="text" required>
-          <div class="underline"></div>
-          <label for="">Código Postal</label>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="input-data">
-          <input [(ngModel)]="state" type="text" required>
-          <div class="underline"></div>
-          <label for="">Provincia/Estado</label>
-        </div>
-        <div class="input-data">
-          <input [(ngModel)]="country" type="text" required>
-          <div class="underline"></div>
-          <label for="">País</label>
-        </div>
       </div>
 
       <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Correos Electronicos</h2>
+      <div class="select-input-data">
+        <button (click)="addMail()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Correo Electronico</button>
+      </div>
 
-      <div class="form-row">
-        <div class="input-data">
-          <input [(ngModel)]="email_description" type="text" required>
-          <div class="underline"></div>
-          <label for="">Descripción de Correo</label>
-        </div>
-        <div class="input-data">
-          <input [(ngModel)]="email_associated" type="text" required>
-          <div class="underline"></div>
-          <label for="">Correo Asociado</label>
+      <div *ngFor="let mail of additionalMail; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="mail.email_associated" type="text" required>
+            <div class="underline"></div>
+            <label for="">Correo Asociado</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="mail.email_description" type="text" required>
+            <div class="underline"></div>
+            <label for="">Descripción de Correo</label>
+          </div>
+          <button (click)="removeMail(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+          padding-right: 7px; line-height: 1;
+          display: inline-block;
+          font-size: 1.2rem;
+          text-decoration: none;
+          border-radius: 100%;
+          background-color: #d5d1defe;
+          color: #313131fe;"> X </button>
         </div>
       </div>
 
       <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Celulares</h2>
+      <div class="select-input-data">
+        <button (click)="addPhoneField()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Teléfono</button>
+      </div>
 
-      <div class="form-row">
-        <div class="input-data">
-          <input [(ngModel)]="phone_description" type="text" required>
-          <div class="underline"></div>
-          <label for="">Descripción de Celular</label>
-        </div>
-        <div class="input-data">
-          <input [(ngModel)]="phone_number" type="text" required>
-          <div class="underline"></div>
-          <label for="">Numero de Celular</label>
+      <div *ngFor="let phone of additionalPhones; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="phone.phone_number" type="text" required>
+            <div class="underline"></div>
+            <label for="">Número de Celular</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="phone.description" type="text" required>
+            <div class="underline"></div>
+            <label for="">Descripción de Celular</label>
+          </div>
+          <button (click)="removePhoneField(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+          padding-right: 7px; line-height: 1;
+          display: inline-block;
+          font-size: 1.2rem;
+          text-decoration: none;
+          border-radius: 100%;
+          background-color: #d5d1defe;
+          color: #313131fe;"> X </button>
         </div>
       </div>
+
 
       <div class="mb-4.5 check-input-data">
         <input type="checkbox" [(ngModel)]="is_private"
@@ -143,8 +199,8 @@
       <div class="select-input-data">
         <label class="block text-black">Empresa</label>
           <div class="input-data">
-          <select [(ngModel)]="selectedEnterprise">
-              <option *ngFor="let enterprise of enterprises" [value]="enterprise">{{ enterprise }}</option>
+          <select [(ngModel)]="enterprise">
+            <option *ngFor="let enterprise of enterprises" [value]="enterprise.enterprise_id">{{ enterprise.name }}</option>
           </select>
         </div>
       </div>
@@ -158,11 +214,8 @@
           <br />
         </div>
       </div>
-
       <div *ngIf="isUserCheckActive">
-
         <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Información de cuenta</h2>
-
         <div class="form-row">
           <div class="input-data">
             <input [(ngModel)]="bank_name" type="text" required>
@@ -175,7 +228,6 @@
             <label for="">Abreviatura de Banco</label>
           </div>
         </div>
-
         <div class="form-row">
           <div class="input-data">
             <input [(ngModel)]="account_number" type="text" required>
@@ -183,7 +235,6 @@
             <label for="">Número de Cuenta</label>
           </div>
         </div>
-
         <div class="form-row">
           <div class="input-data">
             <input [(ngModel)]="accounting_code" type="text" required>
@@ -192,19 +243,42 @@
           </div>
         </div>
 
-        <div class="select-input-data">
+        <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Categorías</h2>
+      <div class="select-input-data">
+        <button (click)="addCategory()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Categoría Adicional</button>
+      </div>
+
+      <div *ngFor="let newRole of additionalCategories; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <select [(ngModel)]="additionalCategories[i]">
+              <option *ngFor="let category of allCategories" [value]="category.id">{{ category?.category }}</option>
+            </select>
+          </div>
+          <button (click)="removeCategory(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+            padding-right: 7px; line-height: 1;
+            display: inline-block;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 100%;
+            background-color: #d5d1defe;
+            color: #313131fe;"> X </button>
+        </div>
+      </div>
+
+        <!--ddiv class="select-input-data">
           <label class="block text-black">Primera Categoría</label>
           <div class="input-data">
-          <select [(ngModel)]="first_category" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-            <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
-          </select>
+            <select [(ngModel)]="first_category">
+              <option *ngFor="let category of allCategories" [value]="category.id">{{ category.category }}</option>
+            </select>
           </div>
         </div>
 
-        <div class="select-input-data">
+        <iv class="select-input-data">
           <label class="block text-black">Segunda Categoría</label>
           <div class="input-data">
-            <select [(ngModel)]="second_category" (change)="handleCategoryChange()" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+            <select [(ngModel)]="second_category" (change)="handleCategoryChange()">
               <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
             </select>
           </div>
@@ -213,30 +287,43 @@
         <div class="select-input-data">
           <label class="block text-black">Tercera Categoría</label>
           <div class="input-data">
-            <select [(ngModel)]="third_category" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+            <select [(ngModel)]="third_category">
               <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
             </select>
           </div>
-        </div>
+        </div-->
 
-        <div class="select-input-data">
+      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Roles</h2>
+      <div class="select-input-data">
+        <button (click)="addRole()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Rol Adicional</button>
+      </div>
+
+      <div *ngFor="let newRole of additionalRoles; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <select [(ngModel)]="additionalRoles[i]">
+              <option *ngFor="let role of roles" [value]="role.name">{{ role?.customrole }}</option>
+            </select>
+          </div>
+          <button (click)="removeRole(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+            padding-right: 7px; line-height: 1;
+            display: inline-block;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 100%;
+            background-color: #d5d1defe;
+            color: #313131fe;"> X </button>
+        </div>
+      </div>
+
+        <!--div class="select-input-data">
           <label class="block text-black">Primer Rol</label>
           <div class="input-data">
-            <select [(ngModel)]="first_role" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-              <option *ngFor="let role of roles" [value]="role.id">{{ role?.customrole }}</option>
+            <select [(ngModel)]="first_role">
+              <option *ngFor="let role of roles" [value]="role.name">{{ role?.customrole }}</option>
             </select>
           </div>
-        </div>
-
-        <div class="select-input-data">
-          <label class="block text-black">Segundo Rol</label>
-          <div class="input-data">
-            <select [(ngModel)]="second_role" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-              <option *ngFor="let role of roles" [value]="role.id">{{ role?.customrole }}</option>
-            </select>
-          </div>
-        </div>
-
+        </div-->
       </div>
 
       <div class="select-input-data">
@@ -244,102 +331,4 @@
           Guardar
         </button>
       </div>
-
   </div>
-
-
-  <!--div class="reputation-container-total">
-    <div class="reputation-box-total items-center rounded-md">
-
-
-      <div class="flex justify-center items-center">
-        <ul>
-          <li>
-                  <div class="w-full xl:w-1/2">
-                    <label class="mb-2.5 block text-black">
-                      Tipo de celular
-                    </label>
-                    <input type="text" [(ngModel)]="phone_type"
-                      class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                  </div-->
-
-                <!--div class="mb-4.5">
-                  <label class="mb-2.5 block text-black">
-                    Empresa
-                  </label>
-                  <input type="text" [(ngModel)]="enterprise"
-                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                </div-->
-
-
-                <!--div class="mb-4.5">
-                  <label class="mb-2.5 block text-black">
-                    Correo
-                  </label>
-                  <input type="text" [(ngModel)]="email"
-                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                </div-->
-
-                <!--div class="mb-4.5">
-                  <label class="mb-2.5 block text-black">
-                    manejo de reclamos
-                  </label>
-                  <input type="text" [(ngModel)]="claims_handler"
-                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                </div>
-
-
-              <div *ngIf="isProfessionalInformationButtonActive">
-
-                <div class="mb-4.5">
-                  <label class="mb-2.5 block text-black">
-                    Titulación academica
-                  </label>
-                  <input type="text"
-                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                </div>
-
-                <div class="mb-4.5">
-                  <label class="mb-2.5 block text-black">
-                    Número colegiado
-                  </label>
-                  <input type="text"
-                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                </div>
-
-                <div class="mb-4.5">
-                  <label class="mb-2.5 block text-black">
-                    Categoría profesional
-                  </label>
-                  <input type="text"
-                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                </div>
-
-                <div class="mb-4.5">
-                  <label class="mb-2.5 block text-black">
-                    Firma
-                  </label>
-                </div>
-
-                <div class="mb-4.5">
-                  <label class="mb-2.5 block text-black">
-                    Zona actuacion
-                  </label>
-                  <input type="text"
-                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                </div>
-
-                <div class="mb-4.5">
-                  <label class="mb-2.5 block text-black">
-                    Código Sinexia
-                  </label>
-                  <input type="text"
-                    class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
-                </div>
-
-              </div>
-
-
-          </li>
-        </ul-->
-
