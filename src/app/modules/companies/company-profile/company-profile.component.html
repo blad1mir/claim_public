@@ -1,0 +1,174 @@
+<div style="margin-top: 100px;">
+
+  <ul class="tab-box-total flex flex-wrap text-sm font-medium text-center text-gray-500 dark:border-gray-700 dark:text-gray-400">
+    <li class="me-2">
+      <a (click)="toggleEmployeeButton(true)" class="tab-paddings inline-block p-4 rounded-t-lg"
+
+      [ngClass]="{'text-blue-600 bg-color active': isEmployeeButtonActive, 'hover:text-gray-600 hover:bg-gray-50': !isEmployeeButtonActive }">
+      Empresa
+    </a>
+    </li>
+    <li class="me-2">
+      <a (click)="toggleEmployeeButton(false)" class="tab-paddings inline-block p-4 rounded-t-lg"
+      [ngClass]="{'text-blue-600 bg-color active': !isEmployeeButtonActive, 'hover:text-gray-600 hover:bg-gray-50':
+      isEmployeeButtonActive }">
+      Empleados
+    </a>
+    </li>
+  </ul>
+
+  <div class="form-style" *ngIf="isEmployeeButtonActive">
+    <div class="container rounded-md">
+      <h3 class="text">
+         Busqueda avanzada
+     </h3>
+
+     <div class="form-row">
+      <div class="input-data">
+        <input [value]="companyProfiles?.name" class="bg-color" type="text" required>
+        <div class="underline"></div>
+        <label for="">Nombre</label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-data">
+        <input [value]="companyProfiles?.legal_document"  class="bg-color" type="text" required>
+        <div class="underline"></div>
+        <label for="">DNI / CIF</label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-data">
+        <input [value]="companyProfiles?.emails_associated[0]?.email"  class="bg-color" type="text" required>
+        <div class="underline"></div>
+        <label for="">Correo</label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-data">
+        <input [value]="companyProfiles?.bank_details[0]?.bank_name "  class="bg-color" type="text" required>
+        <div class="underline"></div>
+        <label for="">Banco</label>
+      </div>
+    </div>
+
+     <div class="form-row">
+      <div class="input-data">
+        <input [value]="companyProfiles?.categories[0]?.category" class="bg-color" type="text" required>
+        <div class="underline"></div>
+        <label for="">Categoría</label>
+      </div>
+    </div>
+
+      <div class="select-input-data">
+
+        <button *ngIf="isInputDisabled" (click)="enableInput()" style="margin-top: 20px; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px;" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38">
+          Editar
+        </button>
+
+        <button *ngIf="!isInputDisabled" (click)="saveAndDisableInput()" style="margin-top: 20px; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px;" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38">
+          Guardar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="reputation-container-total" *ngIf="!isEmployeeButtonActive">
+  <div class="reputation-box-total items-center rounded-md">
+
+    <!--div class="flex justify-center items-center" *ngIf="isEmployeeButtonActive">
+      <ul>
+        <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+          <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px;">Perfil de empresa</h1>
+        </div>
+        <li>
+          <div class="p-6.5">
+            <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
+              <div class="w-full xl:w-1/2">
+                <label class="mb-2.5 block text-black">
+                  Categoría
+                </label>
+                <input type="text" [value]="companyProfiles?.categories[0]?.category" [disabled]="isInputDisabled">
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div-->
+
+    <div>
+      <div class="users-container">
+
+        <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+          <h1 class="text-2xl font-bold mb-2">Empleados</h1>
+        </div>
+
+        <!--div  class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
+          <input [(ngModel)]="searchInput" type="text" placeholder="Search users" class="search-input border p-2">
+          <button class="button-38" role="button" (click)="onSearchClick()">Buscar</button>
+        </div-->
+
+        <div class="table-style">
+          <section class="table__body">
+              <table *ngIf="userProfiles?.results && userProfiles.results.length > 0; else noResults">
+                  <thead>
+                      <tr>
+                          <th> Primer Nombre</th>
+                          <th> Segundo Nombre</th>
+                          <th> Apellido</th>
+                          <th> Segundo Apellido</th>
+                          <th> Correo Electronico</th>
+                          <th> DNI/CIF</th>
+                          <th> Número</th>
+                          <th> Perfil</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let userData of userProfiles?.results">
+                          <td data-title="Nombre"> {{ userData.user.first_name }} </td>
+                          <td data-title="Segundo Nombre"> {{ userData.profile?.middle_name }} </td>
+                          <td data-title="Apellido"> {{ userData.user?.last_name }} </td>
+                          <td data-title="Segundo Apellido"> {{ userData.profile?.second_last_name }} </td>
+                          <td data-title="Correo Electronico"> {{ userData.user?.email }} </td>
+                          <td data-title="DNI / CIF"> {{ userData.profile?.legal_document }} </td>
+                          <td data-title="Número"> {{ userData.profile?.phones_associated?.phone_number }}  </td>
+                          <td>
+                            <button (click)="onSelectUserProfile(userData.id)" style="padding-left: 5px; padding-right: 5px;" role="button" class="status delivered">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                              </svg>
+                            </button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+              <ng-template #noResults>
+                <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+                  <h3 class="text-2xl font-bold mb-2">No hay resultados</h3>
+                </div>
+              </ng-template>
+          </section>
+        </div>
+
+
+
+        <div class="center">
+          <div class="pagination">
+            <a class="button-38" (click)="onPreviousClick()">&laquo;</a>
+            <a class="button-38" >{{paginationNumber()}}</a>
+            <a class="button-38" (click)="onNextClick()">&raquo;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

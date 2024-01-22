@@ -1,0 +1,334 @@
+<div class="margin-init">
+  <div class="container rounded-md">
+
+    <!--div class="form-row">
+      <div class="input-data">
+        <input [(ngModel)]="searchFirstCategory" (ngModelChange)="filterCategories(searchFirstCategory, 'first_category')"
+               type="text" required (focus)="showCategoriesList()" (blur)="hideCategoriesList()">
+        <div class="underline"></div>
+        <label for="">Primera Categoría</label>
+      </div>
+    </div>
+
+    <div class="filtered-categories-container">
+      <div class="filtered-categories" *ngIf="isCategoriesListVisible && filteredFirstCategories.length > 0">
+        <div *ngFor="let category of filteredFirstCategories" (click)="selectCategory(category)">
+          {{ category.category }}
+        </div>
+      </div>
+    </div-->
+
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Crear Contacto</h1>
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="first_name" type="text" required>
+          <div class="underline"></div>
+          <label for="">Nombre</label>
+        </div>
+        <div class="input-data">
+          <input [(ngModel)]="last_name" type="text" required>
+          <div class="underline"></div>
+          <label for="">Apellido</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="middle_name" type="text" required>
+          <div class="underline"></div>
+          <label for="">Segundo Nombre</label>
+        </div>
+        <div class="input-data">
+          <input [(ngModel)]="second_last_name" type="text" required>
+          <div class="underline"></div>
+          <label for="">Segundo Apellido</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="legal_document" type="text" required>
+          <div class="underline"></div>
+          <label for="">DNI / CIF</label>
+        </div>
+      </div>
+      <div class="mb-4.5 check-input-data">
+        <input type="checkbox" [(ngModel)]="create_account" (change)="toggleUserCheck()"
+        id="default-checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="default-checkbox" class="mb-2.5 text-sm text-black" style="margin-left: 5px;">Crear Cuenta</label>
+      </div>
+      <div *ngIf="isUserCheckActive">
+        <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Información de cuenta</h2>
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="username" type="text" required>
+            <div class="underline"></div>
+            <label for="">Nombre de Usuario</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="email" type="text" required>
+            <div class="underline"></div>
+            <label for="">Correo Electronico</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="password" type="text" required>
+            <div class="underline"></div>
+            <label for="">Contraseña</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="password_confirmation" type="text" required>
+            <div class="underline"></div>
+            <label for="">Confirmar Contraseña</label>
+          </div>
+        </div>
+      </div>
+
+
+      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Domicilios</h2>
+      <div class="select-input-data">
+        <button (click)="addAdresses()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Ubicaicón</button>
+      </div>
+      <div *ngFor="let adress of additionalAddresses; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="adress.street" type="text" required>
+            <div class="underline"></div>
+            <label for="">Dirección</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="adress.city" type="text" required>
+            <div class="underline"></div>
+            <label for="">Ciudad</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="adress.zip_code" type="text" required>
+            <div class="underline"></div>
+            <label for="">Código Postal</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="adress.state" type="text" required>
+            <div class="underline"></div>
+            <label for="">Provincia/Estado</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="adress.country" type="text" required>
+            <div class="underline"></div>
+            <label for="">País</label>
+          </div>
+          <button (click)="removeAdresses(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+          padding-right: 7px; line-height: 1;
+          display: inline-block;
+          font-size: 1.2rem;
+          text-decoration: none;
+          border-radius: 100%;
+          background-color: #d5d1defe;
+          color: #313131fe;"> X </button>
+        </div>
+
+      </div>
+
+      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Correos Electronicos</h2>
+      <div class="select-input-data">
+        <button (click)="addMail()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Correo Electronico</button>
+      </div>
+
+      <div *ngFor="let mail of additionalMail; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="mail.email_associated" type="text" required>
+            <div class="underline"></div>
+            <label for="">Correo Asociado</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="mail.email_description" type="text" required>
+            <div class="underline"></div>
+            <label for="">Descripción de Correo</label>
+          </div>
+          <button (click)="removeMail(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+          padding-right: 7px; line-height: 1;
+          display: inline-block;
+          font-size: 1.2rem;
+          text-decoration: none;
+          border-radius: 100%;
+          background-color: #d5d1defe;
+          color: #313131fe;"> X </button>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Celulares</h2>
+      <div class="select-input-data">
+        <button (click)="addPhoneField()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Teléfono</button>
+      </div>
+
+      <div *ngFor="let phone of additionalPhones; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="phone.phone_number" type="text" required>
+            <div class="underline"></div>
+            <label for="">Número de Celular</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="phone.description" type="text" required>
+            <div class="underline"></div>
+            <label for="">Descripción de Celular</label>
+          </div>
+          <button (click)="removePhoneField(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+          padding-right: 7px; line-height: 1;
+          display: inline-block;
+          font-size: 1.2rem;
+          text-decoration: none;
+          border-radius: 100%;
+          background-color: #d5d1defe;
+          color: #313131fe;"> X </button>
+        </div>
+      </div>
+
+
+      <div class="mb-4.5 check-input-data">
+        <input type="checkbox" [(ngModel)]="is_private"
+        id="default-checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="default-checkbox" class="mb-2.5 text-sm text-black" style="margin-left: 5px;">Privado</label>
+      </div>
+
+      <div class="select-input-data">
+        <label class="block text-black">Empresa</label>
+          <div class="input-data">
+          <select [(ngModel)]="enterprise">
+            <option *ngFor="let enterprise of enterprises" [value]="enterprise.enterprise_id">{{ enterprise.name }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data textarea">
+          <textarea rows="8" cols="80" [(ngModel)]="profile_info" required></textarea>
+          <br />
+          <div class="underline"></div>
+          <label for="">Información de perfil</label>
+          <br />
+        </div>
+      </div>
+      <div *ngIf="isUserCheckActive">
+        <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Información de cuenta</h2>
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="bank_name" type="text" required>
+            <div class="underline"></div>
+            <label for="">Banco</label>
+          </div>
+          <div class="input-data">
+            <input [(ngModel)]="bank_abbr" type="text" required>
+            <div class="underline"></div>
+            <label for="">Abreviatura de Banco</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="account_number" type="text" required>
+            <div class="underline"></div>
+            <label for="">Número de Cuenta</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-data">
+            <input [(ngModel)]="accounting_code" type="text" required>
+            <div class="underline"></div>
+            <label for="">Codigo de Contabilidad</label>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Categorías</h2>
+      <div class="select-input-data">
+        <button (click)="addCategory()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Categoría Adicional</button>
+      </div>
+
+      <div *ngFor="let newRole of additionalCategories; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <select [(ngModel)]="additionalCategories[i]">
+              <option *ngFor="let category of allCategories" [value]="category.id">{{ category?.category }}</option>
+            </select>
+          </div>
+          <button (click)="removeCategory(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+            padding-right: 7px; line-height: 1;
+            display: inline-block;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 100%;
+            background-color: #d5d1defe;
+            color: #313131fe;"> X </button>
+        </div>
+      </div>
+
+        <!--ddiv class="select-input-data">
+          <label class="block text-black">Primera Categoría</label>
+          <div class="input-data">
+            <select [(ngModel)]="first_category">
+              <option *ngFor="let category of allCategories" [value]="category.id">{{ category.category }}</option>
+            </select>
+          </div>
+        </div>
+
+        <iv class="select-input-data">
+          <label class="block text-black">Segunda Categoría</label>
+          <div class="input-data">
+            <select [(ngModel)]="second_category" (change)="handleCategoryChange()">
+              <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="select-input-data">
+          <label class="block text-black">Tercera Categoría</label>
+          <div class="input-data">
+            <select [(ngModel)]="third_category">
+              <option *ngFor="let category of categories" [value]="category.id">{{ category.category }}</option>
+            </select>
+          </div>
+        </div-->
+
+      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Roles</h2>
+      <div class="select-input-data">
+        <button (click)="addRole()" class="button-38" style="margin-top: 20px; margin-bottom: 20px;">Agregar Rol Adicional</button>
+      </div>
+
+      <div *ngFor="let newRole of additionalRoles; let i = index">
+        <div class="form-row">
+          <div class="input-data">
+            <select [(ngModel)]="additionalRoles[i]">
+              <option *ngFor="let role of roles" [value]="role.name">{{ role?.customrole }}</option>
+            </select>
+          </div>
+          <button (click)="removeRole(i)" class="rounded status cancelled" style="margin-top: 20px; margin-bottom: 10px; margin-right: 10px; padding-top: 4px; padding-bottom: 4px; padding-left: 7px;
+            padding-right: 7px; line-height: 1;
+            display: inline-block;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 100%;
+            background-color: #d5d1defe;
+            color: #313131fe;"> X </button>
+        </div>
+      </div>
+
+        <!--div class="select-input-data">
+          <label class="block text-black">Primer Rol</label>
+          <div class="input-data">
+            <select [(ngModel)]="first_role">
+              <option *ngFor="let role of roles" [value]="role.name">{{ role?.customrole }}</option>
+            </select>
+          </div>
+        </div-->
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="createUser()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
+          Guardar
+        </button>
+      </div>
+  </div>

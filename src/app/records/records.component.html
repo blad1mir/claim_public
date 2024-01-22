@@ -1,0 +1,26 @@
+<div style="background-color: #e6eaf8;">
+  <app-top-menu></app-top-menu>
+
+  <div class="flex">
+    <!-- Contenido izquierdo -->
+    <div>
+      <app-navbar-menu (onToggleSideNav)="onToggleSideNav($event)"></app-navbar-menu>
+    </div>
+
+    <!-- Contenido central (ocupando dos tercios) -->
+    <div class="flex-1 mx-auto">
+      <app-landing *ngIf="landing"></app-landing>
+      <app-users *ngIf="showUsers"></app-users>
+      <app-companies *ngIf="showCompanies"></app-companies>
+      <app-user-profile *ngIf="showUserProfile"></app-user-profile>
+      <app-company-profile *ngIf="showCompaniesProfile"></app-company-profile>
+      <app-user-edit *ngIf="showUserEdit"></app-user-edit>
+      <app-user-create *ngIf="showCreateUser"></app-user-create>
+      <app-company-create *ngIf="showCreateCompany"></app-company-create>
+      <app-change-password *ngIf="showChangePassword"></app-change-password>
+      <app-professional *ngIf="showProfessional"></app-professional>
+      <app-files *ngIf="showFiles"></app-files>
+      <app-task *ngIf="showTask"></app-task>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,221 @@
+<div style="margin-top: 100px;">
+
+
+  <ul *ngIf="!loading" class="tab-box-total flex flex-wrap text-sm font-medium text-center text-gray-500 dark:border-gray-700 dark:text-gray-400">
+    <li class="me-2">
+      <a (click)="toggleBuscarButton()" class="tab-paddings inline-block p-4 rounded-t-lg"
+
+      [ngClass]="{'text-blue-600 bg-color active': isBuscarButtonActive, 'hover:text-gray-600 hover:bg-gray-50': !isBuscarButtonActive }">
+      Buscar
+    </a>
+    </li>
+    <li class="me-2">
+      <a (click)="toggleBuscarAvzButton()" class="tab-paddings inline-block p-4 rounded-t-lg"
+      [ngClass]="{'text-blue-600 bg-color active': !isBuscarButtonActive, 'hover:text-gray-600 hover:bg-gray-50':
+      isBuscarButtonActive }">
+      Busqueda Avz
+    </a>
+    </li>
+  </ul>
+
+  <div class="form-style" *ngIf="!loading && isBuscarAvzButtonActive && !showErrorSpinner">
+    <div class="container rounded-md">
+      <h3 class="text">
+         Busqueda avanzada
+     </h3>
+
+     <div class="form-row">
+      <div class="input-data textarea">
+        <textarea class="bg-color" [(ngModel)]="nombreInput" rows="8" cols="80" required></textarea>
+        <br />
+        <div class="underline"></div>
+        <label style="background-color: #fbfcff;" for="">Nombre</label>
+        <br />
+      </div>
+    </div>
+
+      <div class="form-row">
+        <div class="input-data textarea">
+          <textarea class="bg-color" [(ngModel)]="emailInput" rows="8" cols="80" required></textarea>
+          <br />
+          <div class="underline"></div>
+          <label style="background-color: #fbfcff;" for="">Correo</label>
+          <br />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data textarea">
+          <textarea class="bg-color" [(ngModel)]="documentoLegalInput" rows="8" cols="80" required></textarea>
+          <br />
+          <div class="underline"></div>
+          <label style="background-color: #fbfcff;" for="">DNI / CIF</label>
+          <br />
+        </div>
+
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="onSearchAvzClick()" style="margin-top: 20px; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px;" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38">
+          Buscar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+
+<div class="reputation-container-total" *ngIf="!isBuscarAvzButtonActive">
+  <div class="reputation-box-total items-center rounded-md">
+
+    <div *ngIf="loading" role="status" class="flex items-center justify-center">
+      <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+          <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+      </svg>
+      <span class="sr-only">Loading...</span>
+    </div>
+
+    <div *ngIf="!loading">
+
+      <div class="users-container" *ngIf="isBuscarButtonActive">
+
+        <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+          <h1 class="text-2xl font-bold mb-2">Empresas</h1>
+        </div>
+
+        <div  class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
+
+          <input [(ngModel)]="searchInput" type="text" placeholder="Buscar Empresas" style="margin-top: 5px;" class="search-input border p-2">
+
+          <button class="button-38" role="button" (click)="onSearchClick()">Buscar</button>
+          <button class="button-38" role="button" (click)="onCreateCompanyClick()" style="margin-left: auto;">Crear</button>
+        </div>
+
+        <div class="table-style">
+          <section class="table__body">
+              <table>
+                  <thead>
+                      <tr>
+                          <th> Nombre</th>
+                          <th> DNI / CIF</th>
+                          <th> Número</th>
+                          <th> Correo</th>
+                          <th> Pagina Web</th>
+                          <th> Perfil</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let companyData of companyProfiles.results">
+                          <td data-title="Nombre"> {{ companyData.name }} </td>
+                          <td data-title="DNI / CIF"> {{ companyData.legal_document }} </td>
+                          <td data-title="Número"> {{ companyData.phones_associated?.phone_number }}  </td>
+                          <td data-title="Correo"> {{ companyData.email.email }} </td>
+                          <td data-title="Pagina Web">  {{ companyData.web_page_url}} </td>
+                          <td>
+                            <button (click)="onSelectCompanyProfile(companyData.enterprise_id)" style="padding-left: 5px; padding-right: 5px;" role="button" class="status delivered">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                              </svg>
+                            </button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </section>
+        </div>
+
+        <!--div class="table-container">
+          <main >
+            <table>
+              <thead style="background-color: #01539B;">
+                <tr style="background-color: #01539B;">
+                  <th style="background-color: #01539B;">
+                    Correo
+                  </th>
+                  <th style="background-color: #01539B;">
+                    Nombre
+                  </th>
+                  <th style="background-color: #01539B;">
+                    DNI / CIF
+                  </th>
+                  <th style="background-color: #01539B;">
+                    Acciones
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-row" *ngFor="let companyData of companyProfiles.results">
+                  <td data-title="Correo">
+                    {{ companyData.email.email }}
+                  </td>
+                  <td data-title="Nombre">
+                    {{ companyData.name }}
+                  </td>
+                  <td data-title="DNI / CIF">
+                    {{ companyData.legal_document }}
+                  </td>
+                  <td data-title="Acciones">
+                    <button role="button" (click)="onSelectCompanyProfile(companyData.enterprise_id)">
+                      <span class="material-icons sidenav-link-icon">person</span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </main>
+        </div-->
+
+        <div class="center">
+          <div class="pagination">
+            <a class="button-38" (click)="onPreviousClick()">&laquo;</a>
+            <a class="button-38" >{{paginationNumber()}}</a>
+            <a class="button-38" (click)="onNextClick()">&raquo;</a>
+          </div>
+        </div>
+      </div>
+
+      <!--div class="flex justify-center items-center" *ngIf="!isBuscarButtonActive">
+        <ul>
+
+          <li>
+            <div class="p-6.5">
+
+              <div class="mb-4.5">
+                <label class="mb-2.5 block text-black">
+                  Nombre
+                </label>
+                <input type="email" placeholder="Nombre"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+
+              <div class="mb-4.5">
+                <label class="mb-2.5 block text-black">
+                  Correo
+                </label>
+                <input type="email" placeholder="Correo" [(ngModel)]="emailInput"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+
+              <div class="mb-4.5">
+                <label class="mb-2.5 block text-black">
+                  DNI / CIF
+                </label>
+                <input type="email" placeholder="DNI / CIF" [(ngModel)]="documentoLegalInput"
+                  class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" />
+              </div>
+
+              <button (click)="onSearchAvzClick()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38">
+                Buscar
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div-->
+    </div>
+
+  </div>
+</div>
+
+

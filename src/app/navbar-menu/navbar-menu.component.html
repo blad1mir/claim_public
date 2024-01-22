@@ -1,0 +1,191 @@
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">C</button>
+    <div class="logo-text" *ngIf="collapsed">Claim Center</div>
+
+    <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
+      <i class="fal fa-times close-icon"></i>
+    </button>
+  </div>
+  <ul class="sidenav-nav">
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" (click)="onUsersMenuClick()">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">person</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Usuarios</span>
+      </a>
+    </li>
+    <ul class="sidenav-nav2 dynamic-height" *ngIf="isUsersMenuOpen">
+      <!--li class="sidenav-nav-item">
+        <a class="sidenav-nav-link" (click)="onUserClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">group</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Lista de Usuarios</span>
+        </a>
+      </li-->
+      <li class="sidenav-nav-item">
+        <a class="sidenav-nav-link" (click)="onProvidersClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">group</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Proveedor</span>
+        </a>
+      </li>
+      <li  class="sidenav-nav-item">
+        <a class="sidenav-nav-link"(click)="onClientsClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">group_add</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Cliente Particular</span>
+        </a>
+      </li>
+      <li  class="sidenav-nav-item">
+        <a class="sidenav-nav-link" (click)="onProfessionalsClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">engineering</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Profesional</span>
+        </a>
+      </li>
+      <li  class="sidenav-nav-item">
+        <a class="sidenav-nav-link" (click)="onPrescriptorsClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">engineering</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Prescriptor</span>
+        </a>
+      </li>
+      <li  class="sidenav-nav-item">
+        <a class="sidenav-nav-link" (click)="onTramitersClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">engineering</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Tramitador Compañía</span>
+        </a>
+      </li>
+      <!--li  class="sidenav-nav-item">
+        <a class="sidenav-nav-link" (click)="onEnableUserClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">add_circle</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Crear</span>
+        </a>
+      </li-->
+    </ul>
+
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" (click)="onContactClick()">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">badge</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Contactos</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" (click)="onCompanyClick()">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">apartment</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Empresas</span>
+      </a>
+    </li>
+
+    <ul class="sidenav-nav2 dynamic-height" *ngIf="isCompanyMenuOpen">
+      <li class="sidenav-nav-item">
+        <a class="sidenav-nav-link" (click)="onClientsCompanyClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">group</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Cliente</span>
+        </a>
+      </li>
+      <li  class="sidenav-nav-item">
+        <a class="sidenav-nav-link"(click)="onProvidersCompanyClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">group_add</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Proveedor</span>
+        </a>
+      </li>
+      <li  class="sidenav-nav-item">
+        <a class="sidenav-nav-link" (click)="onProfessionalsCompanyClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">engineering</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Profesional</span>
+        </a>
+      </li>
+      <li  class="sidenav-nav-item">
+        <a class="sidenav-nav-link" (click)="onAssistantsCompanyClick()">
+          <span class="material-icons sidenav-link-icon" style="font-size: 30px;">engineering</span>
+          <span class="sidenav-link-text" *ngIf="collapsed">Asistencia</span>
+        </a>
+      </li>
+        <li  class="sidenav-nav-item">
+          <a class="sidenav-nav-link" (click)="onRepairersCompanyClick()">
+            <span class="material-icons sidenav-link-icon" style="font-size: 30px;">engineering</span>
+            <span class="sidenav-link-text" *ngIf="collapsed">Reparador Alternativo</span>
+          </a>
+        </li>
+        <li  class="sidenav-nav-item">
+          <a class="sidenav-nav-link" (click)="onCollaboratorsCompanyClick()">
+            <span class="material-icons sidenav-link-icon" style="font-size: 30px;">engineering</span>
+            <span class="sidenav-link-text" *ngIf="collapsed">Empresa Colaboradora</span>
+          </a>
+        </li>
+        <li  class="sidenav-nav-item">
+          <a class="sidenav-nav-link" (click)="onAIDEsCompanyClick()">
+            <span class="material-icons sidenav-link-icon" style="font-size: 30px;">engineering</span>
+            <span class="sidenav-link-text" *ngIf="collapsed">Reparador AIDE</span>
+          </a>
+        </li>
+    </ul>
+
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" (click)="onFilesClick()">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">badge</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Expedientes</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" (click)="onTaskClick()">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">badge</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Tareas</span>
+      </a>
+    </li>
+    <!--li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" href="">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">description</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Expedientes</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" href="">
+        <span class="material-icons sidenav-link-icon" style="font-size: 30px;">playlist_add_check</span>
+        <span class="sidenav-link-text" *ngIf="collapsed">Tareas</span>
+      </a>
+    </li-->
+  </ul>
+</div>
+
+<!--aside id="sidebar-multi-level-sidebar" class="h-full" aria-label="Sidebar">
+  <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50" style="background-color: #1c2434; height: 717px;"-->
+      <!-- Logo ClaimSoft -->
+      <!--div class="text-white text-lg font-bold mb-4" style="padding-left: 35px;">ClaimSoft</div-->
+
+      <!--div style=" padding-left: 10px;">
+        <ul class="space-y-2 font-medium">
+            <li>
+              <a (click)="onUserClick()" class="flex items-center p-2 text-[#01539B] rounded-lg hover:bg-[#01539B] hover:text-white group">
+                <span class="material-icons" style="font-size: 25px; color: #ececec;">person</span>
+                <span class="ml-3">Usuarios</span>
+              </a>
+            </li>
+
+            <li>
+              <a (click)="onCompanyClick()" class="flex items-center p-2 text-[#01539B] rounded-lg hover:bg-[#01539B] hover:text-white group">
+                <span class="material-icons" style="font-size: 25px; color: #ececec;">apartment</span>
+                <span class="ml-3">Empresas</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="flex items-center p-2 text-[#01539B] rounded-lg hover:bg-[#01539B] hover:text-white group">
+                <span class="material-icons" style="font-size: 25px; color: #ececec;">description</span>
+                <span class="ml-3">Expedientes</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="flex items-center p-2 text-[#01539B] rounded-lg hover:bg-[#01539B] hover:text-white group">
+                <span class="material-icons" style="font-size: 25px; color: #ececec;">playlist_add_check</span>
+                <span class="ml-3">Tareas</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="flex items-center p-2 text-[#01539B] rounded-lg hover:bg-[#01539B] hover:text-white group">
+                <span class="material-icons" style="font-size: 25px; color: #ececec;">badge</span>
+              <span class="ml-3">Contactos</span>
+              </a>
+            </li>
+        </ul>
+      </div>
+  </div>
+</aside-->

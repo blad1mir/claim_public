@@ -1,0 +1,50 @@
+<div style="margin-top: 100px;">
+  <div class="form-style">
+    <div class="container rounded-md">
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Usuarios</h1>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [(ngModel)]="passwordInput" class="bg-color"  type="text" required>
+          <div class="underline"></div>
+          <label for="">Contraseña</label>
+        </div>
+        <div class="input-data">
+          <input [(ngModel)]="passwordConfirmationInput" class="bg-color"  type="text" required>
+          <div class="underline"></div>
+          <label for="">Confirmar contraseña</label>
+        </div>
+      </div>
+
+      <div class="flex justify-center items-center">
+        <ul>
+          <li>
+            <div style="position: relative;">
+              <div class="relative inline-block text-left" [ngClass]="{ 'open': open }">
+                <button (click)="toggleDropdown()" class="button-38" style="padding-top: 10px; padding-bottom: 10px;">
+                  Usuarios
+                </button>
+
+                <div *ngIf="open" (click)="stopPropagation($event)" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <div class="py-1">
+                    <label *ngFor="let option of dropdownOptions" class="flex items-center space-x-2 px-4 py-2 cursor-pointer">
+                      <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" [checked]="checkboxSelections[option.username]" (change)="onCheckboxChange(option.username); toggleCheckbox(option.username); updateSelectedUserId(option)" />
+                      <span>{{ option.username }}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="enableUser()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px;">
+          Crear
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

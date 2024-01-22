@@ -1,0 +1,132 @@
+<div style="margin-top: 100px;">
+  <div class="form-style">
+    <div class="container rounded-md">
+      <h3 class="text">
+        Perfil de Usuario
+    </h3>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [value]="userProfiles.user?.first_name" [(ngModel)]="updatedFirst_name" class="bg-color" type="text" required>
+          <div class="underline"></div>
+          <label for="">Nombre</label>
+        </div>
+        <div class="input-data">
+          <input [(ngModel)]="updatedLast_name" class="bg-color" type="text" required>
+          <div class="underline"></div>
+          <label for="">Apellido</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [value]="userProfiles.profile?.middle_name" [(ngModel)]="updatedMiddle_name" class="bg-color" type="text" required>
+          <div class="underline"></div>
+          <label for="">Segundo nombre</label>
+        </div>
+        <div class="input-data">
+          <input [value]="userProfiles.profile?.second_last_name" [(ngModel)]="updatedSecond_last_name" class="bg-color" type="text" required>
+          <div class="underline"></div>
+          <label for="">Segundo apellido</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [value]="userProfiles.user?.username" [(ngModel)]="updatedUsername" class="bg-color" type="text" required>
+          <div class="underline"></div>
+          <label for="">Nombre de Usuario</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input [value]="userProfiles.profile?.phones_associated[0]?.phone_number" [(ngModel)]="updatedPhone_number" class="bg-color" type="text" required>
+          <div class="underline"></div>
+          <label for="">Número Telefono</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data textarea">
+          <textarea [value]="userProfiles.user?.email" [(ngModel)]="updatedEmail" class="bg-color" rows="8" cols="80" required></textarea>
+          <br />
+          <div class="underline"></div>
+          <label style="background-color: #fbfcff;" for="">Correo</label>
+          <br />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data textarea">
+          <textarea [value]="userProfiles.profile?.enterprise" class="bg-color" rows="8" cols="80" required></textarea>
+          <br />
+          <div class="underline"></div>
+          <label style="background-color: #fbfcff;" for="">Empresa</label>
+          <br />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data textarea">
+          <textarea [value]="userProfiles.profile?.legal_document" [(ngModel)]="updatedlegal_document" class="bg-color" rows="8" cols="80" required></textarea>
+          <br />
+          <div class="underline"></div>
+          <label style="background-color: #fbfcff;" for="">DNI / CIF</label>
+          <br />
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <button *ngIf="isInputDisabled" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px;" (click)="enableInput()">
+          Editar
+        </button>
+
+        <button *ngIf="!isInputDisabled" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px; padding-top: 10px; padding-bottom: 10px;" (click)="saveAndDisableInput()">
+          Guardar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!--div class="reputation-container-total">
+    <ul>
+      <li>
+        <h1 class="reputation-container-text title-text text-2xl font-bold mb-2">Perfil</h1>
+      </li>
+      <div class="reputation-box-total flex justify-center items-center rounded-md">
+
+        <div class="flex justify-center items-center">
+          <ul>
+
+            <div class="container search" style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+              <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px;">Perfil</h1>
+            </div>
+
+            <li>
+              <div class="p-6.5">
+
+                <div class="mb-4.5">
+                  <label class="mb-2.5 block text-black">
+                    DNI
+                  </label>
+                    <input type="email" [value]="userProfiles.profile?.legal_document" [disabled]="isInputDisabled" [(ngModel)]="updatedlegal_document"/>
+                </div>
+                <button *ngIf="isInputDisabled" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px;" (click)="enableInput()">
+                  Editar
+                </button>
+
+                <button *ngIf="!isInputDisabled" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px;" (click)="saveAndDisableInput()">
+                  Guardar
+                </button>
+              </div>
+            </li>
+          </ul>
+
+
+        </div>
+      </div>
+    </ul>
+  </div-->
+</div>
