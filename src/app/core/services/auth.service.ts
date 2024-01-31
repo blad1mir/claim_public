@@ -9,6 +9,7 @@ export class AuthService {
   private refreshTokenKey = 'refreshToken';
   private verifiedKey = 'verified';
   private idkey = 'id';
+  private fileIdkey = 'fileId';
 
   constructor(
     private backendService: BackendService
@@ -27,6 +28,10 @@ export class AuthService {
     localStorage.setItem(this.idkey, id);
   }
 
+  setFileId(fileId: string): void {
+    localStorage.setItem(this.fileIdkey, fileId);
+  }
+
   getAuthToken(): string {
     return localStorage.getItem(this.authTokenKey) || '';
   }
@@ -38,6 +43,10 @@ export class AuthService {
 
   getId(): string {
     return localStorage.getItem(this.idkey) || '';
+  }
+
+  getFileId(): string {
+    return localStorage.getItem(this.fileIdkey) || '';
   }
 
   getRefreshToken(): string {

@@ -1,0 +1,111 @@
+<div class="margin-init">
+  <div class="container rounded-md">
+
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Datos del asegurado</h1>
+
+      <div class="form-row" style="display: none; visibility: hidden;">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="file_id" required>
+          <div class="underline"></div>
+          <label for="">file_id</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="name" required>
+          <div class="underline"></div>
+          <label for="">Nombre del cliente</label>
+        </div>
+      </div>
+
+      <!--div class="form-row" style="display: none; visibility: hidden;">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="contacts_token" required>
+          <div class="underline"></div>
+          <label for="">Token de contacto</label>
+        </div>
+      </div-->
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="street" required>
+          <div class="underline"></div>
+          <label for="">Calle</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="city" required>
+          <div class="underline"></div>
+          <label for="">Ciudad</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="zip_code" required>
+          <div class="underline"></div>
+          <label for="">Codigo postal</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="state" required>
+          <div class="underline"></div>
+          <label for="">Estado</label>
+        </div>
+        <div class="input-data">
+          <input type="text" [(ngModel)]="country" required>
+          <div class="underline"></div>
+          <label for="">País</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="legal_document" required>
+          <div class="underline"></div>
+          <label for="">DNI / CIF</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="email" required>
+          <div class="underline"></div>
+          <label for="">Correo electrónico</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="phone_number" required>
+          <div class="underline"></div>
+          <label for="">Teléfono</label>
+        </div>
+        <div class="input-data">
+          <input type="text" [(ngModel)]="description" required>
+          <div class="underline"></div>
+          <label for="">Descripción de teléfono</label>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <label class="block text-black">relación</label>
+          <div class="input-data">
+          <select [(ngModel)]="relation">
+            <option value="Insured">Asegurado</option>
+            <option value="Injured">Perjudicado</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="createInsurance()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
+          Guardar
+        </button>
+      </div>
+  </div>

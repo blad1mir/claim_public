@@ -1,0 +1,76 @@
+<div class="margin-init">
+  <div class="container rounded-md">
+
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Crear Expediente</h1>
+
+      <!--div class="select-input-data">
+        <label class="block text-black">Nombre</label>
+          <div class="input-data">
+          <select [(ngModel)]="assignment">
+            <option *ngFor="let fileClients of fileClient" [value]="fileClients.assignment">{{ fileClients?.name }}</option>
+          </select>
+        </div>
+      </div-->
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="assignmentName" (click)="toggleOptions()" (input)="filterOptions()" required>
+          <div class="underline"></div>
+          <label for="">Nombre</label>
+
+          <ul *ngIf="showOptions" class="custom-options-list">
+            <li *ngFor="let fileClients of filteredList" (click)="selectOption(fileClients)">
+              {{ fileClients?.name }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data textarea">
+          <textarea rows="8" cols="80" [(ngModel)]="description" required></textarea>
+          <br />
+          <div class="underline"></div>
+          <label for="">Descripción</label>
+          <br />
+        </div>
+      </div>
+
+      <!--div class="select-input-data">
+        <label class="block text-black">Responsable del Expediente</label>
+        <div class="input-data">
+          <select>
+            <option> </option>
+          </select>
+        </div>
+      </div-->
+
+      <div class="form-row" style="display: none; visibility: hidden;">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="type" required>
+          <div class="underline"></div>
+          <label for="">Tipo</label>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <label class="block text-black">Estado</label>
+          <div class="input-data">
+          <select [(ngModel)]="status">
+            <option value="created">Creado</option>
+            <option value="Call pending">Pendiente realizar llamada</option>
+            <option value="Pending receipt of documentation">Pendiente recibir documentación</option>
+            <option value="processing">Procesando</option>
+            <option value="Commented">Comentado</option>
+            <option value="Archived">Archivado</option>
+            <option value="Denied">Rechazado</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="createFile()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
+          Guardar
+        </button>
+      </div>
+  </div>

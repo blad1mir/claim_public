@@ -17,6 +17,11 @@
   </ul>
   <div class="container rounded-md">
 
+    <div  class="container-old search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;">
+      <button (click)="oncreateFilesClicked()" class="button-38" role="button" style="">Crear</button>
+    </div>
+
+
     <div *ngIf="isBuscarButtonActive && !isBuscarAvzButtonActive">
       <div class="table-style">
         <section class="table__body">
@@ -34,16 +39,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td data-title="Referencia"> Texto </td>
-                        <td data-title="Estado"> Texto </td>
-                        <td data-title="Cliente"> Texto </td>
-                        <td data-title="Nombre"> Texto </td>
-                        <td data-title="Código Postal"> Texto </td>
-                        <td data-title="Calle"> Texto </td>
-                        <td data-title="Ciudad"> Texto </td>
-                        <td data-title="Fecha de Inicio"> Texto </td>
-                    </tr>
+                  <tr *ngFor="let file of filesData">
+                    <td data-title="Referencia">{{ file.referencia }}</td>
+                    <td data-title="Estado">{{ file.estado }}</td>
+                    <td data-title="Cliente">{{ file.cliente }}</td>
+                    <td data-title="Nombre">{{ file.nombre }}</td>
+                    <td data-title="Código Postal">{{ file.codigoPostal }}</td>
+                    <td data-title="Calle">{{ file.calle }}</td>
+                    <td data-title="Ciudad">{{ file.ciudad }}</td>
+                    <td data-title="Fecha de Inicio">{{ file.fechaInicio }}</td>
+                  </tr>
                 </tbody>
             </table>
         </section>

@@ -1,0 +1,56 @@
+<div class="margin-init">
+  <div class="container rounded-md">
+
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Datos de garantía</h1>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="guarantee_name" required>
+          <div class="underline"></div>
+          <label for="">Nombre de garantía</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="guarantee_capital" required>
+          <div class="underline"></div>
+          <label for="">Capital de garantíaa</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="guarantee_code" required>
+          <div class="underline"></div>
+          <label for="">Código de Garantía</label>
+        </div>
+        <div class="input-data">
+          <input type="text" [(ngModel)]="capital_code" required>
+          <div class="underline"></div>
+          <label for="">Código Capital</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="segurcaixa_code" required>
+          <div class="underline"></div>
+          <label for="">Código segurcaixa</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="guarantee" required>
+          <div class="underline"></div>
+          <label for="">Garantía</label>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="createGuarantee()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
+          Guardar
+        </button>
+      </div>
+  </div>

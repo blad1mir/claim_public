@@ -1,0 +1,85 @@
+<div class="margin-init">
+  <div class="container rounded-md">
+
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Datos del siniestro</h1>
+
+      <div class="form-row" style="display: none; visibility: hidden;">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="file_id" required>
+          <div class="underline"></div>
+          <label for="">file_id</label>
+        </div>
+      </div>
+
+      <!--div class="select-input-data">
+        <label class="block text-black">Tramitador</label>
+          <div class="input-data">
+          <select [(ngModel)]="claims_handler">
+            <option> </option>
+          </select>
+        </div>
+      </div-->
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="claims_handler" required>
+          <div class="underline"></div>
+          <label for="">Tramitador</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="handler_code" required>
+          <div class="underline"></div>
+          <label for="">Código tramitador</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="client_reference" required>
+          <div class="underline"></div>
+          <label for="">Referencia del Cliente</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="assistance_reference" required>
+          <div class="underline"></div>
+          <label for="">Referencia de Asistencia</label>
+        </div>
+      </div>
+
+      <!--div class="select-input-data">
+        <label class="block text-black">Causa del siniestro</label>
+          <div class="input-data">
+          <select [(ngModel)]="claim_causes">
+            <option> </option>
+          </select>
+        </div>
+      </div-->
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="claim_causes" required>
+          <div class="underline"></div>
+          <label for="">Causa del siniestro</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="ccs_company_reference" required>
+          <div class="underline"></div>
+          <label for="">Referencia de compañia</label>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="createAccident()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
+          Guardar
+        </button>
+      </div>
+  </div>

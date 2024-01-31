@@ -14,6 +14,34 @@
  }
 }
 
+.search-container {
+  position: relative;
+  display: inline-block;
+}
+
+.rounded-input {
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.search-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 8px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.search-button i {
+  font-size: 18px;
+}
+
 /*@page {
     size: landscape;
     margin: 0;

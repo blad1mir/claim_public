@@ -1,0 +1,70 @@
+<div class="margin-init">
+  <div class="container rounded-md">
+
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Datos de Mediador</h1>
+
+      <div class="form-row" style="display: none; visibility: hidden;">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="file_id" required>
+          <div class="underline"></div>
+          <label for="">file_id</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="name" required>
+          <div class="underline"></div>
+          <label for="">Nombre</label>
+        </div>
+        <div class="input-data">
+          <input type="text" [(ngModel)]="legal_document" required>
+          <div class="underline"></div>
+          <label for="">NIF/CIF</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="address" required>
+          <div class="underline"></div>
+          <label for="">Dirección</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="email" required>
+          <div class="underline"></div>
+          <label for="">Correo electrónico</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="phone_number" required>
+          <div class="underline"></div>
+          <label for="">Teléfonos</label>
+        </div>
+        <div class="input-data">
+          <input type="text" [(ngModel)]="description" required>
+          <div class="underline"></div>
+          <label for="">Descripción de Teléfono</label>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <label class="block text-black">Persona</label>
+          <div class="input-data">
+          <select [(ngModel)]="person">
+            <option> </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="createMediator()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
+          Guardar
+        </button>
+      </div>
+  </div>

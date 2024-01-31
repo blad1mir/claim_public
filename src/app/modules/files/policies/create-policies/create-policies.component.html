@@ -1,0 +1,44 @@
+<div class="margin-init">
+  <div class="container rounded-md">
+
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Datos de la póliza</h1>
+
+      <div class="form-row" style="display: none; visibility: hidden;">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="file_id" required>
+          <div class="underline"></div>
+          <label for="">file_id</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="policy" required>
+          <div class="underline"></div>
+          <label for="">Póliza del seguro</label>
+        </div>
+      </div>
+
+      <!--div class="select-input-data">
+        <label class="block text-black">Ramo y clase</label>
+          <div class="input-data">
+          <select [(ngModel)]="branch_type">
+            <option> </option>
+          </select>
+        </div>
+      </div-->
+
+      <label for="" style="margin-right: 30px;">Fecha de póliza</label>
+      <div class="form-row">
+        <div class="input-data">
+          <input type="datetime-local" [(ngModel)]="effect_date" required>
+          <div class="underline"></div>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="createPolicy()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
+          Guardar
+        </button>
+      </div>
+  </div>
