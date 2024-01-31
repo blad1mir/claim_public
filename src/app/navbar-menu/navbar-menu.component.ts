@@ -47,6 +47,10 @@ export class NavbarMenuComponent implements OnInit {
     this.communicationService.emitPeopleClicked('contacto');
   }
 
+  onCreateUserClick() {
+    this.communicationService.emitCreateUserClicked();
+  }
+
   onUsersMenuClick(){
     this.isUsersMenuOpen = !this.isUsersMenuOpen;
   }
@@ -112,12 +116,27 @@ export class NavbarMenuComponent implements OnInit {
     this.communicationService.emitCompanyClicked('AIDE');
   }
 
-  onCreateUserClick() {
-    this.communicationService.emitCreateUserClicked();
-  }
+
 
   onEnableUserClick() {
     this.communicationService.emitUserEditClicked();
   }
+
+  oncreateCommunitiesClicked() {
+    this.communicationService.emitCreateCommunitiesClicked();
+  }
+
+  oncreateGuaranteeClicked() {
+    this.communicationService.emitCreateGuaranteeClicked();
+  }
+
+  oncreateHomeAddressClicked() {
+    this.communicationService.emitCreateHomeAddressClicked();
+  }
+
+  onCreateMediatorsClicked() {
+    this.communicationService.emitCreateMediatorsClicked();
+  }
+
 
 }

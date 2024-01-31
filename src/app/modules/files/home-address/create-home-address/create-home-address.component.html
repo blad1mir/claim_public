@@ -1,0 +1,56 @@
+<div class="margin-init">
+  <div class="container rounded-md">
+
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Dirección de vivienda</h1>
+
+      <div class="form-row" style="display: none; visibility: hidden;">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="file_id" required>
+          <div class="underline"></div>
+          <label for="">file_id</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="street" required>
+          <div class="underline"></div>
+          <label for="">Calle</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="city" required>
+          <div class="underline"></div>
+          <label for="">Ciudad</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="zip_code" required>
+          <div class="underline"></div>
+          <label for="">Codigo postal</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="state" required>
+          <div class="underline"></div>
+          <label for="">Estado</label>
+        </div>
+        <div class="input-data">
+          <input type="text" [(ngModel)]="country" required>
+          <div class="underline"></div>
+          <label for="">País</label>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="createHomeAddress()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
+          Guardar
+        </button>
+      </div>
+  </div>

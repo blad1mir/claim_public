@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../core/services/auth.service';
+import { BackendService } from '../core/services/backend.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private authService: AuthService,
+    private backendService: BackendService,
     ) {}
 
   ngOnInit(): void {}
@@ -53,5 +55,24 @@ export class LoginComponent implements OnInit {
       duration: 5000,  // Duración en milisegundos
       panelClass: ['error-snackbar'],  // Clase CSS personalizada para el estilo del mensaje de error
     });
+  }
+
+  private showWarningMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      panelClass: ['warning-snackbar'],
+    });
+  }
+
+  private checkBackendConnection(): void {
+    this.backendService.checkConnection().subscribe(
+      () => {
+        console.log('Conexión con el backend establecida. Puedes realizar acciones adicionales si es necesario.');
+      },
+      (error) => {
+        console.error('No se pudo establecer conexión con el backend.', error);
+        this.showWarningMessage('No se pudo establecer conexión con el backend');
+      }
+    );
   }
 }

@@ -35,6 +35,29 @@ export class CommunicationService {
   private taskClickedSource = new Subject<boolean>();
   taskClicked$ = this.taskClickedSource.asObservable();
 
+  private createFilesClickedSource = new Subject<boolean>();
+  createFilesClicked$ = this.createFilesClickedSource.asObservable();
+
+  private createAccidentsClickedSource = new Subject<boolean>();
+  createAccidentsClicked$ = this.createAccidentsClickedSource.asObservable();
+
+  private createCommunitiesClickedSource = new Subject<boolean>();
+  createCommunitiesClicked$ = this.createCommunitiesClickedSource.asObservable();
+
+  private createGuaranteeClickedSource = new Subject<boolean>();
+  createGuaranteeClicked$ = this.createGuaranteeClickedSource.asObservable();
+
+  private createHomeAddressClickedSource = new Subject<boolean>();
+  createHomeAddressClicked$ = this.createHomeAddressClickedSource.asObservable();
+
+  private createInsuranceClickedSource = new Subject<boolean>();
+  createInsuranceClicked$ = this.createInsuranceClickedSource.asObservable();
+
+  private createMediatorsClickedSource = new Subject<boolean>();
+  createMediatorsClicked$ = this.createMediatorsClickedSource.asObservable();
+
+  private createPoliciesClickedSource = new Subject<boolean>();
+  createPoliciesClicked$ = this.createPoliciesClickedSource.asObservable();
 
   emitUserClicked() {
     this.companyClickedSource.next(false);
@@ -46,6 +69,14 @@ export class CommunicationService {
     this.createUserClickedSource.next(false);
     this.filesClickedSource.next(false);
     this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
     this.userClickedSource.next(true);
   }
 
@@ -59,6 +90,14 @@ export class CommunicationService {
     this.createUserClickedSource.next(false);
     this.filesClickedSource.next(false);
     this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
     if (typeof usernameOrBoolean === 'string') {
       this.userProfileClickedSource.next(usernameOrBoolean);
     } else {
@@ -76,6 +115,14 @@ export class CommunicationService {
     this.createUserClickedSource.next(false);
     this.filesClickedSource.next(false);
     this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
     if (typeof PeopleOrBoolean === 'string') {
       this.userClickedSource.next(PeopleOrBoolean);
     } else {
@@ -93,6 +140,14 @@ export class CommunicationService {
     this.createUserClickedSource.next(false);
     this.filesClickedSource.next(false);
     this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
     if (typeof CompanyOrBoolean === 'string') {
       this.companyClickedSource.next(CompanyOrBoolean);
     } else {
@@ -110,6 +165,14 @@ export class CommunicationService {
     this.createUserClickedSource.next(false);
     this.filesClickedSource.next(false);
     this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
     this.userEditClickedSource.next(true);
   }
 
@@ -122,6 +185,14 @@ export class CommunicationService {
     this.createProfessionalClickedSource.next(false)
     this.createUserClickedSource.next(false);
     this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
     this.filesClickedSource.next(false)
     if (typeof CompanyOrBoolean === 'string') {
       this.companyProfileClickedSource.next(CompanyOrBoolean);
@@ -140,6 +211,14 @@ export class CommunicationService {
     this.createProfessionalClickedSource.next(false)
     this.filesClickedSource.next(false)
     this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
     this.createUserClickedSource.next(true);
   }
 
@@ -153,6 +232,14 @@ export class CommunicationService {
     this.filesClickedSource.next(false);
     this.createProfessionalClickedSource.next(false);
     this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
     this.createCompanyClickedSource.next(true);
   }
 
@@ -166,6 +253,14 @@ export class CommunicationService {
     this.filesClickedSource.next(false)
     this.createCompanyClickedSource.next(false);
     this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
     this.createProfessionalClickedSource.next(true)
   }
 
@@ -179,6 +274,14 @@ export class CommunicationService {
     this.createCompanyClickedSource.next(false);
     this.createProfessionalClickedSource.next(false)
     this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
     this.filesClickedSource.next(true)
   }
 
@@ -194,4 +297,176 @@ export class CommunicationService {
     this.filesClickedSource.next(false);
     this.taskClickedSource.next(true);
   }
+
+  emitCreateAccidentsClicked(){
+    this.companyClickedSource.next(false);
+    this.userProfileClickedSource.next(false);
+    this.companyProfileClickedSource.next(false);
+    this.userEditClickedSource.next(false);
+    this.userClickedSource.next(false);
+    this.createUserClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false);
+    this.filesClickedSource.next(false);
+    this.taskClickedSource.next(false);
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
+    this.createAccidentsClickedSource.next(true)
+  }
+
+  emitCreateCommunitiesClicked(){
+    this.companyClickedSource.next(false);
+    this.userProfileClickedSource.next(false);
+    this.companyProfileClickedSource.next(false);
+    this.userEditClickedSource.next(false);
+    this.userClickedSource.next(false);
+    this.createUserClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false);
+    this.filesClickedSource.next(false);
+    this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(true)
+  }
+
+  emitCreateFilesClicked(){
+    this.companyClickedSource.next(false);
+    this.userProfileClickedSource.next(false);
+    this.companyProfileClickedSource.next(false);
+    this.userEditClickedSource.next(false);
+    this.userClickedSource.next(false);
+    this.createUserClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false);
+    this.filesClickedSource.next(false);
+    this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
+    this.createFilesClickedSource.next(true)
+  }
+
+  emitCreateGuaranteeClicked(){
+    this.companyClickedSource.next(false);
+    this.userProfileClickedSource.next(false);
+    this.companyProfileClickedSource.next(false);
+    this.userEditClickedSource.next(false);
+    this.userClickedSource.next(false);
+    this.createUserClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false);
+    this.filesClickedSource.next(false);
+    this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(true)
+  }
+
+  emitCreateHomeAddressClicked(){
+    this.companyClickedSource.next(false);
+    this.userProfileClickedSource.next(false);
+    this.companyProfileClickedSource.next(false);
+    this.userEditClickedSource.next(false);
+    this.userClickedSource.next(false);
+    this.createUserClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false);
+    this.filesClickedSource.next(false);
+    this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(true)
+  }
+
+  emitCreateInsuranceClicked(){
+    this.companyClickedSource.next(false);
+    this.userProfileClickedSource.next(false);
+    this.companyProfileClickedSource.next(false);
+    this.userEditClickedSource.next(false);
+    this.userClickedSource.next(false);
+    this.createUserClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false);
+    this.filesClickedSource.next(false);
+    this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
+    this.createInsuranceClickedSource.next(true)
+  }
+
+  emitCreateMediatorsClicked(){
+    this.companyClickedSource.next(false);
+    this.userProfileClickedSource.next(false);
+    this.companyProfileClickedSource.next(false);
+    this.userEditClickedSource.next(false);
+    this.userClickedSource.next(false);
+    this.createUserClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false);
+    this.filesClickedSource.next(false);
+    this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createPoliciesClickedSource.next(false)
+    this.createMediatorsClickedSource.next(true)
+  }
+
+  emitCreatePoliciesClicked(){
+    this.companyClickedSource.next(false);
+    this.userProfileClickedSource.next(false);
+    this.companyProfileClickedSource.next(false);
+    this.userEditClickedSource.next(false);
+    this.userClickedSource.next(false);
+    this.createUserClickedSource.next(false);
+    this.createCompanyClickedSource.next(false);
+    this.createProfessionalClickedSource.next(false);
+    this.filesClickedSource.next(false);
+    this.taskClickedSource.next(false);
+    this.createAccidentsClickedSource.next(false)
+    this.createCommunitiesClickedSource.next(false)
+    this.createFilesClickedSource.next(false)
+    this.createGuaranteeClickedSource.next(false)
+    this.createHomeAddressClickedSource.next(false)
+    this.createInsuranceClickedSource.next(false)
+    this.createMediatorsClickedSource.next(false)
+    this.createPoliciesClickedSource.next(true)
+  }
+
+
+
+
 }

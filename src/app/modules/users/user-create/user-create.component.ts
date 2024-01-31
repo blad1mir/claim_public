@@ -7,7 +7,6 @@ import { BackendService } from 'src/app/core/services/backend.service';
 import { environment } from 'src/environments/environment';
 
 interface Enterprise {
-  enterprise_id: number;
   name: string;
 }
 @Component({
@@ -86,6 +85,11 @@ export class UserCreateComponent implements OnInit {
   isDropdownOpen: boolean = false;
 
   isCategoriesListVisible: boolean = false;
+
+  showOptionsEnterprise: boolean = false;
+  filteredListEnterprise: any[] = [];
+  enterprisename: string = '';
+  enterprise_id: string = '';
 
 
 
@@ -220,8 +224,9 @@ export class UserCreateComponent implements OnInit {
 "ciudad",this.city,
 "calle",this.street,
 "codigo",this.zip_code,
+"enterprise_id",this.enterprise_id,
 "role 1",this.additionalRoles,)
-    if (!this.first_name || !this.last_name || !this.enterprise || !this.legal_document || !this.profile_info)
+    if (!this.first_name || !this.last_name || !this.legal_document || !this.profile_info)
     {
       this.showWarningMessage('Por favor, complete todos los campos.'); return;
     }
@@ -252,7 +257,7 @@ export class UserCreateComponent implements OnInit {
           second_last_name: this.second_last_name,
           middle_name: this.middle_name,
           profile_info: this.profile_info,
-          enterprise: this.enterprise,
+          enterprise: this.enterprise_id,
           legal_document: this.legal_document,
           is_private: this.is_private,
 
@@ -417,5 +422,22 @@ hideCategoriesList(): void {
   this.isCategoriesListVisible = false;
 }
 
+toggleOptionsEnterprise(): void {
+  this.filteredListEnterprise = this.enterprises;
+  this.showOptionsEnterprise = !this.showOptionsEnterprise;
+}
+
+selectOptionEnterprise(enterprise: any): void {
+  this.enterprisename = enterprise.name;
+  this.enterprise_id = enterprise.enterprise_id;
+  this.showOptionsEnterprise = false;
+}
+
+filterOptionsEnterprise(): void {
+  const filterTerm = this.enterprisename.toLowerCase();
+  this.filteredListEnterprise = this.enterprises.filter(enterprise =>
+    enterprise.name.toLowerCase().includes(filterTerm)
+  );
+}
 
 }
