@@ -39,6 +39,15 @@ export class RecordsComponent implements OnInit {
   showCreateMediators: boolean = false;
   showCreatePolicies: boolean = false;
 
+  showProfileAccidents: boolean = false;
+  showProfileCommunities: boolean = false;
+  showProfileFile: boolean = false;
+  showProfileGuarantee: boolean = false;
+  showProfileHomeAddress: boolean = false;
+  showProfileInsurance: boolean = false;
+  showProfileMediators: boolean = false;
+  showProfilePolicies: boolean = false;
+
   onToggleSideNav(data: SideNavToggle): void{
     this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed;
@@ -78,9 +87,30 @@ export class RecordsComponent implements OnInit {
       this.showCreateMediators = false;
       this.showCreatePolicies = false;
       this.showUsers = true;
+
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
     });
+
     this.communicationService.companyClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompaniesProfile = false;
       this.showUserEdit = false;
@@ -105,6 +135,16 @@ export class RecordsComponent implements OnInit {
     this.communicationService.userProfileClicked$.subscribe(() => {
       this.showCompanies = false;
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showCompaniesProfile = false;
       this.showUserEdit = false;
       this.showCreateUser = false;
@@ -128,6 +168,16 @@ export class RecordsComponent implements OnInit {
     this.communicationService.userEditClicked$.subscribe(() => {
       this.showCompanies = false;
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showCompaniesProfile = false;
       this.showUserProfile = false;
       this.showCreateUser = false;
@@ -150,6 +200,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.companyProfileClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -173,6 +233,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.createUserClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -196,6 +266,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.createCompanyClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -219,6 +299,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.createProfessionalClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -242,6 +332,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.filesClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -265,6 +365,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.taskClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -288,6 +398,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.createFilesClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -311,6 +431,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.createAccidentsClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -334,6 +464,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.createCommunitiesClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -357,6 +497,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.createGuaranteeClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -380,6 +530,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.createHomeAddressClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -403,6 +563,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.createInsuranceClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -426,6 +596,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.createMediatorsClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -449,6 +629,16 @@ export class RecordsComponent implements OnInit {
 
     this.communicationService.createPoliciesClicked$.subscribe(() => {
       this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
       this.showUserProfile = false;
       this.showCompanies = false;
       this.showUserEdit = false;
@@ -468,6 +658,280 @@ export class RecordsComponent implements OnInit {
       this.showCreateMediators = false;
       this.showCreatePolicies = true;
       this.showTask = false;
+    });
+
+    this.communicationService.profileFilesClicked$.subscribe(() => {
+      this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = true;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
+      this.showUserProfile = false;
+      this.showCompanies = false;
+      this.showUserEdit = false;
+      this.showCompaniesProfile = false;
+      this.showCreateUser = false;
+      this.landing = false;
+      this.showChangePassword = false;
+      this.showCreateCompany = false;
+      this.showProfessional = false;
+      this.showFiles = false;
+      this.showCreateAccidents = false;
+      this.showCreateCommunities = false;
+      this.showCreateFiles = false;
+      this.showCreateGuarantee = false;
+      this.showCreateHomeAddress = false;
+      this.showCreateInsurance = false;
+      this.showCreateMediators = false;
+      this.showCreatePolicies = false;
+      this.showTask = false;
+    });
+
+    this.communicationService.profileAccidentsClicked$.subscribe(() => {
+      this.showUsers = false;
+
+      this.showProfileAccidents = true;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
+      this.showUserProfile = false;
+      this.showCompanies = false;
+      this.showUserEdit = false;
+      this.showCompaniesProfile = false;
+      this.showCreateUser = false;
+      this.landing = false;
+      this.showChangePassword = false;
+      this.showCreateCompany = false;
+      this.showProfessional = false;
+      this.showFiles = false;
+      this.showCreateAccidents = false;
+      this.showCreateCommunities = false;
+      this.showCreateFiles = false;
+      this.showCreateGuarantee = false;
+      this.showCreateHomeAddress = false;
+      this.showCreateInsurance = false;
+      this.showCreateMediators = false;
+      this.showCreatePolicies = false;
+      this.showTask = false;
+    });
+
+    this.communicationService.profileCommunitiesClicked$.subscribe(() => {
+      this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = true;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
+      this.showUserProfile = false;
+      this.showCompanies = false;
+      this.showUserEdit = false;
+      this.showCompaniesProfile = false;
+      this.showCreateUser = false;
+      this.landing = false;
+      this.showChangePassword = false;
+      this.showCreateCompany = false;
+      this.showProfessional = false;
+      this.showFiles = false;
+      this.showCreateAccidents = false;
+      this.showCreateCommunities = false;
+      this.showCreateFiles = false;
+      this.showCreateGuarantee = false;
+      this.showCreateHomeAddress = false;
+      this.showCreateInsurance = false;
+      this.showCreateMediators = false;
+      this.showCreatePolicies = false;
+      this.showTask = false;
+    });
+
+    this.communicationService.profileGuaranteeClicked$.subscribe(() => {
+      this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = true;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
+      this.showUserProfile = false;
+      this.showCompanies = false;
+      this.showUserEdit = false;
+      this.showCompaniesProfile = false;
+      this.showCreateUser = false;
+      this.landing = false;
+      this.showChangePassword = false;
+      this.showCreateCompany = false;
+      this.showProfessional = false;
+      this.showFiles = false;
+      this.showCreateAccidents = false;
+      this.showCreateCommunities = false;
+      this.showCreateFiles = false;
+      this.showCreateGuarantee = false;
+      this.showCreateHomeAddress = false;
+      this.showCreateInsurance = false;
+      this.showCreateMediators = false;
+      this.showCreatePolicies = false;
+      this.showTask = false;
+    });
+
+    this.communicationService.profileHomeAddressClicked$.subscribe(() => {
+      this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = true;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
+      this.showUserProfile = false;
+      this.showCompanies = false;
+      this.showUserEdit = false;
+      this.showCompaniesProfile = false;
+      this.showCreateUser = false;
+      this.landing = false;
+      this.showChangePassword = false;
+      this.showCreateCompany = false;
+      this.showProfessional = false;
+      this.showFiles = false;
+      this.showCreateAccidents = false;
+      this.showCreateCommunities = false;
+      this.showCreateFiles = false;
+      this.showCreateGuarantee = false;
+      this.showCreateHomeAddress = false;
+      this.showCreateInsurance = false;
+      this.showCreateMediators = false;
+      this.showCreatePolicies = false;
+      this.showTask = false;
+    });
+
+    this.communicationService.profileInsuranceClicked$.subscribe(() => {
+      this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = true;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = false;
+
+      this.showUserProfile = false;
+      this.showCompanies = false;
+      this.showUserEdit = false;
+      this.showCompaniesProfile = false;
+      this.showCreateUser = false;
+      this.landing = false;
+      this.showChangePassword = false;
+      this.showCreateCompany = false;
+      this.showProfessional = false;
+      this.showFiles = false;
+      this.showCreateAccidents = false;
+      this.showCreateCommunities = false;
+      this.showCreateFiles = false;
+      this.showCreateGuarantee = false;
+      this.showCreateHomeAddress = false;
+      this.showCreateInsurance = false;
+      this.showCreateMediators = false;
+      this.showCreatePolicies = false;
+      this.showTask = false;
+    });
+
+    this.communicationService.profileMediatorsClicked$.subscribe(() => {
+      this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = true;
+      this.showProfilePolicies = false;
+
+      this.showUserProfile = false;
+      this.showCompanies = false;
+      this.showUserEdit = false;
+      this.showCompaniesProfile = false;
+      this.showCreateUser = false;
+      this.landing = false;
+      this.showChangePassword = false;
+      this.showCreateCompany = false;
+      this.showProfessional = false;
+      this.showFiles = false;
+      this.showCreateAccidents = false;
+      this.showCreateCommunities = false;
+      this.showCreateFiles = false;
+      this.showCreateGuarantee = false;
+      this.showCreateHomeAddress = false;
+      this.showCreateInsurance = false;
+      this.showCreateMediators = false;
+      this.showCreatePolicies = false;
+      this.showTask = false;
+    });
+
+    this.communicationService.profilePoliciesClicked$.subscribe(() => {
+      this.showUsers = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = true;
+
+      this.showUserProfile = false;
+      this.showCompanies = false;
+      this.showUserEdit = false;
+      this.showCompaniesProfile = false;
+      this.showCreateUser = false;
+      this.landing = false;
+      this.showChangePassword = false;
+      this.showCreateCompany = false;
+      this.showProfessional = false;
+      this.showFiles = false;
+      this.showCreateAccidents = false;
+      this.showCreateCommunities = false;
+      this.showCreateFiles = false;
+      this.showCreateGuarantee = false;
+      this.showCreateHomeAddress = false;
+      this.showCreateInsurance = false;
+      this.showCreateMediators = false;
+      this.showCreatePolicies = false;
+      this.showTask = false;
+
+      this.showProfileAccidents = false;
+      this.showProfileCommunities = false;
+      this.showProfileFile = false;
+      this.showProfileGuarantee = false;
+      this.showProfileHomeAddress = false;
+      this.showProfileInsurance = false;
+      this.showProfileMediators = false;
+      this.showProfilePolicies = true;
+
     });
   }
 }

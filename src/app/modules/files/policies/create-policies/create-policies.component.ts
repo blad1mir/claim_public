@@ -15,6 +15,7 @@ export class CreatePoliciesComponent implements OnInit {
   policy: string = '';
   effect_date: string = '';
   branch_type: string = 'COobrcivil';
+  PolicyBranchTypeOptions: { name: string, type: string }[] = [];
 
   constructor(
     private communicationService: CommunicationService,
@@ -24,6 +25,7 @@ export class CreatePoliciesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.fetchPolicyBranchTypeOptions();
   }
 
   oncreateHomeAddressClicked() {
@@ -37,22 +39,32 @@ export class CreatePoliciesComponent implements OnInit {
     });
   }
 
+  private fetchPolicyBranchTypeOptions(): void {
+    const PolicyBranchTypeOptions = this.authService.getPolicyBranchTypeOptions();
+    this.PolicyBranchTypeOptions = PolicyBranchTypeOptions;
+    console.log(this.PolicyBranchTypeOptions);
+  }
+
   createPolicy(): void {
-    /*const authToken = this.authService.getAuthToken();
+    /*if (!this.policy || !this.effect_date || !this.branch_type ){
+      this.showWarningMessage('Por favor, complete todos los campos.'); return;
+    }*/
+
+    const authToken = this.authService.getAuthToken();
     if (authToken) {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${authToken}`,
         'Content-Type': 'application/json'
       });
 
-      const policyData = {
+      /*const policyData = {
         file_id:this.authService.getFileId(),
         policy:this.policy,
         effect_date:this.effect_date,
         branch_type:this.branch_type,
-      };
+      };*/
 
-      this.http.post('http://v.claimcenter.com:8000/api/policies/', policyData, { headers }).subscribe(
+      /*this.http.post('http://v.claimcenter.com:8000/api/policies/', policyData, { headers }).subscribe(
         (response) => {
           console.log('Poliza creada exitosamente', response);
           this.showWarningMessage('Poliza creada exitosamente');
@@ -62,11 +74,16 @@ export class CreatePoliciesComponent implements OnInit {
           console.error('Error al crear la Poliza', error);
           this.showWarningMessage('Error al crear la Poliza');
         }
-      );
-    } else {
+      );*/
+
+      this.oncreateHomeAddressClicked();
+
+    }
+    /*else
+    {
       console.error('No hay token de autorización disponible.');
       this.showWarningMessage('Su sesión ha expirado');
     }*/
-    this.oncreateHomeAddressClicked();
+
   }
 }

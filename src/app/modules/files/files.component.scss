@@ -442,7 +442,7 @@ body{
   border: 1px solid transparent;
   transition: background-color 0.5s, border 0.5s, box-shadow 0.5s;
   margin-bottom: 100px;
-  margin-left: 300px;
+  margin-left: 290px;
   margin-right: 40px;
   padding: 50px;
 }
@@ -656,7 +656,6 @@ $mobile: 850px;
   thead {
     th {
       background-color: darken($rain,6%);
-      color: #fff;
     }
   }
   tfoot {

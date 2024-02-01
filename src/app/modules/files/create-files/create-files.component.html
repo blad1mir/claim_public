@@ -36,20 +36,12 @@
         </div>
       </div>
 
-      <!--div class="select-input-data">
-        <label class="block text-black">Responsable del Expediente</label>
-        <div class="input-data">
-          <select>
-            <option> </option>
+      <div class="select-input-data">
+        <label class="block text-black">Tipo</label>
+          <div class="input-data">
+          <select [(ngModel)]="type">
+            <option *ngFor="let type of fileType" [value]="type.type">{{ type?.name }}</option>
           </select>
-        </div>
-      </div-->
-
-      <div class="form-row" style="display: none; visibility: hidden;">
-        <div class="input-data">
-          <input type="text" [(ngModel)]="type" required>
-          <div class="underline"></div>
-          <label for="">Tipo</label>
         </div>
       </div>
 
@@ -57,13 +49,7 @@
         <label class="block text-black">Estado</label>
           <div class="input-data">
           <select [(ngModel)]="status">
-            <option value="created">Creado</option>
-            <option value="Call pending">Pendiente realizar llamada</option>
-            <option value="Pending receipt of documentation">Pendiente recibir documentación</option>
-            <option value="processing">Procesando</option>
-            <option value="Commented">Comentado</option>
-            <option value="Archived">Archivado</option>
-            <option value="Denied">Rechazado</option>
+            <option *ngFor="let status of fileStatus" [value]="status.status">{{ status?.name }}</option>
           </select>
         </div>
       </div>

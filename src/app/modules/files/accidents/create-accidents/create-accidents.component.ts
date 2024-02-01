@@ -18,6 +18,7 @@ export class CreateAccidentsComponent implements OnInit {
   assistance_reference: string = '';
   claim_causes: string = '';
   ccs_company_reference: string = '';
+  claimcauseTypeChoices: { name: string, type: string }[] = [];
 
   constructor(
     private communicationService: CommunicationService,
@@ -27,6 +28,7 @@ export class CreateAccidentsComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
+    this.fetchClaimcauseTypeChoices();
   }
 
   onFilesClick() {
@@ -40,7 +42,18 @@ export class CreateAccidentsComponent implements OnInit {
     });
   }
 
+  private fetchClaimcauseTypeChoices(): void {
+    const claimcauseTypeChoices = this.authService.getClaimcauseTypeChoices();
+    this.claimcauseTypeChoices = claimcauseTypeChoices;
+    console.log(this.claimcauseTypeChoices);
+  }
+
+
   createAccident(): void {
+    if (!this.claims_handler || !this.client_reference || !this.handler_code || !this.assistance_reference || !this.claim_causes || !this.ccs_company_reference)
+    {
+      this.showWarningMessage('Por favor, complete todos los campos.'); return;
+    }
     const authToken = this.authService.getAuthToken();
     if (authToken) {
       const headers = new HttpHeaders({

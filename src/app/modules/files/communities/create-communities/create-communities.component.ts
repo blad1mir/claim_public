@@ -27,6 +27,9 @@ export class CreateCommunitiesComponent implements OnInit {
   last_renovation_year: number = 0;
   community_type: string = '';
 
+  communityTypeOptions: { name: string, type: string }[] = [];
+
+
   constructor(
     private communicationService: CommunicationService,
     private http: HttpClient,
@@ -35,6 +38,7 @@ export class CreateCommunitiesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.fetchCommunityTypeOptions();
   }
 
   oncreateAccidentsClicked() {
@@ -48,7 +52,18 @@ export class CreateCommunitiesComponent implements OnInit {
     });
   }
 
+  private fetchCommunityTypeOptions(): void {
+    const communityTypeOptions = this.authService.getCommunityTypeOptions();
+    this.communityTypeOptions = communityTypeOptions;
+    console.log(this.communityTypeOptions);
+  }
+
+
   createCommunity(): void {
+    if (!this.community_code || !this.recreational_facilities || !this.occupancy_percentage || !this.number_of_houses || !this.square_meters_per_house || !this.number_of_offices || !this.square_meters_per_office || !this.above_ground_floors || !this.basement_floors || !this.adjacent_buildings_count || !this.isolated_buildings_count || !this.last_renovation_year || !this.community_type)
+    {
+      this.showWarningMessage('Por favor, complete todos los campos.'); return;
+    }
     const authToken = this.authService.getAuthToken();
     if (authToken) {
       const headers = new HttpHeaders({
@@ -58,7 +73,7 @@ export class CreateCommunitiesComponent implements OnInit {
 
       const communitiesData = {
         file_id:this.authService.getFileId(),
-        community_code: this.community_code,
+        community_code: this.authService.getCommunityCode(),
         recreational_facilities: this.recreational_facilities,
         occupancy_percentage: this.occupancy_percentage,
         number_of_houses: this.number_of_houses,

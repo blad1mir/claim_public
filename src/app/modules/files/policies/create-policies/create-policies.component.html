@@ -19,16 +19,16 @@
         </div>
       </div>
 
-      <!--div class="select-input-data">
+      <div class="select-input-data">
         <label class="block text-black">Ramo y clase</label>
           <div class="input-data">
           <select [(ngModel)]="branch_type">
-            <option> </option>
+            <option *ngFor="let choises of PolicyBranchTypeOptions" [value]="choises.type">{{ choises?.name }}</option>
           </select>
         </div>
-      </div-->
+      </div>
 
-      <label for="" style="margin-right: 30px;">Fecha de póliza</label>
+      <label for="" style="margin-left: 20px;">Fecha de póliza</label>
       <div class="form-row">
         <div class="input-data">
           <input type="datetime-local" [(ngModel)]="effect_date" required>
