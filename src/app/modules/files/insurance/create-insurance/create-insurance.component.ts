@@ -43,6 +43,10 @@ export class CreateInsuranceComponent implements OnInit {
     this.communicationService.emitCreatePoliciesClicked();
   }
 
+  oncreateHomeAddressClicked() {
+    this.communicationService.emitCreateHomeAddressClicked();
+  }
+
   private fetchFileTypeOptions(): void {
     const insuredRelationChoises = this.authService.getInsuredRelationChoises();
     this.insuredRelationChoises = insuredRelationChoises;
@@ -93,7 +97,8 @@ export class CreateInsuranceComponent implements OnInit {
         (response) => {
           console.log('Seguro creado exitosamente', response);
           this.showWarningMessage('Seguro creado exitosamente');
-          this.onCreatePoliciesClicked();
+          this.oncreateHomeAddressClicked();
+          //this.onCreatePoliciesClicked();
         },
         (error) => {
           console.error('Error al crear el Seguro', error);
