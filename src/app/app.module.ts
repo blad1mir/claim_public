@@ -32,6 +32,14 @@ import { CreateInsuranceComponent } from './modules/files/insurance/create-insur
 import { CreateMediatorsComponent } from './modules/files/mediators/create-mediators/create-mediators.component';
 import { CreatePoliciesComponent } from './modules/files/policies/create-policies/create-policies.component';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { ProfileFileComponent } from './modules/files/profile-file/profile-file.component';
+import { AccidentsComponent } from './modules/files/accidents/accidents.component';
+import { CommunitiesComponent } from './modules/files/communities/communities.component';
+import { GuaranteeComponent } from './modules/files/guarantee/guarantee.component';
+import { HomeAddressComponent } from './modules/files/home-address/home-address.component';
+import { InsuranceComponent } from './modules/files/insurance/insurance.component';
+import { MediatorsComponent } from './modules/files/mediators/mediators.component';
+import { PoliciesComponent } from './modules/files/policies/policies.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +68,15 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
     CreateInsuranceComponent,
     CreateMediatorsComponent,
     CreatePoliciesComponent,
+
+    ProfileFileComponent,
+    AccidentsComponent,
+    CommunitiesComponent,
+    GuaranteeComponent,
+    HomeAddressComponent,
+    InsuranceComponent,
+    MediatorsComponent,
+    PoliciesComponent,
   ],
   imports: [
     BrowserModule,

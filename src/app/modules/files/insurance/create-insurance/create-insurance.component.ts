@@ -14,7 +14,7 @@ export class CreateInsuranceComponent implements OnInit {
   file_id: string = '10001';
   name: string = '';
   email: string = '';
-  //contacts_token: string = '';
+  contacts_token: string = '';
   legal_document: string = '';
   country: string = '';
   state: string = '';
@@ -25,6 +25,8 @@ export class CreateInsuranceComponent implements OnInit {
   phone_number: string = '';
   description: string = '';
 
+  insuredRelationChoises: { name: string, type: string }[] = [];
+
   constructor(
     private communicationService: CommunicationService,
     private http: HttpClient,
@@ -33,11 +35,18 @@ export class CreateInsuranceComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.fetchFileTypeOptions();
   }
 
 
   onCreatePoliciesClicked() {
     this.communicationService.emitCreatePoliciesClicked();
+  }
+
+  private fetchFileTypeOptions(): void {
+    const insuredRelationChoises = this.authService.getInsuredRelationChoises();
+    this.insuredRelationChoises = insuredRelationChoises;
+    console.log(this.insuredRelationChoises);
   }
 
   private showWarningMessage(message: string): void {
@@ -48,6 +57,9 @@ export class CreateInsuranceComponent implements OnInit {
   }
 
   createInsurance(): void {
+    if (!this.name || !this.email || !this.legal_document || !this.country || !this.state || !this.city || !this.street || !this.zip_code || !this.relation || !this.phone_number || !this.description){
+      this.showWarningMessage('Por favor, complete todos los campos.'); return;
+    }
     const authToken = this.authService.getAuthToken();
     if (authToken) {
       const headers = new HttpHeaders({

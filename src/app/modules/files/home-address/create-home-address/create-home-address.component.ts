@@ -28,8 +28,12 @@ export class CreateHomeAddressComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onCreateMediatorsClicked() {
+  /*onCreateMediatorsClicked() {
     this.communicationService.emitCreateMediatorsClicked();
+  }*/
+
+  oncreateCommunitiesClicked() {
+    this.communicationService.emitCreateCommunitiesClicked();
   }
 
   private showWarningMessage(message: string): void {
@@ -41,6 +45,9 @@ export class CreateHomeAddressComponent implements OnInit {
 
 
   createHomeAddress(): void {
+    if (!this.country || !this.state || !this.city || !this.street || !this.zip_code){
+      this.showWarningMessage('Por favor, complete todos los campos.'); return;
+    }
     const authToken = this.authService.getAuthToken();
     if (authToken) {
       const headers = new HttpHeaders({
@@ -61,7 +68,8 @@ export class CreateHomeAddressComponent implements OnInit {
         (response) => {
           console.log('Vivienda creada exitosamente', response);
           this.showWarningMessage('Vivienda creada exitosamente');
-          this.onCreateMediatorsClicked();
+          //this.onCreateMediatorsClicked();
+          this.oncreateCommunitiesClicked();
         },
         (error) => {
           console.error('Error al crear la Vivienda', error);

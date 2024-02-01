@@ -13,12 +13,14 @@ export class CreateFilesComponent implements OnInit {
 
   assignment: string = '';
   description: string = '';
-  type: string = 'gessinase';
+  type: string = '';
   status: string = '';
   assignmentName: string = '';
 
   fileClient: any[] = [];
   filteredList: any[] = [];
+  fileStatus: { name: string, status: string }[] = [];
+  fileType: { name: string, type: string }[] = [];
   showOptions: boolean = false;
 
   constructor(
@@ -30,6 +32,8 @@ export class CreateFilesComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchFileClient();
+    this.fetchFileStatusChoises();
+    this.fetchFileTypeOptions();
   }
 
   onCreateInsuranceClicked() {
@@ -77,6 +81,18 @@ export class CreateFilesComponent implements OnInit {
     }
   }
 
+  private fetchFileStatusChoises(): void {
+    const fileStatusChoices = this.authService.getFileStatusChoices();
+    this.fileStatus = fileStatusChoices;
+    console.log(this.fileStatus);
+  }
+
+  private fetchFileTypeOptions(): void {
+    const fileTypeOptions = this.authService.getFilesTypeOptions();
+    this.fileType = fileTypeOptions;
+    console.log(this.fileType);
+  }
+
   private showWarningMessage(message: string): void {
     this.snackBar.open(message, 'Cerrar', {
       duration: 5000,
@@ -85,6 +101,10 @@ export class CreateFilesComponent implements OnInit {
   }
 
   createFile(): void {
+    if (!this.assignment || !this.description || !this.type || !this.status)
+    {
+      this.showWarningMessage('Por favor, complete todos los campos.'); return;
+    }
     const authToken = this.authService.getAuthToken();
     if (authToken) {
       const headers = new HttpHeaders({
@@ -105,6 +125,7 @@ export class CreateFilesComponent implements OnInit {
           console.log('Expediente creado exitosamente', response);
           this.showWarningMessage('Expediente creado exitosamente');
           this.authService.setFileId((response as any).file_id);
+          this.authService.setCommunityCode((response as any).code);
           this.onCreateInsuranceClicked();
 
         },

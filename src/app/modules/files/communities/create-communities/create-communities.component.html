@@ -11,13 +11,13 @@
         </div>
       </div>
 
-      <div class="form-row">
+      <!--div class="form-row">
         <div class="input-data">
           <input type="text" [(ngModel)]="community_code" required>
           <div class="underline"></div>
           <label for="">Codigo de Comunidad</label>
         </div>
-      </div>
+      </div-->
 
       <div class="mb-4.5 check-input-data">
         <input type="checkbox" [(ngModel)]="recreational_facilities"
@@ -95,11 +95,20 @@
         </div>
       </div>
 
-      <div class="form-row">
+      <!--div class="form-row">
         <div class="input-data">
           <input type="text" [(ngModel)]="community_type" required>
           <div class="underline"></div>
           <label for="">tipo de comunidad</label>
+        </div>
+      </div-->
+
+      <div class="select-input-data">
+        <label class="block text-black">tipo de comunidad</label>
+          <div class="input-data">
+          <select [(ngModel)]="community_type">
+            <option *ngFor="let Choises of communityTypeOptions" [value]="Choises.type">{{ Choises?.name }}</option>
+          </select>
         </div>
       </div>
 

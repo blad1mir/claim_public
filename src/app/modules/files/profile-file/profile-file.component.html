@@ -1,12 +1,12 @@
 <div class="margin-init">
   <ul class="tab-box-total flex flex-wrap text-sm font-medium text-center text-gray-500 dark:border-gray-700 dark:text-gray-400" style="margin-left: 310px;">
     <li class="me-2">
-      <a (click)="emitProfileFilesClicked()" class="tab-paddings inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">
+      <a class="tab-paddings inline-block p-4 rounded-t-lg text-blue-600 bg-color active">
       Expediente
     </a>
     </li>
     <li class="me-2">
-      <a (click)="onProfileInsuranceClicked()" class="tab-paddings inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">
+      <a (click)="onProfileInsuranceClicked()"  class="tab-paddings inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">
         Seguro
       </a>
     </li>
@@ -26,7 +26,7 @@
       </a>
     </li>
     <li class="me-2">
-      <a class="tab-paddings inline-block p-4 rounded-t-lg text-blue-600 bg-color active">
+      <a (click)="onProfileAccidentsClicked()" class="tab-paddings inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50">
         Siniestro
       </a>
     </li>

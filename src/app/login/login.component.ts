@@ -35,6 +35,13 @@ export class LoginComponent implements OnInit {
             this.authService.setAuthTokens(response.token, response.refresh_token);
             this.authService.setVerified(response.user.is_verified);
             this.authService.setId(response.user.id);
+            this.authService.setFileStatusChoices(response.initial_info.file_status_choices);
+            this.authService.setFileSTypeOptions(response.initial_info.file_type_options);
+            this.authService.setInsuredRelationChoises(response.initial_info.insured_relation_choices);
+            this.authService.setPolicyBranchTypeOptions(response.initial_info.policy_branch_type_options);
+            this.authService.setCommunityTypeOptions(response.initial_info.community_type_options);
+            this.authService.setClaimcauseTypeChoices(response.initial_info.claim_cause_type_choices);
+
             this.router.navigate(['/records']);
           }
         },

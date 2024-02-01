@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <!--div class="form-row" style="display: none; visibility: hidden;">
+      <!--div class="form-row">
         <div class="input-data">
           <input type="text" [(ngModel)]="contacts_token" required>
           <div class="underline"></div>
@@ -97,8 +97,7 @@
         <label class="block text-black">relación</label>
           <div class="input-data">
           <select [(ngModel)]="relation">
-            <option value="Insured">Asegurado</option>
-            <option value="Injured">Perjudicado</option>
+            <option *ngFor="let Choises of insuredRelationChoises" [value]="Choises.type">{{ Choises?.name }}</option>
           </select>
         </div>
       </div>
