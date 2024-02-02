@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommunicationService } from 'src/app/communication.service';
@@ -11,6 +11,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class InsuranceComponent implements OnInit {
 
+  insurance: any[] = [];
+
   constructor(
     private communicationService: CommunicationService,
     private http: HttpClient,
@@ -19,6 +21,7 @@ export class InsuranceComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.fetchInsurance();
   }
 
   onProfileAccidentsClicked() {
@@ -43,6 +46,31 @@ export class InsuranceComponent implements OnInit {
 
   emitProfileFilesClicked() {
     this.communicationService.emitProfileFilesClicked();
+  }
+
+  fetchInsurance(): void {
+    const authToken = this.authService.getAuthToken();
+    if (authToken) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      });
+
+      const fileId = this.authService.getProfileFileId();
+
+      this.http.get(`http://v.claimcenter.com:8000/api/insured_clients/${fileId}/`, { headers })
+        .subscribe(
+          (response: any) => {
+            console.log('insurance:', response);
+            this.insurance = response;
+          },
+          (error) => {
+            console.error('Error fetching insurance:', error);
+          }
+        );
+    } else {
+      console.error('No hay token de autorización disponible.');
+    }
   }
 
 }

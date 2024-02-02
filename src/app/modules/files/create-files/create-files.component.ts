@@ -126,6 +126,7 @@ export class CreateFilesComponent implements OnInit {
           this.showWarningMessage('Expediente creado exitosamente');
           this.authService.setFileId((response as any).file_id);
           this.authService.setCommunityCode((response as any).code);
+          this.authService.setAssigment((response as any).assignment);
           this.onCreateInsuranceClicked();
 
         },

@@ -56,7 +56,9 @@ export class ProfileFileComponent implements OnInit {
         'Content-Type': 'application/json'
       });
 
-      this.http.get( `http://v.claimcenter.com:8000/api/incident_files/${this.authService.getProfileFileId()}`, { headers })
+      const fileId = this.authService.getProfileFileId();
+
+      this.http.get(`http://v.claimcenter.com:8000/api/incident_files/${fileId}/`, { headers })
         .subscribe(
           (response: any) => {
             console.log('file Clients:', response);
@@ -70,6 +72,7 @@ export class ProfileFileComponent implements OnInit {
       console.error('No hay token de autorización disponible.');
     }
   }
+
 
 
 }
