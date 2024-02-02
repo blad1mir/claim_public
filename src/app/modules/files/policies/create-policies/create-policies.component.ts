@@ -46,9 +46,9 @@ export class CreatePoliciesComponent implements OnInit {
   }
 
   createPolicy(): void {
-    /*if (!this.policy || !this.effect_date || !this.branch_type ){
+    if (!this.policy || !this.effect_date || !this.branch_type ){
       this.showWarningMessage('Por favor, complete todos los campos.'); return;
-    }*/
+    }
 
     const authToken = this.authService.getAuthToken();
     if (authToken) {
@@ -57,33 +57,34 @@ export class CreatePoliciesComponent implements OnInit {
         'Content-Type': 'application/json'
       });
 
-      /*const policyData = {
+      const policyData = {
         file_id:this.authService.getFileId(),
         policy:this.policy,
         effect_date:this.effect_date,
         branch_type:this.branch_type,
-      };*/
+      };
 
-      /*this.http.post('http://v.claimcenter.com:8000/api/policies/', policyData, { headers }).subscribe(
+      this.http.post('http://v.claimcenter.com:8000/api/policies/', policyData, { headers }).subscribe(
         (response) => {
           console.log('Poliza creada exitosamente', response);
           this.showWarningMessage('Poliza creada exitosamente');
+          this.authService.setBranchType((response as any).branch_type);
           this.oncreateHomeAddressClicked();
         },
         (error) => {
           console.error('Error al crear la Poliza', error);
           this.showWarningMessage('Error al crear la Poliza');
         }
-      );*/
+      );
 
-      this.oncreateHomeAddressClicked();
+      //this.oncreateHomeAddressClicked();
 
     }
-    /*else
+    else
     {
       console.error('No hay token de autorización disponible.');
       this.showWarningMessage('Su sesión ha expirado');
-    }*/
+    }
 
   }
 }

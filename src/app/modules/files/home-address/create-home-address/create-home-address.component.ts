@@ -43,6 +43,12 @@ export class CreateHomeAddressComponent implements OnInit {
     });
   }
 
+  oncreateAccidentsClicked() {
+    this.communicationService.emitCreateAccidentsClicked();
+  }
+
+
+
 
   createHomeAddress(): void {
     if (!this.country || !this.state || !this.city || !this.street || !this.zip_code){
@@ -68,8 +74,12 @@ export class CreateHomeAddressComponent implements OnInit {
         (response) => {
           console.log('Vivienda creada exitosamente', response);
           this.showWarningMessage('Vivienda creada exitosamente');
-          //this.onCreateMediatorsClicked();
-          this.oncreateCommunitiesClicked();
+          if((this.authService.getAssigment() === 'SegurCaixa, S.A.') && (this.authService.getFileId() == "MPedifcomu")){
+            this.oncreateCommunitiesClicked();
+          } else {
+            this.oncreateAccidentsClicked();
+          }
+
         },
         (error) => {
           console.error('Error al crear la Vivienda', error);

@@ -97,8 +97,8 @@ export class CreateInsuranceComponent implements OnInit {
         (response) => {
           console.log('Seguro creado exitosamente', response);
           this.showWarningMessage('Seguro creado exitosamente');
-          this.oncreateHomeAddressClicked();
-          //this.onCreatePoliciesClicked();
+          //this.oncreateHomeAddressClicked();
+          this.onCreatePoliciesClicked();
         },
         (error) => {
           console.error('Error al crear el Seguro', error);

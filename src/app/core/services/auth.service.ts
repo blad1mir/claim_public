@@ -12,6 +12,8 @@ export class AuthService {
   private fileIdkey = 'fileId';
   private profileFileIdkey = 'profileFileId'
   private communityCodeIdkey = 'communityCodeId'
+  private branchTypekey = 'branchType'
+  private assigmentkey = 'assigment'
 
 
   constructor(
@@ -35,6 +37,10 @@ export class AuthService {
     localStorage.setItem(this.fileIdkey, fileId);
   }
 
+  setBranchType(branchType: string): void {
+    localStorage.setItem(this.branchTypekey, branchType);
+  }
+
   setProfileFileId(proFileFileId: string): void {
     localStorage.setItem(this.profileFileIdkey, proFileFileId);
   }
@@ -42,6 +48,11 @@ export class AuthService {
   setCommunityCode(communityCodeId: string): void {
     localStorage.setItem(this.communityCodeIdkey, communityCodeId);
   }
+
+  setAssigment(assigment: string): void {
+    localStorage.setItem(this.assigmentkey, assigment);
+  }
+
 
   setFileStatusChoices(fileStatusChoices: any[]): void {
     localStorage.setItem('fileStatusChoices', JSON.stringify(fileStatusChoices));
@@ -89,6 +100,14 @@ export class AuthService {
 
   getCommunityCode(): string {
     return localStorage.getItem(this.communityCodeIdkey) || '';
+  }
+
+  getBranchType(): string {
+    return localStorage.getItem(this.branchTypekey) || '';
+  }
+
+  getAssigment(): string {
+    return localStorage.getItem(this.assigmentkey) || '';
   }
 
   getRefreshToken(): string {
