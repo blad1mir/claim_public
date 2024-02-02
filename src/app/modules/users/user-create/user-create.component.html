@@ -196,12 +196,26 @@
         <label for="default-checkbox" class="mb-2.5 text-sm text-black" style="margin-left: 5px;">Privado</label>
       </div>
 
-      <div class="select-input-data">
+      <!--div class="select-input-data">
         <label class="block text-black">Empresa</label>
           <div class="input-data">
           <select [(ngModel)]="enterprise">
             <option *ngFor="let enterprise of enterprises" [value]="enterprise.enterprise_id">{{ enterprise.name }}</option>
           </select>
+        </div>
+      </div-->
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="enterprisename" (click)="toggleOptionsEnterprise()" (input)="filterOptionsEnterprise()" required>
+          <div class="underline"></div>
+          <label for="">Empresa</label>
+
+          <ul *ngIf="showOptionsEnterprise" class="custom-options-list">
+            <li *ngFor="let enterprise of enterprises" (click)="selectOptionEnterprise(enterprise)">
+              {{ enterprise?.name }}
+            </li>
+          </ul>
         </div>
       </div>
 

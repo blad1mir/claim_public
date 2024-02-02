@@ -1,0 +1,120 @@
+<div class="margin-init">
+  <div class="container rounded-md">
+
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Datos de comunidad</h1>
+
+      <div class="form-row" style="display: none; visibility: hidden;">
+        <div class="input-data">
+          <input type="text" required>
+          <div class="underline"></div>
+          <label for="">file_id</label>
+        </div>
+      </div>
+
+      <!--div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="community_code" required>
+          <div class="underline"></div>
+          <label for="">Codigo de Comunidad</label>
+        </div>
+      </div-->
+
+      <div class="mb-4.5 check-input-data">
+        <input type="checkbox" [(ngModel)]="recreational_facilities"
+        id="default-checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="default-checkbox" class="mb-2.5 text-sm text-black" style="margin-left: 5px;">
+          instalaciones recreativas</label>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="occupancy_percentage" required>
+          <div class="underline"></div>
+          <label for="">Porcentaje de ocupación
+          </label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="number_of_houses" required>
+          <div class="underline"></div>
+          <label for="">Numero de casas</label>
+        </div>
+        <div class="input-data">
+          <input type="text" [(ngModel)]="square_meters_per_house" required>
+          <div class="underline"></div>
+          <label for="">Metros cuadrados por casa</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="number_of_offices" required>
+          <div class="underline"></div>
+          <label for="">Numero de oficinas</label>
+        </div>
+        <div class="input-data">
+          <input type="text" [(ngModel)]="square_meters_per_office" required>
+          <div class="underline"></div>
+          <label for="">Metros cuadrados por oficina</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="above_ground_floors" required>
+          <div class="underline"></div>
+          <label for="">Plantas sobre planta baja</label>
+        </div>
+        <div class="input-data">
+          <input type="text" [(ngModel)]="basement_floors" required>
+          <div class="underline"></div>
+          <label for="">Sótanos</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="adjacent_buildings_count" required>
+          <div class="underline"></div>
+          <label for="">Edificios adyacentes</label>
+        </div>
+        <div class="input-data">
+          <input type="text" [(ngModel)]="isolated_buildings_count" required>
+          <div class="underline"></div>
+          <label for="">edificios aislados</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="last_renovation_year" required>
+          <div class="underline"></div>
+          <label for="">último año de renovación</label>
+        </div>
+      </div>
+
+      <!--div class="form-row">
+        <div class="input-data">
+          <input type="text" [(ngModel)]="community_type" required>
+          <div class="underline"></div>
+          <label for="">tipo de comunidad</label>
+        </div>
+      </div-->
+
+      <div class="select-input-data">
+        <label class="block text-black">tipo de comunidad</label>
+          <div class="input-data">
+          <select [(ngModel)]="community_type">
+            <option *ngFor="let Choises of communityTypeOptions" [value]="Choises.type">{{ Choises?.name }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="select-input-data">
+        <button (click)="createCommunity()" class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
+          Guardar
+        </button>
+      </div>
+  </div>

@@ -129,7 +129,7 @@
 
           <div  class="container-old search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
 
-            <input [(ngModel)]="searchInput" type="text" placeholder="Buscar Usuarios" class="search-input border p-2">
+            <!--input [(ngModel)]="searchInput" type="text" placeholder="Buscar Usuarios" class="search-input border p-2"-->
 
             <!--div style="position: relative;">
               <div class="relative inline-block text-left" [ngClass]="{ 'open': open }">
@@ -148,9 +148,23 @@
               </div>
             </div-->
 
-            <button (click)="onSearchClick()" class="button-38" role="button">Buscar</button>
+            <!--button (click)="onSearchClick()" class="button-38" role="button">Buscar</button>
 
-            <button (click)="onEnableUserClick()" class="button-38" role="button" style="margin-left: auto;">Crear</button>
+            <button (click)="onEnableUserClick()" class="button-38" role="button" style="margin-left: auto;">Crear</button-->
+
+              <label for="default-search" class="mb-2 text-sm font-medium text-gray-700 sr-only dark:text-white">Buscar</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg class="w-4 h-4 text-gray-700 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                  </svg>
+                </div>
+                <input [(ngModel)]="searchInput" type="search" id="default-search" class="w-96 p-4 ps-10 text-sm text-gray-700 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray focus:ring-blue-500 focus:border-blue-500" placeholder="Buscar" required>
+                <button (click)="onSearchClick()" type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-700 dark:hover:bg-blue-800 focus:ring-blue-800">Buscar</button>
+              </div>
+
+            <button (click)="onEnableUserClick()" style="margin-top: 12px; margin-left: auto; " type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Crear</button>
+
           </div>
 
           <div class="table-style">
@@ -177,8 +191,7 @@
                             <td data-title="Equipo"></td>
                             <td>
                               <button (click)="onSelectUserProfile(userData.user.id)" style="padding-left: 5px; padding-right: 5px;" role="button" class="status delivered">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                 </svg>
                               </button>
                             </td>
@@ -252,14 +265,28 @@
             <h1 class="text-2xl font-bold mb-2">Contactos</h1>
           </div>
 
-          <div  class="container-old search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;" >
+          <div class="container-old search" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 5px; margin-bottom: 20px;">
 
-            <input [(ngModel)]="searchInput" type="text" placeholder="Buscar Usuarios" class="search-input border p-2">
+            <!--input [(ngModel)]="searchInput" type="text" placeholder="Buscar Usuarios" class="search-input border p-2">
 
-            <button (click)="onSearchClick()" class="button-38" role="button">Buscar</button>
+            <button (click)="onSearchClick()" class="button-38" role="button">Buscar</button-->
 
-            <button (click)="onCreateUserClick()" class="button-38" role="button" style="margin-left: auto;">Crear</button>
+                <label for="default-search" class="mb-2 text-sm font-medium text-gray-700 sr-only dark:text-white">Buscar</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-700 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                  </div>
+                  <input [(ngModel)]="searchInput" type="search" id="default-search" class="w-96 p-4 ps-10 text-sm text-gray-700 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray focus:ring-blue-500 focus:border-blue-500" placeholder="Buscar" required>
+                  <button (click)="onSearchClick()" type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-700 dark:hover:bg-blue-800 focus:ring-blue-800">Buscar</button>
+                </div>
+
+              <button (click)="onCreateUserClick()" style="margin-top: 12px; margin-left: auto; " type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Crear</button>
+            <!--button (click)="onCreateUserClick()" class="button-38" role="button" style="margin-left: auto;">Crear</button-->
           </div>
+
+
 
           <div class="table-style">
             <section class="table__body">
