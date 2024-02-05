@@ -61,7 +61,7 @@ export class FilesComponent implements OnInit {
         (response: any) => {
           console.log('Incident Files:', response);
           this.filesData = response.results;
-          this.fileProfiles = response; // Asignar también la información de paginación
+          this.fileProfiles = response;
         },
         (error) => {
           console.error('Error fetching Incident Files:', error);
@@ -104,7 +104,6 @@ export class FilesComponent implements OnInit {
   }
 
   private extractOffset(url: string): number {
-    // Extrae el valor de 'offset' de la URL
     const match = /offset=(\d+)/.exec(url);
     return match ? +match[1] : 0;
   }

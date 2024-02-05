@@ -33,7 +33,7 @@
   </ul>
   <div class="container rounded-md">
 
-    <div>
+    <div *ngIf="noCommunities">
       <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Comunidad</h1>
 
       <div class="mb-4.5 check-input-data">
@@ -125,6 +125,10 @@
           Editar
         </button>
       </div-->
+    </div>
+
+    <div *ngIf="!noCommunities">
+      <h1 class="text-2xl font-bold mb-2" style="text-align: center;">No se han encontrado comunidades en este expediente</h1>
     </div>
 
   </div>
