@@ -11,6 +11,17 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class InsuranceComponent implements OnInit {
 
+  city: string = '';
+  country: string = '';
+  state: string = '';
+  street: string = '';
+  zip_code: string = '';
+  email: string = '';
+  legal_document: string = '';
+  name: string = '';
+  relation: string = '';
+  number: string = '';
+  number_description: string = '';
   insurance: any[] = [];
 
   constructor(
@@ -63,6 +74,17 @@ export class InsuranceComponent implements OnInit {
           (response: any) => {
             console.log('insurance:', response);
             this.insurance = response;
+            this.city = response.address.city;
+            this.country = response.address.country;
+            this.state = response.address.state;
+            this.street = response.address.street;
+            this.zip_code = response.address.zip_code;
+            this.email = response.email;
+            this.legal_document = response.legal_document;
+            this.name = response.name;
+            this.relation = response.relation;
+            this.number = response.phones_associated?.phone_number;
+            this.number_description = response.phones_associated?.description;
           },
           (error) => {
             console.error('Error fetching insurance:', error);

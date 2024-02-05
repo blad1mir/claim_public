@@ -11,6 +11,11 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class HomeAddressComponent implements OnInit {
 
+  city: string = '';
+  country: string = '';
+  state: string = '';
+  street: string = '';
+  zip_code: string = '';
   homeAddress: any[]=[];
 
   constructor(
@@ -63,6 +68,11 @@ export class HomeAddressComponent implements OnInit {
           (response: any) => {
             console.log('homeAddress:', response);
             this.homeAddress = response;
+            this.city = response.city;
+            this.country = response.country;
+            this.state = response.state;
+            this.street = response.street;
+            this.zip_code = response.zip_code;
           },
           (error) => {
             console.error('Error fetching homeAddress:', error);

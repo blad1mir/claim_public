@@ -26,7 +26,7 @@ export class CreateHomeAddressComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.authService.getAssigment(), " / ", this.authService.getFileId())
+    console.log(this.authService.getAssigment(), " / ", this.authService.getBranchType())
   }
 
   /*onCreateMediatorsClicked() {

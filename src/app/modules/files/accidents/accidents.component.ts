@@ -11,6 +11,13 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class AccidentsComponent implements OnInit {
 
+  claims_handler: string = '';
+  handler_code: string = '';
+  client_reference: string = '';
+  assistance_reference: string = '';
+  claim_causes: string = '';
+  ccs_company_reference: string = '';
+
   accident: any[]=[];
 
   constructor(
@@ -63,6 +70,12 @@ export class AccidentsComponent implements OnInit {
           (response: any) => {
             console.log('accident:', response);
             this.accident = response;
+            this.claims_handler = response.claims_handler;
+            this.handler_code = response.handler_code;
+            this.client_reference = response.client_reference;
+            this.assistance_reference = response.assistance_reference;
+            this.claim_causes = response.claim_causes;
+            this.ccs_company_reference = response.ccs_company_reference;
           },
           (error) => {
             console.error('Error fetching accident:', error);

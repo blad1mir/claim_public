@@ -11,6 +11,9 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class PoliciesComponent implements OnInit {
 
+  policy_name: string = '';
+  branch_type: string = '';
+  effect_date: string = '';
   policy: any[] = [];
 
   constructor(
@@ -63,6 +66,9 @@ export class PoliciesComponent implements OnInit {
           (response: any) => {
             console.log('policy:', response);
             this.policy = response;
+            this.policy_name = response.policy;
+            this.branch_type = response.branch_type;
+            this.effect_date = this.formatDateWithoutTime(response.effect_date);
           },
           (error) => {
             console.error('Error fetching policy:', error);
@@ -71,6 +77,12 @@ export class PoliciesComponent implements OnInit {
     } else {
       console.error('No hay token de autorización disponible.');
     }
+  }
+
+  formatDateWithoutTime(date: string): string {
+    const dateParts = date.slice(0, -10).split('-');
+    const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+    return formattedDate;
   }
 
 }
