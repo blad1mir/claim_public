@@ -117,7 +117,6 @@ export class NavbarMenuComponent implements OnInit {
   }
 
 
-
   onEnableUserClick() {
     this.communicationService.emitUserEditClicked();
   }

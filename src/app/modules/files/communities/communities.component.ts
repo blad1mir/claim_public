@@ -26,6 +26,8 @@ export class CommunitiesComponent implements OnInit {
   last_renovation_year: string = '';
   community_type: string = '';
 
+  noCommunities: boolean = true;
+
   community: any[] = [];
 
   constructor(
@@ -94,6 +96,7 @@ export class CommunitiesComponent implements OnInit {
           },
           (error) => {
             console.error('Error fetching community:', error);
+            this.noCommunities = false;
           }
         );
     } else {
