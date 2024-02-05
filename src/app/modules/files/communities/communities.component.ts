@@ -11,6 +11,21 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class CommunitiesComponent implements OnInit {
 
+
+  recreational_facilities: string = '';
+  community_code: string = '';
+  occupancy_percentage: string = '';
+  number_of_houses: string = '';
+  square_meters_per_house: string = '';
+  number_of_offices: string = '';
+  square_meters_per_office: string = '';
+  above_ground_floors: string = '';
+  basement_floors: string = '';
+  adjacent_buildings_count: string = '';
+  isolated_buildings_count: string = '';
+  last_renovation_year: string = '';
+  community_type: string = '';
+
   community: any[] = [];
 
   constructor(
@@ -63,6 +78,19 @@ export class CommunitiesComponent implements OnInit {
           (response: any) => {
             console.log('community:', response);
             this.community = response;
+            this.recreational_facilities = response.recreational_facilities;
+            this.community_code = response.community_code;
+            this.occupancy_percentage = response.occupancy_percentage;
+            this.number_of_houses = response.number_of_houses;
+            this.square_meters_per_house = response.square_meters_per_house;
+            this.number_of_offices = response.number_of_offices;
+            this.square_meters_per_office = response.square_meters_per_office;
+            this.above_ground_floors = response.above_ground_floors;
+            this.basement_floors = response.basement_floors;
+            this.adjacent_buildings_count = response.adjacent_buildings_count;
+            this.isolated_buildings_count = response.isolated_buildings_count;
+            this.last_renovation_year = response.last_renovation_year;
+            this.community_type = response.community_type;
           },
           (error) => {
             console.error('Error fetching community:', error);

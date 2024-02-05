@@ -11,6 +11,14 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class ProfileFileComponent implements OnInit {
 
+  assignment: string = '';
+  description: string = '';
+  type: string = '';
+  status: string = '';
+  code: string = '';
+  policy_details: string = '';
+  assignmentName: string = '';
+
   file: any[] = [];
 
   constructor(
@@ -63,6 +71,12 @@ export class ProfileFileComponent implements OnInit {
           (response: any) => {
             console.log('file Clients:', response);
             this.file = response;
+            this.assignment = response.assignment;
+            this.description = response.description;
+            this.type = response.type;
+            this.status = response.status;
+            this.code = response.code;
+            this.policy_details = response.policy_details;
           },
           (error) => {
             console.error('Error fetching file Clients:', error);

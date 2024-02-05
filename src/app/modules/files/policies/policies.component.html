@@ -34,154 +34,38 @@
   <div class="container rounded-md">
 
     <div>
-      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Busqueda de expedientes</h1>
+      <h1 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px;">Poliza</h1>
 
       <div class="form-row">
         <div class="input-data">
-          <input type="text" required>
+          <input disabled [(ngModel)]="policy_name" type="text" required>
           <div class="underline"></div>
-          <label for="">Referencia Claim Center</label>
-        </div>
-        <div class="input-data">
-          <input type="text" required>
-          <div class="underline"></div>
-          <label for="">Referencia del cliente</label>
-        </div>
-      </div>
-
-      <div class="select-input-data">
-        <label class="block text-black">Estado</label>
-          <div class="input-data">
-          <select>
-            <option> </option>
-          </select>
+          <!--label for="">Poliza</label-->
         </div>
       </div>
 
       <div class="form-row">
         <div class="input-data">
-          <input type="text" required>
+          <input disabled [(ngModel)]="branch_type" type="text" required>
           <div class="underline"></div>
-          <label for="">Cliente</label>
+          <!--label for="">Ramo y clase</label-->
         </div>
       </div>
 
       <div class="form-row">
         <div class="input-data">
-          <input type="text" required>
+          <input disabled [(ngModel)]="effect_date" type="text" required>
           <div class="underline"></div>
-          <label for="">Fecha de Inicio</label>
-        </div>
-        <div class="input-data">
-          <input type="text" required>
-          <div class="underline"></div>
-          <label for="">Fecha del siniestro</label>
+          <!--label for="">Fecha de póliza</label-->
         </div>
       </div>
 
-      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Datos del asegurado</h2>
 
-      <div class="form-row">
-        <div class="input-data">
-          <input type="text" required>
-          <div class="underline"></div>
-          <label for="">Nombre del asegurado/a</label>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="input-data">
-          <input type="text" required>
-          <div class="underline"></div>
-          <label for="">NIF/CIF</label>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="input-data">
-          <input type="text" required>
-          <div class="underline"></div>
-          <label for="">Póliza del seguro</label>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="input-data">
-          <input type="text" required>
-          <div class="underline"></div>
-          <label for="">Teléfonos</label>
-        </div>
-      </div>
-
-      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Datos del expediente</h2>
-
-      <div class="select-input-data">
-        <label class="block text-black">Ramo y clase</label>
-          <div class="input-data">
-          <select>
-            <option> </option>
-          </select>
-        </div>
-      </div>
-
-      <div class="select-input-data">
-        <label class="block text-black">Causa del siniestro</label>
-          <div class="input-data">
-          <select>
-            <option> </option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="input-data">
-          <input type="text" required>
-          <div class="underline"></div>
-          <label for="">Actividad</label>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="input-data">
-          <input type="text" required>
-          <div class="underline"></div>
-          <label for="">Referencia de asistencia</label>
-        </div>
-      </div>
-
-      <h2 class="text-2xl font-bold mb-2" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">Lugar de la acción</h2>
-
-      <div class="form-row">
-        <div class="input-data">
-          <input type="text" required>
-          <div class="underline"></div>
-          <label for="">Calle</label>
-        </div>
-        <div class="input-data">
-          <input type="text" required>
-          <div class="underline"></div>
-          <label for="">Ciudad</label>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="input-data">
-          <input type="text" required>
-          <div class="underline"></div>
-          <label for="">Código Postal</label>
-        </div>
-        <div class="input-data">
-          <input type="text" required>
-          <div class="underline"></div>
-          <label for="">Provincia/Estado</label>
-        </div>
-      </div>
-
-      <div class="select-input-data">
+      <!--div class="select-input-data">
         <button class="flex w-full justify-center rounded bg-primary p-3 font-medium reputation-container button-38" style="margin-top: 20px; margin-bottom: 20px;">
-          Buscar
+          Editar
         </button>
-      </div>
+      </div-->
     </div>
 
   </div>
