@@ -26,7 +26,10 @@ export class CommunitiesComponent implements OnInit {
   last_renovation_year: string = '';
   community_type: string = '';
 
+  communityTypeOptions: { name: string, type: string }[] = [];
+
   noCommunities: boolean = true;
+  editEnabled: boolean = false;
 
   community: any[] = [];
 
@@ -39,6 +42,7 @@ export class CommunitiesComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchCommunity();
+    this.fetchCommunityTypeOptions();
   }
 
   onProfileAccidentsClicked() {
@@ -101,6 +105,71 @@ export class CommunitiesComponent implements OnInit {
         );
     } else {
       console.error('No hay token de autorización disponible.');
+    }
+  }
+
+  private showWarningMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      panelClass: ['warning-snackbar'],
+    });
+  }
+
+  onEditEnabledClicked(){
+    this.editEnabled = true;
+  }
+
+  private fetchCommunityTypeOptions(): void {
+    const communityTypeOptions = this.authService.getCommunityTypeOptions();
+    this.communityTypeOptions = communityTypeOptions;
+    console.log(this.communityTypeOptions);
+  }
+
+  updateCommunity(): void {
+    if ( !this.recreational_facilities || !this.occupancy_percentage || !this.number_of_houses || !this.square_meters_per_house || !this.number_of_offices || !this.square_meters_per_office || !this.above_ground_floors || !this.basement_floors || !this.adjacent_buildings_count || !this.isolated_buildings_count || !this.last_renovation_year || !this.community_type)
+    {
+      this.showWarningMessage('Por favor, complete todos los campos.'); return;
+    }
+    const authToken = this.authService.getAuthToken();
+    if (authToken) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      });
+
+      const communitiesData = {
+        file_id:this.authService.getFileId(),
+        community_code: this.authService.getCommunityCode(),
+        recreational_facilities: this.recreational_facilities,
+        occupancy_percentage: this.occupancy_percentage,
+        number_of_houses: this.number_of_houses,
+        square_meters_per_house: this.square_meters_per_house,
+        number_of_offices: this.number_of_offices,
+        square_meters_per_office: this.square_meters_per_office,
+        above_ground_floors: this.above_ground_floors,
+        basement_floors: this.basement_floors,
+        adjacent_buildings_count: this.adjacent_buildings_count,
+        isolated_buildings_count: this.isolated_buildings_count,
+        last_renovation_year: this.last_renovation_year,
+        community_type: this.community_type,
+      };
+
+      const fileId = this.authService.getProfileFileId();
+
+      this.http.put(`http://v.claimcenter.com:8000/api/communities/${fileId}/`, communitiesData, { headers }).subscribe(
+        (response) => {
+          console.log('Comunidad editada exitosamente', response);
+          this.showWarningMessage('Comunidad editada exitosamente');
+          this.editEnabled = false;
+        },
+        (error) => {
+          console.error('Error al editar la comunidad', error);
+          this.showWarningMessage('Error al editar la comunidad');
+        }
+      );
+    } else {
+      console.error('No hay token de autorización disponible.');
+      this.showWarningMessage('Su sesión ha expirado');
     }
   }
 

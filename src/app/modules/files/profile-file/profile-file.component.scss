@@ -1,0 +1,21 @@
+.custom-options-list {
+  background-color: white;
+  width: 500px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  padding: 0;
+
+  li {
+    padding: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+}

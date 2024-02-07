@@ -18,6 +18,8 @@ export class HomeAddressComponent implements OnInit {
   zip_code: string = '';
   homeAddress: any[]=[];
 
+  editEnabled: boolean = false;
+
   constructor(
     private communicationService: CommunicationService,
     private http: HttpClient,
@@ -80,6 +82,58 @@ export class HomeAddressComponent implements OnInit {
         );
     } else {
       console.error('No hay token de autorización disponible.');
+    }
+  }
+
+  private showWarningMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000,
+      panelClass: ['warning-snackbar'],
+    });
+  }
+
+  onEditEnabledClicked(){
+    this.editEnabled = true;
+  }
+
+  updateHomeAddress(): void {
+    if (!this.country || !this.state || !this.city || !this.street || !this.zip_code){
+      this.showWarningMessage('Por favor, complete todos los campos.'); return;
+    }
+    const authToken = this.authService.getAuthToken();
+    if (authToken) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      });
+
+      const homeAddressData = {
+        file_id:this.authService.getFileId(),
+        country:this.country,
+        state:this.state,
+        city:this.city,
+        street:this.street,
+        zip_code:this.zip_code,
+      };
+
+      const fileId = this.authService.getProfileFileId();
+
+      this.http.put(`http://v.claimcenter.com:8000/api/home_address/${fileId}/`, homeAddressData, { headers }).subscribe(
+        (response) => {
+          console.log('Vivienda editada exitosamente', response);
+          this.showWarningMessage('Vivienda editada exitosamente');
+
+          this.editEnabled = false;
+
+        },
+        (error) => {
+          console.error('Error al editar la Vivienda', error);
+          this.showWarningMessage('Error al editar la Vivienda');
+        }
+      );
+    } else {
+      console.error('No hay token de autorización disponible.');
+      this.showWarningMessage('Su sesión ha expirado');
     }
   }
 
