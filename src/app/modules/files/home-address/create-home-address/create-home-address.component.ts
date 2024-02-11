@@ -26,6 +26,7 @@ export class CreateHomeAddressComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.authService.getAssigment(), " / ", this.authService.getBranchType())
   }
 
   /*onCreateMediatorsClicked() {
@@ -42,6 +43,12 @@ export class CreateHomeAddressComponent implements OnInit {
       panelClass: ['warning-snackbar'],
     });
   }
+
+  oncreateAccidentsClicked() {
+    this.communicationService.emitCreateAccidentsClicked();
+  }
+
+
 
 
   createHomeAddress(): void {
@@ -68,8 +75,12 @@ export class CreateHomeAddressComponent implements OnInit {
         (response) => {
           console.log('Vivienda creada exitosamente', response);
           this.showWarningMessage('Vivienda creada exitosamente');
-          //this.onCreateMediatorsClicked();
-          this.oncreateCommunitiesClicked();
+          if((this.authService.getAssigment() === 'SegurCaixa, S.A.') && (this.authService.getBranchType() === "MPedifcomu")){
+            this.oncreateCommunitiesClicked();
+          } else {
+            this.oncreateAccidentsClicked();
+          }
+
         },
         (error) => {
           console.error('Error al crear la Vivienda', error);

@@ -58,9 +58,8 @@ export class CreateCommunitiesComponent implements OnInit {
     console.log(this.communityTypeOptions);
   }
 
-
   createCommunity(): void {
-    if (!this.community_code || !this.recreational_facilities || !this.occupancy_percentage || !this.number_of_houses || !this.square_meters_per_house || !this.number_of_offices || !this.square_meters_per_office || !this.above_ground_floors || !this.basement_floors || !this.adjacent_buildings_count || !this.isolated_buildings_count || !this.last_renovation_year || !this.community_type)
+    if ( !this.recreational_facilities || !this.occupancy_percentage || !this.number_of_houses || !this.square_meters_per_house || !this.number_of_offices || !this.square_meters_per_office || !this.above_ground_floors || !this.basement_floors || !this.adjacent_buildings_count || !this.isolated_buildings_count || !this.last_renovation_year || !this.community_type)
     {
       this.showWarningMessage('Por favor, complete todos los campos.'); return;
     }
